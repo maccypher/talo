@@ -82,9 +82,8 @@ select.selectTheme {
 	color: #fff;
 	padding: 5px 10px;
 	margin: 0 10px;
-	/*border-radius: 5px;*/
-	/*background-color: #3e454a;*/
 	background-color: #2e2f33;
+	background-color: #29292e;
 	box-shadow: inset 0 1px #111, 0 1px #333;
 }
 .layout h4 {
@@ -184,11 +183,13 @@ aside.sideBar input[type="submit"] {
 	box-shadow: inset 0 -1px 0 #10b5d2;
 	padding: 0;
 	color: #333;
-	text-shadow: 0 1px #24ddfe;
+	text-shadow: 0 1px 1px #24ddfe;
+	line-height: 34px;
 }
 aside.sideBar input[type="submit"]:hover {
 	background-color: #1ec7e5;
-	color: #000;
+	color: #fff;
+	text-shadow: none;
 	border-top: 1px solid #24ddfe;
 	border-bottom: 1px solid #0aa8c4;
 	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #0aa8c4;
@@ -216,24 +217,31 @@ aside .catList {
 	margin-bottom: 10px;
 }
 aside .catList li {
-	margin: 0 0 10px 0;
+	margin: 0 0 20px 0;
 }
 aside .catList li h4 {
-	font-size: 20px;
 	display: block;
-	color: #aaa;
-	color: #e5461e;
-	margin: -10px 0 10px 10px;
-	text-transform: capitalize;
+	height: 30px;
+	margin: -20px 0 0 -5px;
+	padding: 5px 0 5px 15px;
+	background-color: #29292e;
+	line-height: 30px;
+	font-size: 20px;
 	font-style: italic;
+	text-transform: capitalize;
+	color: #e5461e;
 }
 aside .editBookmarks {
-	margin: 5px 0;
+	margin: 0 0 23px 0;
+	padding: 0;
+}
+aside .editBookmarks:last-child {
+	margin: 0 0 0 0;
 	padding: 0;
 }
 aside .editBookmarks li {
 	list-style-type: none;
-	margin: 5px 0;
+	margin: 0 0 5px 0;
 	padding: 0;
 }
 aside .editBookmarks li:last-child {
@@ -247,10 +255,8 @@ aside .btn {
 	text-decoration: none;
 	padding: 2px 10px 2px 30px;
 	margin: 0 0 0 -5px;
-
 	display: block;
 	line-height: 30px;
-	/*border: none;*/
 	border-bottom: 1px solid #242428;
 	border-top: 1px solid #333;
 	color: #eee;
@@ -259,7 +265,6 @@ aside .btn {
 aside .btn:hover {
 	background-color: #e5461e;
 	color: #fff;
-	/*border-radius: 5px;*/
 	border: none;
 	border-top: 1px solid #f46332;
 	border-bottom: 1px solid #c63b1b;
@@ -287,58 +292,88 @@ aside .btn .delBtn:hover {
 	color: #000;
 }
 aside.sideBar .editEntry input[type="text"] {
-	width: 413px;
+	width: 408px;
 }
 aside.sideBar input[type="submit"].doDelete,
 aside.sideBar input[type="submit"].cancelDelete,
 aside.sideBar input[type="submit"].saveChanges,
 aside.sideBar input[type="submit"].discardChanges {
-	display: inline-block;
-	width: 210px;
+	width: 200px;
 	height: 34px;
+	background-color: #10b5d2;
+	border: none;
+	border-top: 1px solid #10b5d2;
+	border-bottom: 1px solid #10b5d2;
+	box-shadow: none;
+	box-shadow: inset 0 -1px 0 #10b5d2;
+	padding: 0;
+	color: #333;
+	text-shadow: 0 1px 1px #24ddfe;
 	margin-left: 4px;
 	margin-right: 0;
-	border: none;
-	/*border-radius: 5px;*/
-	box-shadow: none;
-	/*background-color: #9bc732;*/
-	background-color: #e5461e;
-	padding: 0;
-	font-size: 18px;
-	color: #555;
-	text-shadow: 0 1px #bde954;
 }
 aside.sideBar input[type="submit"].doDelete,
 aside.sideBar input[type="submit"].discardChanges {
-	background-color: #f36c3f;
-	margin-left: 0;
-	margin-right: 3px;
-	text-shadow: 0 1px #f68f6f;
+	margin-left: 10px;
+	margin-right: 20px;
+	text-shadow: 0 1px 1px #f57443;
+	background-color: #e5461e;
+	border: none;
+	border-top: 1px solid #f46332;
+	border-bottom: 1px solid #c63b1b;
+	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #c63b1b;
 }
 aside.sideBar input[type="submit"].doDelete {
-	margin-right: 6px;
+	margin-left: 7px;
+	margin-right: 0;
 }
 aside.sideBar input[type="submit"].cancelDelete {
-	margin-left: 4px;
+	margin-left: 10px;
+	margin-right: 20px;
 }
-aside.sideBar input[type="submit"].cancelDelete:hover,
-aside.sideBar input[type="submit"].saveChanges:hover {
-	background-color: #bde954;
-	color: #000;	
+aside.sideBar input[type="submit"]:hover.cancelDelete {
+	background-color: #1ec7e5;
+	color: #fff;
+	text-shadow: none;
+	border-top: 1px solid #24ddfe;
+	border-bottom: 1px solid #0aa8c4;
+	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #0aa8c4;
 }
-aside.sideBar input[type="submit"].doDelete:hover,
-aside.sideBar input[type="submit"].discardChanges:hover {
-	background-color: #f58e5f;
-	color: #000;
+aside.sideBar input[type="submit"]:hover.saveChanges {
+	background-color: #1ec7e5;
+	color: #fff;
+	text-shadow: none;
+	border-top: 1px solid #24ddfe;
+	border-bottom: 1px solid #0aa8c4;
+	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #0aa8c4;
 }
-aside.sideBar input[type="submit"].cancelDelete:focus,
-aside.sideBar input[type="submit"].doDelete:focus,
-aside.sideBar input[type="submit"].saveChanges:focus,
-aside.sideBar input[type="submit"].discardChanges:focus {
+aside.sideBar input[type="submit"]:hover.doDelete {
+	color: #fff;
+	text-shadow: none;
+	background-color: #f6572f;
+	border: none;
+	border-top: 1px solid #f46332;
+	border-bottom: 1px solid #c63b1b;
+	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #c63b1b;
+}
+aside.sideBar input[type="submit"]:hover.discardChanges {
+	color: #fff;
+	text-shadow: none;
+	background-color: #f6572f;
+	border: none;
+	border-top: 1px solid #f46332;
+	border-bottom: 1px solid #c63b1b;
+	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #c63b1b;
+}
+aside.sideBar input[type="submit"]:focus.cancelDelete,
+aside.sideBar input[type="submit"]:focus.doDelete,
+aside.sideBar input[type="submit"]:focus.saveChanges,
+aside.sideBar input[type="submit"]:focus.discardChanges {
 	box-shadow: 0 0 5px #fff;
 	color: #000;
 }
 /* ---- */
+
 .inactive,
 .active,
 .column,

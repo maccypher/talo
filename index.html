@@ -38,10 +38,13 @@
 
 		<h3>Edit Bookmarks:</h3>
 		<div class="container">
+
 			<ul class="catList">
 				<li ng-repeat="cat in cats"><h4>{{cat.name}}</h4>
+				
 					<ul class="editBookmarks">
 						<li ng-repeat="editItem in cat.items">
+							
 							<div class="editEntry" ng-show="editing">
 								<input class="animateAll" type="text" id="modCat" ng-model="editItem.cat" />
 								<br />
@@ -49,22 +52,25 @@
 								<br />
 								<input class="animateAll" type="text" id="modName" ng-model="editItem.name" />
 								<br />
-								<input class="animateAll discardChanges" type="submit" ng-click="editing = false" value="Cancel" />&nbsp;
+								<input class="animateAll discardChanges" type="submit" ng-click="cancelEdit(editItem.id)" value="Cancel" />&nbsp;
 								<input class="animateAll saveChanges" type="submit" ng-click="saveItem(editItem)" value="Save Changes" />
 							</div>
 							<div class="verifyDelete" ng-show="verify">
+								<input class="animateAll cancelDelete" type="submit" ng-click="cancelEdit(editItem.id); verify = false" value="Cancel" />
 								<input class="animateAll doDelete" type="submit" ng-click="delItem(editItem.id); verify = false" value="Delete" />
-								<input class="animateAll cancelDelete" type="submit" ng-click="verify = false" value="Cancel" />
 							</div>
 							<div ng-hide="editing || verify" class="btn animateAll">
 								{{editItem.name}}
 								<a class="editBtn showCursor" ng-click="editing = true"><i class="icon-edit"></i></a>
 								<a class="delBtn showCursor" ng-click="verify = true"><i class="icon-delete"></i></a>
 							</div>
+
 						</li>
 					</ul>
+
 				</li>
 			</ul>
+			
 		</div>
 		<a href="" class="closeSettings" ng-click="toggle()"><i class="icon-close"></i></a>
 	</aside>

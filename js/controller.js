@@ -29,9 +29,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 			{ name: 'Taxi', value: 'taxi' },
 			{ name: 'Tones', value: 'tones' },
 			{ name: 'Pastel Sky', value: 'pastel' },
-			{ name: 'Clouds', value: 'clouds' },
-			{ name: 'Corporate', value: 'bb-corporate' },
-			{ name: 'Retro', value: 'bb-retro' },
+			{ name: 'Clouds', value: 'clouds' }
 	];
 
 	$scope.selectedTheme = $store.get('selection') || $scope.themes[0].value;
@@ -153,6 +151,10 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		$scope.editBookmarks();
 	};
 /* ---- */
-/* ---- */
 
+/* Bof: cancel edit entry */
+	$scope.cancelEdit = function(item){
+		$scope.editBookmarks();
+	};
+/* ---- */
 });
