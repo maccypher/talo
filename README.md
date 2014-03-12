@@ -1,4 +1,4 @@
-talo
-====
+# talo
 
-Editable start- / homepage - bookmark collection manager
+### An editable start- / homepage - bookmark collection manager
+

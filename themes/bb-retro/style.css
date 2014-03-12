@@ -1,0 +1,109 @@
+/* Retro */
+@import url(http://fonts.googleapis.com/css?family=Lily+Script+One);
+@import url(http://fonts.googleapis.com/css?family=Oregano);
+
+body {
+	background: #4f565b url('Retro-Worldmap.jpg') no-repeat center center;
+	color: #fff;
+	font-weight: 400;
+	background-size: 100% 100%;
+}
+section a {
+	display: block;
+	font-family: 'Oregano';
+	font-style: italic;
+	font-size: 22px;
+	color: #333;
+}
+section a:hover {
+	background-color: #be581a;
+	border-radius: 5px;
+}
+.column {
+	background: #8dac8a url('retro-column-bg.jpg');
+	border-radius: 5px;
+	border: 5px solid #f9edb3;
+	box-shadow: 0 2px 6px #000;
+	color: #444;
+	min-height: 450px;
+}
+.column h2 {
+	font-family: 'Lily Script One';
+	font-style: italic;
+	text-transform: capitalize;
+	display: block;
+	width: 98%;
+	margin: 0;
+	padding: 5px 0 5px 2%;
+	background-color: #f9edb3;
+	color: #be581a;
+}
+section ul li {
+	line-height: 28px;
+	margin: 5px 1px 5px 5px;
+}
+#headLine {
+	display: none;
+}
+#logo img {
+	display: none;
+}
+#logo {
+	position: absolute;
+	width: 210px;
+	height: 45px;
+	top: auto;
+	bottom: 30px;
+	right: 190px;
+	z-index: 10;
+	background: url('retro-logo-2.png') ;
+}
+.filter {
+	display: block;
+	position: relative;
+	top: 50px;
+	left: auto;
+	width: 35%;
+	margin: 7px auto 0 auto;
+}
+
+::-webkit-input-placeholder { color: #97ab89; }
+::-moz-placeholder { color: #97ab89; }
+:-ms-input-placeholder { color: #97ab89; }
+input:-moz-placeholder { color: #97ab89; }
+
+input[type="search"].queryInput {
+	font-family: 'Oregano';
+	font-style: italic;
+	font-size: 24px;
+	width: 100%;
+	height: 40px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 3px #999;
+	background-color: #f9edb3;
+	padding: 2px 10px;
+	margin: 0;
+	color: #be581a;
+
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}
+input[type="search"]:hover.queryInput {
+	background-color: #f9edb3;
+	background-color: #fafec4;
+
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}
+input[type="search"]:focus.queryInput {
+	background-color: #fff;
+	box-shadow: inset 0 0 3px #999, 0 0 6px #97ab89;
+
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}

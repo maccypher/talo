@@ -1,0 +1,331 @@
+/* settings.css */
+
+/* Bof: some global stuff */
+aside {
+	font-family: "Lato";
+}
+section.mainSection {
+	position: absolute;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+}
+.hideIt {
+	left: -500px;
+}
+.showIt {
+	left: 0;
+	box-shadow: 2px 0 20px #000;
+}
+.swipeLeft {
+	left: 0;
+}
+.swipeRight {
+	left: 500px;
+}
+.pushLeft {
+	background-position: 0 0;
+}
+.pushRight {
+	background-position: 500px 0;
+	overflow: hidden;
+}
+.overlay {
+	position: absolute;
+	z-index: 990;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	background-color: rgba(0,0,0,0.7);
+}
+.showCursor {
+	cursor: pointer;
+}
+/* ---- */
+
+/* Bof: Theme selector */
+select.selectTheme {
+	width: 460px;
+	height: 40px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 3px #999;
+	border: none;
+	outline: none;
+	font-size: 18px;
+	padding: 2px 10px;
+	margin: 0 0 10px 0;
+
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+	text-indent: 0.01px;
+	text-overflow: '';
+
+	background: #aaa url('../img/select-arrow.png') no-repeat right 3px;
+	color: #555;
+}
+.container {
+}
+.layout {
+	color: #ddd;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 5px;
+	background-color: #3e454a;
+	box-shadow: inset 0 1px #333, 0 1px #666;
+}
+.layout h4 {
+	font-size: 18px;
+	margin: 0 0 10px 0;
+}
+.layout input[type="radio"] {
+	display: none;
+}
+.layout label {
+	display: inline-block;
+	width: 90px;
+	margin: 0 5% 0 0;
+}
+.layout label:last-child {
+	margin-right: 0;
+}
+.inactive {
+	color: #666;
+	cursor: pointer;
+}
+.inactive:hover {
+	color: #999;
+}
+.active {
+	color: #9bc732;
+	cursor: default;
+}
+/* ---- */
+
+/* Bof: Add new bookmark */
+.closeSettings {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	display: block;
+	z-index: 1010;
+	width: 30px;
+	height: 30px;
+	background-color: #4f565b;
+	color: #ddd;
+	border: none;
+}
+.closeSettings i {
+	color: #ddd;
+}
+.closeSettings:hover,
+.closeSettings:hover i {
+	color: #9bc732;
+	border: none;
+}
+aside h3 {
+	color: #111;
+	text-shadow: 0 1px #777;
+	font-weight: 400;
+}
+aside.sideBar {
+	background: #4f565b;
+	position: absolute;
+	display: inline-block;
+	width: 460px;
+	height: 100%;
+	min-height: 100%;
+	padding: 10px 20px;
+	overflow: auto;
+}
+aside.sideBar input[type="submit"],
+aside.sideBar input[type="text"] {
+	width: 438px;
+	height: 30px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 3px #999;
+	background-color: #ddd;
+	border: 1px solid #4f565b;
+	font-size: 18px;
+	padding: 2px 10px;
+	margin: 0 0 10px 0;
+}
+aside.sideBar input[type="text"]:hover {
+	background-color: #fff;
+}
+aside.sideBar input[type="text"]:focus {
+	background-color: #fff;
+	border: 1px solid #00dcff;
+	box-shadow: 0 0 10px #00dcff;
+}
+aside.sideBar input[type="submit"] {
+	width: 460px;
+	height: 34px;
+	border: none;
+	box-shadow: none;
+	background-color: #9bc732;
+	padding: 0;
+	color: #555;
+	text-shadow: 0 1px #bde954;
+}
+aside.sideBar input[type="submit"]:hover {
+	background-color: #bde954;
+	color: #000;
+}
+aside.sideBar input[type="submit"]:focus {
+	box-shadow: 0 0 5px #fff;
+	color: #000;
+}
+aside.sideBar ::-webkit-input-placeholder { color: #aaa; }
+aside.sideBar ::-moz-placeholder { color: #aaa; } /* firefox 19+ */
+aside.sideBar :-ms-input-placeholder { color: #aaa; } /* ie */
+aside.sideBar input:-moz-placeholder { color: #aaa; }
+/* ---- */
+
+aside hr {
+	color: #2d343a;
+	background-color: #2d343a;
+	height: 1px;
+	border: none;
+	border-bottom: 1px solid #777;
+}
+
+/* Bof: Edit bookmarks */
+aside .catList {
+	margin-bottom: 100px;
+}
+aside .catList li {
+	margin: 0 0 10px 0;
+}
+aside .catList li h4 {
+	display: block;
+	border-top: 1px solid #;
+	color: #aaa;
+	margin: 5px 0;
+	text-transform: capitalize;
+	font-style: italic;
+}
+aside .editBookmarks,
+aside .editBookmarks li {
+	list-style-type: none;
+	margin: 5px 5px 0 5px;
+	padding: 0;
+}
+aside .btn {
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	font-weight: 100;
+	font-style: normal;
+	text-decoration: none;
+	padding: 2px 5px;
+
+	display: block;
+	line-height: 30px;
+	border: none;
+	color: #eee;
+	background: none;
+}
+aside .btn {
+	color: #eee;
+	text-decoration: none;
+}
+aside .btn:hover {
+	background-color: #9bc732;
+	color: #555;
+	border-radius: 5px;
+	border: none;
+}
+aside .btn .editBtn,
+aside .btn .delBtn {
+	position: absolute;
+	right: 28px;
+	font-size: 14px;
+	color: #4f565b;
+	display: inline-block;
+}
+aside .btn .editBtn {
+	right: 50px;
+}
+aside .btn:hover .editBtn,
+aside .btn:hover .delBtn {
+	color: #eee;
+}
+aside .btn .editBtn:hover,
+aside .btn .delBtn:hover {
+	color: #000;
+}
+aside.sideBar .editEntry input[type="text"] {
+	width: 413px;
+}
+aside.sideBar input[type="submit"].doDelete,
+aside.sideBar input[type="submit"].cancelDelete,
+aside.sideBar input[type="submit"].saveChanges,
+aside.sideBar input[type="submit"].discardChanges {
+	display: inline-block;
+	width: 210px;
+	height: 34px;
+	margin-left: 4px;
+	margin-right: 0;
+	border: none;
+	border-radius: 5px;
+	box-shadow: none;
+	background-color: #9bc732;
+	padding: 0;
+	font-size: 18px;
+	color: #555;
+	text-shadow: 0 1px #bde954;
+}
+aside.sideBar input[type="submit"].doDelete,
+aside.sideBar input[type="submit"].discardChanges {
+	background-color: #f36c3f;
+	margin-left: 0;
+	margin-right: 3px;
+	text-shadow: 0 1px #f68f6f;
+}
+aside.sideBar input[type="submit"].doDelete {
+	margin-right: 6px;
+}
+aside.sideBar input[type="submit"].cancelDelete {
+	margin-left: 4px;
+}
+aside.sideBar input[type="submit"].cancelDelete:hover,
+aside.sideBar input[type="submit"].saveChanges:hover {
+	background-color: #bde954;
+	color: #000;	
+}
+aside.sideBar input[type="submit"].doDelete:hover,
+aside.sideBar input[type="submit"].discardChanges:hover {
+	background-color: #f58e5f;
+	color: #000;
+}
+aside.sideBar input[type="submit"].cancelDelete:focus,
+aside.sideBar input[type="submit"].doDelete:focus,
+aside.sideBar input[type="submit"].saveChanges:focus,
+aside.sideBar input[type="submit"].discardChanges:focus {
+	box-shadow: 0 0 5px #fff;
+	color: #000;
+}
+/* ---- */
+.inactive,
+.active,
+.column,
+.animateAll,
+aside a,
+aside a:hover,
+.overlay,
+.hideIt,
+.showIt,
+.swipeLeft,
+.swipeRight,
+.pushLeft,
+.pushRight {
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" ng-app="homePage" ng-controller="mainCtrl">
+<head>
+	<meta charset="utf-8">
+	<title>BlackBridge Home</title>
+	<link rel="stylesheet" href="css/app.css" />
+	<link rel="stylesheet" ng-href="themes/{{cssTheme}}/style.css" />
+	<script src="js/angular.min.js"></script>
+	<script src="js/localStorage.js"></script>
+	<script src="js/controller.js"></script>
+</head>
+<body ng-class="{'pushRight': isCollapsed, 'pushLeft': !isCollapsed}">
+
+	<aside class="sideBar" ng-class="{'showIt': isCollapsed, 'hideIt': !isCollapsed}">
+		<h3>Select Theme:</h3>
+		<div class="container">
+			<select class="selectTheme" ng-model="selectedTheme" ng-options="theme.value as theme.name for theme in themes"></select>
+			<br />
+			<div class="layout">
+				<h4>Columns to show</h4>
+				<input type="radio" value="one" ng-model="column" id="oneColumn" /><label for="oneColumn" ng-class="{'active': ceckedColumn == 'one', 'inactive': ceckedColumn !== 'one' }"><i class="icon-ok"></i>&nbsp;One</label>
+				<input type="radio" value="two" ng-model="column" id="twoColumn" /><label for="twoColumn" ng-class="{'active': ceckedColumn == 'two', 'inactive': ceckedColumn !== 'two' }"><i class="icon-ok"></i>&nbsp;Two</label>
+				<input type="radio" value="three" ng-model="column" id="threeColumn" /><label for="threeColumn" ng-class="{'active': ceckedColumn == 'three', 'inactive': ceckedColumn !== 'three' }"><i class="icon-ok"></i>&nbsp;Three</label>
+				<input type="radio" value="four" ng-model="column" id="fourColumn" /><label for="fourColumn" ng-class="{'active': ceckedColumn == 'four', 'inactive': ceckedColumn !== 'four' }"><i class="icon-ok"></i>&nbsp;Four</label>
+			</div>
+		</div>
+
+		<h3>Add new Bookmark:</h3>
+		<div class="container">
+			<input class="animateAll" type="text" ng-model="newCat" id="newCat" placeholder="Category" />
+			<br />
+			<input class="animateAll" type="text" ng-model="newUrl" id="newUrl" placeholder="Url" />
+			<br />
+			<input class="animateAll" type="text" ng-model="newName" id="newName" placeholder="Name" />
+			<br />
+			<input class="animateAll" type="submit" ng-click="addNew()" value="Add new bookmark" />
+		</div>
+
+		<h3>Edit Bookmarks:</h3>
+		<div class="container">
+			<ul class="catList">
+				<li ng-repeat="cat in cats"><h4>{{cat.name}}</h4>
+					<ul class="editBookmarks">
+						<li ng-repeat="editItem in cat.items">
+							<div class="editEntry" ng-show="editing">
+								<input class="animateAll" type="text" id="modCat" ng-model="editItem.cat" />
+								<br />
+								<input class="animateAll" type="text" id="modUrl" ng-model="editItem.url" />
+								<br />
+								<input class="animateAll" type="text" id="modName" ng-model="editItem.name" />
+								<br />
+								<input class="animateAll discardChanges" type="submit" ng-click="editing = false" value="Cancel" />&nbsp;
+								<input class="animateAll saveChanges" type="submit" ng-click="saveItem(editItem)" value="Save Changes" />
+							</div>
+							<div class="verifyDelete" ng-show="verify">
+								<input class="animateAll doDelete" type="submit" ng-click="delItem(editItem.id); verify = false" value="Delete" />
+								<input class="animateAll cancelDelete" type="submit" ng-click="verify = false" value="Cancel" />
+							</div>
+							<div ng-hide="editing || verify" class="btn animateAll">
+								{{editItem.name}}
+								<a class="editBtn showCursor" ng-click="editing = true"><i class="icon-edit"></i></a>
+								<a class="delBtn showCursor" ng-click="verify = true"><i class="icon-delete"></i></a>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<a href="" class="closeSettings" ng-click="toggle()"><i class="icon-close"></i></a>
+	</aside>
+
+	<section class="mainSection" ng-class="{'swipeRight': isCollapsed, 'swipeLeft': !isCollapsed}">
+		<div ng-class="{'overlay': isCollapsed}" ng-click="toggle()"></div>
+		<a href="" class="openSettings" ng-click="isCollapsed = !isCollapsed"><i class="icon-cog"></i></a>
+	
+		<div  id="headLine">
+			<h1>Bookmarks</h1>
+		</div>
+
+		<div class="filter">
+			<input class="queryInput" type="search" ng-model="query" placeholder="Search Bookmarks ..." />
+		</div>
+		
+		<div id="content">
+
+			<div class="column {{column}}" ng-repeat="cat in cats">
+				<h2>{{cat.name}}</h2>
+				<ul class="bookmarks">
+					<li ng-repeat="item in cat.items | filter: query">
+						<a href="{{item.url}}">{{item.name}}</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+	</section>
+	<section>
+		<div id="copyright"><a href="https://github.com/maccypher/talo">talo &copy; 2014 by MacCypher</a></div>
+	</section>
+</body>
+</html>

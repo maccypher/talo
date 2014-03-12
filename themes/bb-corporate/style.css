@@ -1,0 +1,58 @@
+/* corporate */
+body {
+	background: #fff url('corporate-bg.png') no-repeat center 0;
+	color: #333;
+	font-weight: 400;
+}
+#headLine {
+	left: 17%;
+	color: #f0f0f0;
+}
+.column ul {
+	min-height: 450px;
+	margin-left: -8px;
+	padding-left: 15px;
+	border-left: 1px dotted #333;
+}
+.column.four:first-child ul {
+	border-left: none;
+}
+#content h2 {
+	font-size: 30px;
+	font-weight: 300;
+	color: #545a52;
+	line-height: 28px;
+	text-transform: uppercase;
+	text-align: left;
+	border-left: 5px solid #bd002b;
+
+	margin-left: -10px;
+	padding: 0 0 0 15px;
+}
+section a {
+	display: inline;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 18px;
+	border-bottom: 1px dotted #fff;
+}
+section a:hover {
+	background: none;
+	color: #e1212e;
+	border-bottom: 1px dotted #e1212e;
+}
+
+a.openSettings {
+	color: #aaa;
+	margin-top: 5px;
+	display: block;
+	width: 24px;
+	height: 24px;
+	border: none;
+	text-decoration: none;
+}
+a.openSettings:hover {
+	color: #bd002b;
+	border: none;
+	text-decoration: none;
+}

@@ -1,0 +1,22 @@
+/* default */
+body {
+	background: #f0f0f0 url('worldmap.gif') no-repeat center center;
+	color: #4f565b;
+	background-size: 100% 100%;
+}
+section a {
+	display: block;
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 22px;
+}
+section a:hover {
+	background: #3c96d5;
+	color: #fff;
+}
+a.openSettings {
+	color: #555;
+}
+a.openSettings:hover {
+	color: #3c96d5;
+}
