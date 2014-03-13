@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "chrome_url_overrides": {
+      "newtab": "index.html"
+   },
+   "name": "talo",
+   "description": "An editable start- / homepage - bookmark collection manager",
+   "icons": { "128": "img/icon.png" },
+   "permissions": [ 
+      "management",
+      "storage"
+    ],
+   "version": "0.8"
+}
