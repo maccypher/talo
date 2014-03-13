@@ -138,7 +138,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 /* ---- */
 
 /* Bof: delete entry */
-	$scope.delItem = function(item) {
+	$scope.delItem = function(item){
 		$store.remove(item);
 		$scope.editBookmarks();
 		$scope.bookmarks();
@@ -157,4 +157,17 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		$scope.editBookmarks();
 	};
 /* ---- */
+	$scope.exportData = function(){
+		var temp = JSON.stringify(localStorage);
+		console.log(temp);
+	}
+	
+	$scope.importData = function(){
+		var string2json = '';
+		var data = JSON.parse(string2json);
+		for (var key in data) {
+			localstorage[key] = data[key];
+		}
+	};
+
 });
