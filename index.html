@@ -12,7 +12,13 @@
 <body ng-class="{'pushRight': isCollapsed, 'pushLeft': !isCollapsed}">
 
 	<aside class="sideBar" ng-class="{'showIt': isCollapsed, 'hideIt': !isCollapsed}">
-		<input class="btnSmall animateAll" type="submit" ng-click="exportData()" value="Backup" />
+		<h3>Import / Export:</h3>
+		<div class="container">
+			<input class="backupBtn animateAll" type="submit" ng-click="exportData(); importOpen = false" value="Create Backup" />
+			<input class="restoreBtn animateAll" type="submit" ng-click="openImport(); exportOpen = false" value="Restore Backup" />
+		</div>
+
+
 		<h3>Select Theme:</h3>
 		<div class="container">
 			<select class="selectTheme" ng-model="selectedTheme" ng-options="theme.value as theme.name for theme in themes"></select>
@@ -75,6 +81,22 @@
 		</div>
 		<a href="" class="closeSettings" ng-click="toggle()"><i class="icon-close"></i></a>
 	</aside>
+
+	<div ng-show="exportOpen" id="exportBox">
+		<div class="container">
+			<h3>Export</h3>
+			<a href="" class="closeImEx" ng-click="importOpen = false; exportOpen = false"><i class="icon-close"></i></a>
+			<textarea ng-bind="exportJson" class="imexJson" readonly></textarea>
+		</div>
+	</div>
+	<div ng-show="importOpen" id="importBox">
+		<div class="container">
+			<h3>Import</h3>
+			<a href="" class="closeImEx" ng-click="importOpen = false; exportOpen = false"><i class="icon-close"></i></a>
+			<textarea ng-model="importJson" class="imexJson"></textarea>
+			<input class="animateAll saveChanges" type="submit" ng-click="importData()" value="Import" />
+		</div>
+	</div>
 
 	<section class="mainSection" ng-class="{'swipeRight': isCollapsed, 'swipeLeft': !isCollapsed}">
 		<div ng-class="{'overlay': isCollapsed}" ng-click="toggle()"></div>

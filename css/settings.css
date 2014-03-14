@@ -247,30 +247,64 @@ aside .editBookmarks li {
 aside .editBookmarks li:last-child {
 	margin-bottom: 10px;
 }
-aside input[type="submit"].btnSmall {
-	width: 100px;
-	height: 20px;
+aside input[type="submit"].restoreBtn,
+aside input[type="submit"].backupBtn {
+	width: 200px;
+	height: 34px;
 	background-color: #10b5d2;
 	border: none;
 	border-top: 1px solid #24ddfe;
 	border-bottom: 1px solid #0997b3;
 	box-shadow: none;
 	box-shadow: inset 0 -1px 0 #0997b3;
-	padding: 0;
-	line-height: 19px;
-	font-size: 12px;
 	color: #333;
 	text-shadow: 0 1px 1px #24ddfe;
-	margin-left: 4px;
-	margin-right: 0;	
+	margin-left: 10px;
+	margin-right: 20px;	
 }
-aside input[type="submit"]:hover.btnSmall {
+aside input[type="submit"]:hover.restoreBtn,
+aside input[type="submit"]:hover.backupBtn {
 	background-color: #1ec7e5;
 	color: #fff;
 	text-shadow: none;
 	border-top: 1px solid #24ddfe;
 	border-bottom: 1px solid #0997b3;
 	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #0997b3;
+}
+aside input[type="submit"].restoreBtn {
+	margin-left: 17px;
+	margin-right: 0;
+}
+#importBox,
+#exportBox {
+	position: absolute;
+	top: 10%;
+	left: 600px;
+	z-index: 1110;
+}
+#importBox h3,
+#exportBox h3 {
+	margin: 0 0 10px 0;
+	padding: 0;
+	color: #ccc;
+	text-shadow: inset 0 1px #000;
+	font-weight: 400;
+}
+
+#importBox .container,
+#exportBox .container {
+	width: 600px;
+	padding: 20px;
+}
+#importBox .imexJson,
+#exportBox .imexJson {
+	width: 560px;
+	height: 300px;
+	margin: 0 auto;
+}
+.closeImEx {
+	position: absolute;
+	right: 10px;
 }
 aside .btn {
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;

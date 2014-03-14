@@ -6,6 +6,9 @@ var app = angular.module('homePage', ['localStorage']);
 
 app.controller('mainCtrl', function($scope, $rootScope, $store) {
 /* Bof: define some vars */
+	$scope.isCollapsed = false;
+	$scope.exportOpen = false;
+	$scope.importOpen = false;
 	var obj = {};
 	obj.id = '';
 	obj.cat = '';
@@ -14,7 +17,6 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 /* ---- */
 
 /* Bof: Show / Hide sidebar */
-	$scope.isCollapsed = false;
 	
 	$scope.toggle = function() {
 		$scope.isCollapsed = !$scope.isCollapsed;
@@ -159,14 +161,22 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 /* ---- */
 	$scope.exportData = function(){
 		var temp = JSON.stringify(localStorage);
-		console.log(temp);
+		$scope.exportOpen = true;
+		$rootScope.$broadcast('mainCtrl.exportOpen', $scope.exportOpen);
+		$scope.exportJson = temp;
 	}
 	
+	$scope.openImport = function(){
+		$scope.importOpen = true;
+		$rootScope.$broadcast('mainCtrl.importOpen', $scope.importOpen);
+	}
+
 	$scope.importData = function(){
-		var string2json = '';
+		var string2json = $scope.importJson;
 		var data = JSON.parse(string2json);
+		
 		for (var key in data) {
-			localstorage[key] = data[key];
+			localStorage[key] = data[key];
 		}
 	};
 
