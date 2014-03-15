@@ -12,6 +12,13 @@ section.mainSection {
 	height: 100%;
 	min-height: 100%;
 }
+.clear {
+	float: none;
+	clear: both;
+}
+.hidden {
+	display: none;
+}
 .hideIt {
 	left: -500px;
 }
@@ -247,6 +254,9 @@ aside .editBookmarks li {
 aside .editBookmarks li:last-child {
 	margin-bottom: 10px;
 }
+/* ---- */
+
+/* Bof: Import / Export functionality */
 aside input[type="submit"].restoreBtn,
 aside input[type="submit"].backupBtn {
 	width: 200px;
@@ -265,6 +275,7 @@ aside input[type="submit"].backupBtn {
 aside input[type="submit"]:hover.restoreBtn,
 aside input[type="submit"]:hover.backupBtn {
 	background-color: #1ec7e5;
+	font-size: 18px;
 	color: #fff;
 	text-shadow: none;
 	border-top: 1px solid #24ddfe;
@@ -281,6 +292,9 @@ aside input[type="submit"].restoreBtn {
 	top: 10%;
 	left: 600px;
 	z-index: 1110;
+	padding: 0;
+	box-shadow: 0 0 10px #000;
+	font-family: "Lato";
 }
 #importBox h3,
 #exportBox h3 {
@@ -288,24 +302,59 @@ aside input[type="submit"].restoreBtn {
 	padding: 0;
 	color: #ccc;
 	text-shadow: inset 0 1px #000;
+	font-size: 28px;
 	font-weight: 400;
 }
 
 #importBox .container,
 #exportBox .container {
-	width: 600px;
-	padding: 20px;
+	width: 582px;
+	padding: 20px 20px 60px 20px;
+	margin: 0;
 }
 #importBox .imexJson,
 #exportBox .imexJson {
 	width: 560px;
 	height: 300px;
 	margin: 0 auto;
+	border: none;
+	outline: none;
+	box-shadow: inset 0 0 3px #999;
+	background-color: #ddd;
+	border: 1px solid #4f565b;
+	font-size: 18px;
+	padding: 2px 10px;
 }
 .closeImEx {
 	position: absolute;
+	top: 10px;
 	right: 10px;
 }
+.copyStatusTrue {
+	position: absolute;
+	height: 30px;
+	visibility: visible;
+	color: #ccc;
+	margin-top: 15px;
+}
+.copyStatusFalse {
+	position: absolute;
+	height: 30px;
+	visibility: hidden;
+	margin-top: 10px;
+}
+.exportText,
+.importText {
+	margin-top: 10px;
+	margin-right: 0px !important;
+	float: right;
+}
+.clearAll {
+	width: 448px !important;
+	margin-bottom: 50px !important;
+}
+/* ---- */
+
 aside .btn {
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
@@ -353,6 +402,9 @@ aside .btn .delBtn:hover {
 aside.sideBar .editEntry input[type="text"] {
 	width: 408px;
 }
+aside.sideBar input[type="submit"].clearAll,
+input[type="submit"].exportText,
+input[type="submit"].importText,
 aside.sideBar input[type="submit"].doDelete,
 aside.sideBar input[type="submit"].cancelDelete,
 aside.sideBar input[type="submit"].saveChanges,
@@ -366,11 +418,13 @@ aside.sideBar input[type="submit"].discardChanges {
 	box-shadow: none;
 	box-shadow: inset 0 -1px 0 #0997b3;
 	padding: 0;
+	font-size: 18px;
 	color: #333;
 	text-shadow: 0 1px 1px #24ddfe;
 	margin-left: 4px;
 	margin-right: 0;
 }
+aside.sideBar input[type="submit"].clearAll,
 aside.sideBar input[type="submit"].doDelete,
 aside.sideBar input[type="submit"].discardChanges {
 	margin-left: 10px;
@@ -382,14 +436,19 @@ aside.sideBar input[type="submit"].discardChanges {
 	border-bottom: 1px solid #c63b1b;
 	box-shadow: inset 0 -1px 0 #c63b1b;
 }
+aside.sideBar input[type="submit"].clearAll,
 aside.sideBar input[type="submit"].doDelete {
 	margin-left: 7px;
 	margin-right: 0;
 }
+input[type="submit"].exportText,
+input[type="submit"].importText,
 aside.sideBar input[type="submit"].cancelDelete {
 	margin-left: 10px;
 	margin-right: 20px;
 }
+input[type="submit"]:hover.exportText,
+input[type="submit"]:hover.importText,
 aside.sideBar input[type="submit"]:hover.cancelDelete {
 	background-color: #1ec7e5;
 	color: #fff;
@@ -406,6 +465,7 @@ aside.sideBar input[type="submit"]:hover.saveChanges {
 	border-bottom: 1px solid #0997b3;
 	box-shadow: inset 0 -1px 0 #0997b3;
 }
+aside.sideBar input[type="submit"]:hover.clearAll,
 aside.sideBar input[type="submit"]:hover.doDelete {
 	color: #fff;
 	text-shadow: none;

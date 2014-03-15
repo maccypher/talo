@@ -9,6 +9,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 	$scope.isCollapsed = false;
 	$scope.exportOpen = false;
 	$scope.importOpen = false;
+	$scope.confirmClear = false;
 	var obj = {};
 	obj.id = '';
 	obj.cat = '';
@@ -21,6 +22,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 	$scope.toggle = function() {
 		$scope.isCollapsed = !$scope.isCollapsed;
 		$rootScope.$broadcast('mainCtrl.isCollapsed', $scope.isCollapsed);
+		$scope.closeImport();
 	};
 /* ---- */
 
@@ -136,6 +138,8 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		$scope.newCat = '';
 		$scope.newUrl = '';
 		$scope.newName = '';
+		$scope.importJson = '';
+		$scope.exportJson = '';
 	};
 /* ---- */
 
@@ -164,20 +168,88 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		$scope.exportOpen = true;
 		$rootScope.$broadcast('mainCtrl.exportOpen', $scope.exportOpen);
 		$scope.exportJson = temp;
-	}
-	
+	};
+
+	$scope.download = function (fileType){
+		var textToWrite = $scope.exportJson;
+		var fileNameToSaveAs = "talo_bookmarks";
+
+		if(fileType == "json") {
+			var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+		}
+		
+		var downloadLink = document.createElement("a");
+		downloadLink.download = fileNameToSaveAs;
+		downloadLink.innerHTML = "Download File";
+		if (window.webkitURL != null)	{
+			downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+		} else {
+			downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+			downloadLink.onclick = destroyClickedElement;
+			downloadLink.style.display = "none";
+			document.body.appendChild(downloadLink);
+		}
+
+		downloadLink.click();
+
+	};
+
 	$scope.openImport = function(){
 		$scope.importOpen = true;
 		$rootScope.$broadcast('mainCtrl.importOpen', $scope.importOpen);
-	}
+	};
 
-	$scope.importData = function(){
+	$scope.closeImport = function(){
+		$scope.importOpen = false;
+		$rootScope.$broadcast('mainCtrl.importOpen', $scope.importOpen);
+	};
+
+	$scope.restoreClean = function(){
+		localStorage.clear();
 		var string2json = $scope.importJson;
 		var data = JSON.parse(string2json);
 		
 		for (var key in data) {
 			localStorage[key] = data[key];
 		}
+		$scope.editBookmarks();
+		$scope.clearForm();
+		$scope.closeImport();
 	};
 
+	$scope.restoreAdd = function(){
+		var string2json = $scope.importJson;
+		var data = JSON.parse(string2json);
+		
+		for (var key in data) {
+			localStorage[key] = data[key];
+		}
+		$scope.editBookmarks();
+		$scope.clearForm();
+		$scope.closeImport();
+	};
+
+	$scope.confirmClearAll = function(){
+		$scope.confirmClear = true;
+		$rootScope.$broadcast('mainCtrl.confirmClear', $scope.confirmClear);
+	};
+
+	$scope.clearAll = function(){
+		for (var i = 0; i < localStorage.length; i++){
+			var lsKey = localStorage.key(i);
+			if(lsKey == "selection") {
+				console.log(lsKey);
+			}
+			if(lsKey == "columns") {
+				console.log(lsKey);
+			}
+			if(lsKey != "selection") {
+				if(lsKey != "columns") {
+				//localStorage.clear();
+					$store.remove(lsKey);
+				}
+			}
+		}
+		$scope.editBookmarks();
+	};
 });

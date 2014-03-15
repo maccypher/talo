@@ -80,13 +80,26 @@
 
 		</div>
 		<a href="" class="closeSettings" ng-click="toggle()"><i class="icon-close"></i></a>
+		<input class="animateAll confirmClearAll" type="submit" ng-click="confirmClearAll()" value="Delete All &amp; Restore Defaults" />
 	</aside>
+
+	<div ng-show="confirmClear" id="exportBox">
+		<div class="container">
+			<h3>Confirm Delete &amp; Restore</h3>
+			<input class="animateAll exportText" type="submit" ng-click="clearAll()" value="Delete All" />
+			<input class="animateAll exportText" type="submit" ng-click="cancelClear(); confirmClear = false" value="Cancel" />
+			<br class="clear" />
+		</div>
+	</div>
 
 	<div ng-show="exportOpen" id="exportBox">
 		<div class="container">
 			<h3>Export</h3>
 			<a href="" class="closeImEx" ng-click="importOpen = false; exportOpen = false"><i class="icon-close"></i></a>
-			<textarea ng-bind="exportJson" class="imexJson" readonly></textarea>
+			<textarea ng-bind="exportJson" class="imexJson" ng-copy="copied=true" ng-init="copied=false" readonly></textarea>
+			<span ng-class="{'copyStatusTrue': copied, 'copyStatusFalse': !copied}">All copied to clipboard</span>
+			<input class="animateAll exportText" type="submit" ng-click="download()" value="Export as JSon" />
+			<br class="clear" />
 		</div>
 	</div>
 	<div ng-show="importOpen" id="importBox">
@@ -94,7 +107,9 @@
 			<h3>Import</h3>
 			<a href="" class="closeImEx" ng-click="importOpen = false; exportOpen = false"><i class="icon-close"></i></a>
 			<textarea ng-model="importJson" class="imexJson"></textarea>
-			<input class="animateAll saveChanges" type="submit" ng-click="importData()" value="Import" />
+			<input class="animateAll importText" type="submit" ng-click="restoreClean()" value="Restore Clean" />
+			<input class="animateAll importText" type="submit" ng-click="restoreAdd()" value="Add Data" />
+			<br class="clear" />
 		</div>
 	</div>
 
