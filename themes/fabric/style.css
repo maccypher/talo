@@ -63,9 +63,9 @@ a,
 a:hover,
 .bookmarks a,
 .bookmarks a:hover,
-input[type="search"].queryInput,
-input[type="search"]:hover.queryInput,
-input[type="search"]:focus.queryInput,
+input,
+input:hover,
+input:focus,
 .copyright {
 	-webkit-transition: all 0.3s ease-out;
 	-moz-transition: all 0.3s ease-out;

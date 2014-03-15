@@ -170,17 +170,15 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		$scope.exportJson = temp;
 	};
 
-	$scope.download = function (fileType){
+	$scope.download = function (){
 		var textToWrite = $scope.exportJson;
 		var fileNameToSaveAs = "talo_bookmarks";
-
-		if(fileType == "json") {
-			var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
-		}
-		
+		var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
 		var downloadLink = document.createElement("a");
+
 		downloadLink.download = fileNameToSaveAs;
 		downloadLink.innerHTML = "Download File";
+
 		if (window.webkitURL != null)	{
 			downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
 		} else {
@@ -235,21 +233,14 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 	};
 
 	$scope.clearAll = function(){
-		for (var i = 0; i < localStorage.length; i++){
-			var lsKey = localStorage.key(i);
-			if(lsKey == "selection") {
-				console.log(lsKey);
-			}
-			if(lsKey == "columns") {
-				console.log(lsKey);
-			}
-			if(lsKey != "selection") {
-				if(lsKey != "columns") {
-				//localStorage.clear();
-					$store.remove(lsKey);
-				}
-			}
-		}
+		var tempSelection = $store.get('selection');
+		var tempColumns = $store.get('columns');
+		
+		localStorage.clear();
+		
+		$store.set('selection', tempSelection);
+		$store.set('columns', tempColumns);
+
 		$scope.editBookmarks();
 	};
 });

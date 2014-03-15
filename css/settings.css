@@ -24,13 +24,13 @@ section.mainSection {
 }
 .showIt {
 	left: 0;
-	box-shadow: 2px 0 20px #000;
 }
 .swipeLeft {
 	left: 0;
 }
 .swipeRight {
 	left: 500px;
+	box-shadow: 2px 0 20px #000;
 }
 .pushLeft {
 	background-position: 0 0;
@@ -45,7 +45,7 @@ section.mainSection {
 	width: 100%;
 	height: 100%;
 	min-height: 100%;
-	background-color: rgba(0,0,0,0.7);
+	background-color: rgba(0,0,0,0.2);
 }
 .showCursor {
 	cursor: pointer;
@@ -158,6 +158,7 @@ aside.sideBar {
 	padding: 10px 20px;
 	overflow: auto;
 }
+input.btnBlue,
 aside.sideBar input[type="submit"],
 aside.sideBar input[type="text"] {
 	width: 418px;
@@ -179,6 +180,8 @@ aside.sideBar input[type="text"]:focus {
 	border: 1px solid #00dcff;
 	box-shadow: 0 0 10px #00dcff;
 }
+input.btnBlue,
+input.btnRed,
 aside.sideBar input[type="submit"] {
 	width: 440px;
 	height: 34px;
@@ -193,6 +196,8 @@ aside.sideBar input[type="submit"] {
 	text-shadow: 0 1px 1px #24ddfe;
 	line-height: 34px;
 }
+input:hover.btnBlue,
+input:hover.btnRed,
 aside.sideBar input[type="submit"]:hover {
 	background-color: #1ec7e5;
 	color: #fff;
@@ -201,6 +206,8 @@ aside.sideBar input[type="submit"]:hover {
 	border-bottom: 1px solid #0997b3;
 	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #0997b3;
 }
+input:focus.btnBlue,
+input:focus.btnRed,
 aside.sideBar input[type="submit"]:focus {
 	box-shadow: 0 0 5px #fff;
 	color: #000;
@@ -296,6 +303,7 @@ aside input[type="submit"].restoreBtn {
 	box-shadow: 0 0 10px #000;
 	font-family: "Lato";
 }
+#confirmClearBox h3,
 #importBox h3,
 #exportBox h3 {
 	margin: 0 0 10px 0;
@@ -305,7 +313,6 @@ aside input[type="submit"].restoreBtn {
 	font-size: 28px;
 	font-weight: 400;
 }
-
 #importBox .container,
 #exportBox .container {
 	width: 582px;
@@ -349,9 +356,35 @@ aside input[type="submit"].restoreBtn {
 	margin-right: 0px !important;
 	float: right;
 }
-.clearAll {
+.confirmClearAll {
 	width: 448px !important;
 	margin-bottom: 50px !important;
+}
+#confirmClearBox {
+	position: absolute;
+	top: 10%;
+	left: 600px;
+	z-index: 1110;
+	padding: 0;
+	box-shadow: 0 0 10px #000;
+	font-family: "Lato";
+}
+#confirmClearBox .container {
+	width: 432px;
+	padding: 20px 20px 20px 20px;
+	margin: 0;
+}
+#confirmClearBox input.btnBlue,
+#confirmClearBox input.btnRed {
+	font-size: 18px;
+	width: 200px;
+	float: left;
+}
+#confirmClearBox input.btnBlue {
+	margin: 10px 0 0 15px;
+}
+#confirmClearBox input.btnRed {
+	margin: 10px 15px 0 0;
 }
 /* ---- */
 
@@ -402,6 +435,8 @@ aside .btn .delBtn:hover {
 aside.sideBar .editEntry input[type="text"] {
 	width: 408px;
 }
+
+input.btnBlue,
 aside.sideBar input[type="submit"].clearAll,
 input[type="submit"].exportText,
 input[type="submit"].importText,
@@ -424,6 +459,7 @@ aside.sideBar input[type="submit"].discardChanges {
 	margin-left: 4px;
 	margin-right: 0;
 }
+input.btnRed,
 aside.sideBar input[type="submit"].clearAll,
 aside.sideBar input[type="submit"].doDelete,
 aside.sideBar input[type="submit"].discardChanges {
@@ -447,8 +483,10 @@ aside.sideBar input[type="submit"].cancelDelete {
 	margin-left: 10px;
 	margin-right: 20px;
 }
+input:hover.btnBlue,
 input[type="submit"]:hover.exportText,
 input[type="submit"]:hover.importText,
+aside.sideBar input[type="submit"]:hover.saveChanges,
 aside.sideBar input[type="submit"]:hover.cancelDelete {
 	background-color: #1ec7e5;
 	color: #fff;
@@ -457,33 +495,20 @@ aside.sideBar input[type="submit"]:hover.cancelDelete {
 	border-bottom: 1px solid #0997b3;
 	box-shadow: inset 0 -1px 0 #0997b3;
 }
-aside.sideBar input[type="submit"]:hover.saveChanges {
-	background-color: #1ec7e5;
-	color: #fff;
-	text-shadow: none;
-	border-top: 1px solid #24ddfe;
-	border-bottom: 1px solid #0997b3;
-	box-shadow: inset 0 -1px 0 #0997b3;
-}
+input:hover.btnRed,
 aside.sideBar input[type="submit"]:hover.clearAll,
+aside.sideBar input[type="submit"]:hover.discardChanges,
 aside.sideBar input[type="submit"]:hover.doDelete {
+	background-color: #f6572f;
 	color: #fff;
 	text-shadow: none;
-	background-color: #f6572f;
 	border: none;
 	border-top: 1px solid #f46332;
 	border-bottom: 1px solid #c63b1b;
 	box-shadow: inset 0 -1px 0 #c63b1b;
 }
-aside.sideBar input[type="submit"]:hover.discardChanges {
-	color: #fff;
-	text-shadow: none;
-	background-color: #f6572f;
-	border: none;
-	border-top: 1px solid #f46332;
-	border-bottom: 1px solid #c63b1b;
-	box-shadow: inset 0 -1px 0 #c63b1b;
-}
+input:focus.btnBlue,
+input:focus.btnRed,
 aside.sideBar input[type="submit"]:focus.cancelDelete,
 aside.sideBar input[type="submit"]:focus.doDelete,
 aside.sideBar input[type="submit"]:focus.saveChanges,
@@ -493,6 +518,8 @@ aside.sideBar input[type="submit"]:focus.discardChanges {
 }
 /* ---- */
 
+input.btnBlue,
+input.btnRed,
 .inactive,
 .active,
 .column,

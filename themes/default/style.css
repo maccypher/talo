@@ -20,3 +20,15 @@ a.openSettings {
 a.openSettings:hover {
 	color: #3c96d5;
 }
+a,
+a:hover,
+.bookmarks a,
+.bookmarks a:hover,
+input,
+input:hover,
+input:focus,
+.copyright {
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}

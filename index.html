@@ -83,11 +83,11 @@
 		<input class="animateAll confirmClearAll" type="submit" ng-click="confirmClearAll()" value="Delete All &amp; Restore Defaults" />
 	</aside>
 
-	<div ng-show="confirmClear" id="exportBox">
+	<div ng-show="confirmClear" id="confirmClearBox">
 		<div class="container">
 			<h3>Confirm Delete &amp; Restore</h3>
-			<input class="animateAll exportText" type="submit" ng-click="clearAll()" value="Delete All" />
-			<input class="animateAll exportText" type="submit" ng-click="cancelClear(); confirmClear = false" value="Cancel" />
+			<input class="animateAll btnRed" type="submit" ng-click="clearAll(); confirmClear = false" value="Delete All" />
+			<input class="animateAll btnBlue" type="submit" ng-click="cancelClear(); confirmClear = false" value="Cancel" />
 			<br class="clear" />
 		</div>
 	</div>

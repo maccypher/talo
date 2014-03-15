@@ -1,6 +1,50 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:100,300);
+
 body {
 	background: #333 url('Clouds.jpg') no-repeat center center;
-	color: #ddd;
-	font-weight: 400;
+	color: #fff;
+	font-weight: 100;
 	background-size: 100% 100%;
+	font-family: "Raleway";
+	font-size: 24px;
+}
+h1 {
+	font-size: 60px;
+	font-weight: 100;
+	font-family: "Raleway";
+}
+h2 {
+	font-weight: 300;
+	color: #394355;
+}
+a {
+	display: block;
+	color: #fff;
+	border-radius: 3px;
+}
+a:hover {
+	color: #000;
+	background-color: rgba(255,255,255,0.3);
+}
+#content {
+	margin: 7% auto 0 auto;
+}
+input[type="search"].queryInput {
+	background-color: #eee;
+}
+input[type="search"].queryInput:hover {
+	background-color: #fff;
+}
+input[type="search"].queryInput:focus {
+	box-shadow: 0 0 20px #fff, 0 0 20px #fff;
+}
+
+a,
+a:hover,
+input,
+input:hover,
+input:focus {
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
 }
