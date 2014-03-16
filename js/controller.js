@@ -20,9 +20,10 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 /* Bof: Show / Hide sidebar */
 	
 	$scope.toggle = function() {
-		$scope.isCollapsed = !$scope.isCollapsed;
-		$rootScope.$broadcast('mainCtrl.isCollapsed', $scope.isCollapsed);
-		$scope.closeImport();
+		if(!$scope.exportOpen && !$scope.importOpen && !$scope.confirmClear) {
+			$scope.isCollapsed = !$scope.isCollapsed;
+			$rootScope.$broadcast('mainCtrl.isCollapsed', $scope.isCollapsed);
+		}
 	};
 /* ---- */
 
@@ -170,6 +171,11 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		$scope.exportJson = temp;
 	};
 
+	$scope.closeExport = function(){
+		$scope.exportOpen = false;
+		$rootScope.$broadcast('mainCtrl.exportOpen', $scope.exportOpen);
+	};
+
 	$scope.download = function (){
 		var textToWrite = $scope.exportJson;
 		var fileNameToSaveAs = "talo_bookmarks";
@@ -229,6 +235,11 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 
 	$scope.confirmClearAll = function(){
 		$scope.confirmClear = true;
+		$rootScope.$broadcast('mainCtrl.confirmClear', $scope.confirmClear);
+	};
+
+	$scope.closeConfirmClearAll = function(){
+		$scope.confirmClear = false;
 		$rootScope.$broadcast('mainCtrl.confirmClear', $scope.confirmClear);
 	};
 

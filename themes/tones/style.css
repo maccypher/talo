@@ -26,12 +26,14 @@ a:hover.openSettings {
 }
 input[type="search"].queryInput {
 	background-color: #eee;
+	border: 1px solid #ccc;
 }
 input[type="search"].queryInput:hover {
 	background-color: #fff;
 }
 input[type="search"].queryInput:focus {
 	box-shadow: 0 0 10px #fff, 0 0 10px #fff;
+	border: 1px solid #eee;
 }
 ::-webkit-input-placeholder { color: #ddd; }
 ::-moz-placeholder { color: #ddd; }

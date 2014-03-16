@@ -3,7 +3,7 @@
 /* Bof: some global stuff */
 aside {
 	font-family: "Lato";
-	font-size: 16px;
+	font-size: 18px;
 }
 section.mainSection {
 	position: absolute;
@@ -11,6 +11,12 @@ section.mainSection {
 	width: 100%;
 	height: 100%;
 	min-height: 100%;
+}
+aside a,
+aside a:hover,
+#dialogs a,
+#dialogs a:hover {
+	background: none;
 }
 .clear {
 	float: none;
@@ -104,6 +110,8 @@ select.selectTheme {
 	display: inline-block;
 	width: 85px;
 	margin: 0 5% 0 0;
+	font-size: 18px;
+	font-weight: 300;
 }
 .layout label:last-child {
 	margin-right: 0;
@@ -158,9 +166,14 @@ aside.sideBar {
 	padding: 10px 20px;
 	overflow: auto;
 }
-input.btnBlue,
-aside.sideBar input[type="submit"],
-aside.sideBar input[type="text"] {
+aside.sideBar ::-webkit-input-placeholder { color: #aaa; }
+aside.sideBar ::-moz-placeholder { color: #aaa; } /* firefox 19+ */
+aside.sideBar :-ms-input-placeholder { color: #aaa; } /* ie */
+aside.sideBar input:-moz-placeholder { color: #aaa; }
+/* ---- */
+
+/* Bof: Input field styling */
+.sideBar input[type="text"] {
 	width: 418px;
 	height: 30px;
 	border: none;
@@ -172,50 +185,77 @@ aside.sideBar input[type="text"] {
 	padding: 2px 10px;
 	margin: 0 10px 10px 10px;
 }
-aside.sideBar input[type="text"]:hover {
+.sideBar input[type="text"]:hover {
 	background-color: #fff;
 }
-aside.sideBar input[type="text"]:focus {
+.sideBar input[type="text"]:focus {
 	background-color: #fff;
 	border: 1px solid #00dcff;
 	box-shadow: 0 0 10px #00dcff;
 }
+/* ---- */
+
+/* Bof: Button styling */
+input.btnBlue {
+	background-color: #10b5d2; /* blue */
+}
+input.btnRed {
+	background-color: #e5461e; /* red */
+}
+input.btnGreen {
+	background-color: #a0c61b; /* green */
+}
 input.btnBlue,
 input.btnRed,
-aside.sideBar input[type="submit"] {
-	width: 440px;
-	height: 34px;
-	background-color: #10b5d2;
+input.btnGreen {
 	border: none;
-	border-top: 1px solid #24ddfe;
-	border-bottom: 1px solid #0997b3;
+	border-top: 1px solid rgba(255,255,255,.2);
 	box-shadow: none;
-	box-shadow: inset 0 -1px 0 #0997b3;
-	padding: 0;
+	box-shadow: inset 0 -2px 0 rgba(0,0,0,.2);
+	padding: 2px 0;
+	margin: 10px;
+	font-size: 18px;
 	color: #333;
-	text-shadow: 0 1px 1px #24ddfe;
-	line-height: 34px;
+	text-shadow: 0 1px 1px rgba(255,255,255,.2);
+	line-height: 36px;
+}
+input:hover.btnBlue {
+	background-color: #32d7f4; /* light-blue */
+}
+input:hover.btnRed {
+	background-color: #e5461e; /* red */
+	background-color: #f6572f; /* light-red */
+}
+input:hover.btnGreen {
+	background-color: #c2e83d; /* light-green */
 }
 input:hover.btnBlue,
 input:hover.btnRed,
-aside.sideBar input[type="submit"]:hover {
-	background-color: #1ec7e5;
+input:hover.btnGreen {
 	color: #fff;
 	text-shadow: none;
-	border-top: 1px solid #24ddfe;
-	border-bottom: 1px solid #0997b3;
-	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #0997b3;
 }
 input:focus.btnBlue,
 input:focus.btnRed,
-aside.sideBar input[type="submit"]:focus {
-	box-shadow: 0 0 5px #fff;
+input:focus.btnGreen {
 	color: #000;
+	text-shadow: none;
 }
-aside.sideBar ::-webkit-input-placeholder { color: #aaa; }
-aside.sideBar ::-moz-placeholder { color: #aaa; } /* firefox 19+ */
-aside.sideBar :-ms-input-placeholder { color: #aaa; } /* ie */
-aside.sideBar input:-moz-placeholder { color: #aaa; }
+input.btnFull {
+	width: 440px;
+}
+input.btnLeft,
+input.btnRight {
+	width: 208px;
+}
+#exportBox .btnLeft,
+#importBox .btnLeft {
+	float: left;
+}
+#exportBox .btnRight,
+#importBox .btnRight {
+	float: right;
+}
 /* ---- */
 
 aside hr {
@@ -228,7 +268,7 @@ aside hr {
 
 /* Bof: Edit bookmarks */
 aside .catList {
-	margin-bottom: 10px;
+	margin: 0 0 10px 0;
 }
 aside .catList li {
 	margin: 0 0 20px 0;
@@ -236,7 +276,7 @@ aside .catList li {
 aside .catList li h4 {
 	display: block;
 	height: 30px;
-	margin: -20px 0 0 -5px;
+	margin: -20px 0 0 0;
 	padding: 5px 0 5px 15px;
 	background-color: #29292e;
 	line-height: 30px;
@@ -255,7 +295,7 @@ aside .editBookmarks:last-child {
 }
 aside .editBookmarks li {
 	list-style-type: none;
-	margin: 0 0 5px 0;
+	margin: 0 0 0 0;
 	padding: 0;
 }
 aside .editBookmarks li:last-child {
@@ -264,35 +304,6 @@ aside .editBookmarks li:last-child {
 /* ---- */
 
 /* Bof: Import / Export functionality */
-aside input[type="submit"].restoreBtn,
-aside input[type="submit"].backupBtn {
-	width: 200px;
-	height: 34px;
-	background-color: #10b5d2;
-	border: none;
-	border-top: 1px solid #24ddfe;
-	border-bottom: 1px solid #0997b3;
-	box-shadow: none;
-	box-shadow: inset 0 -1px 0 #0997b3;
-	color: #333;
-	text-shadow: 0 1px 1px #24ddfe;
-	margin-left: 10px;
-	margin-right: 20px;	
-}
-aside input[type="submit"]:hover.restoreBtn,
-aside input[type="submit"]:hover.backupBtn {
-	background-color: #1ec7e5;
-	font-size: 18px;
-	color: #fff;
-	text-shadow: none;
-	border-top: 1px solid #24ddfe;
-	border-bottom: 1px solid #0997b3;
-	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #0997b3;
-}
-aside input[type="submit"].restoreBtn {
-	margin-left: 17px;
-	margin-right: 0;
-}
 #importBox,
 #exportBox {
 	position: absolute;
@@ -316,7 +327,7 @@ aside input[type="submit"].restoreBtn {
 #importBox .container,
 #exportBox .container {
 	width: 582px;
-	padding: 20px 20px 60px 20px;
+	padding: 20px 20px 20px 20px;
 	margin: 0;
 }
 #importBox .imexJson,
@@ -332,29 +343,26 @@ aside input[type="submit"].restoreBtn {
 	font-size: 18px;
 	padding: 2px 10px;
 }
-.closeImEx {
+a.closeImEx {
 	position: absolute;
 	top: 10px;
 	right: 10px;
+}
+a:hover.closeImEx {
+	color: #e5461e;
 }
 .copyStatusTrue {
 	position: absolute;
 	height: 30px;
 	visibility: visible;
 	color: #ccc;
-	margin-top: 15px;
+	margin-top: 35px;
 }
 .copyStatusFalse {
 	position: absolute;
 	height: 30px;
 	visibility: hidden;
-	margin-top: 10px;
-}
-.exportText,
-.importText {
-	margin-top: 10px;
-	margin-right: 0px !important;
-	float: right;
+	margin-top: 35px;
 }
 .confirmClearAll {
 	width: 448px !important;
@@ -362,7 +370,7 @@ aside input[type="submit"].restoreBtn {
 }
 #confirmClearBox {
 	position: absolute;
-	top: 10%;
+	top: 25%;
 	left: 600px;
 	z-index: 1110;
 	padding: 0;
@@ -370,21 +378,13 @@ aside input[type="submit"].restoreBtn {
 	font-family: "Lato";
 }
 #confirmClearBox .container {
-	width: 432px;
+	width: 462px;
 	padding: 20px 20px 20px 20px;
 	margin: 0;
 }
-#confirmClearBox input.btnBlue,
-#confirmClearBox input.btnRed {
+.infoText {
 	font-size: 18px;
-	width: 200px;
-	float: left;
-}
-#confirmClearBox input.btnBlue {
-	margin: 10px 0 0 15px;
-}
-#confirmClearBox input.btnRed {
-	margin: 10px 15px 0 0;
+	line-height: 28px;
 }
 /* ---- */
 
@@ -395,11 +395,12 @@ aside .btn {
 	font-style: normal;
 	text-decoration: none;
 	padding: 2px 10px 2px 30px;
-	margin: 0 0 0 -5px;
+	margin: 0;
 	display: block;
 	line-height: 30px;
-	border-bottom: 1px solid #242428;
-	border-top: 1px solid #333;
+	border-top: 1px solid #2f2f2f;
+	/*border-bottom: 1px solid #242428;*/
+	border-bottom: 1px solid #1b1b1b;
 	color: #eee;
 	background: none;
 }
@@ -407,9 +408,9 @@ aside .btn:hover {
 	background-color: #e5461e;
 	color: #fff;
 	border: none;
-	border-top: 1px solid #f46332;
-	border-bottom: 1px solid #c63b1b;
-	box-shadow: 0 -2px 2px #111, inset 0 -1px 0 #c63b1b;
+	border-top: 1px solid rgba(255,255,255,.2);
+	border-bottom: 1px solid #1b1b1b;
+	box-shadow: 0 -2px 4px -2px #111, inset 0 -2px 0 rgba(0,0,0,.2);
 	text-shadow: 0 1px 1px #000;
 }
 aside .btn .editBtn,
@@ -433,93 +434,13 @@ aside .btn .delBtn:hover {
 	color: #000;
 }
 aside.sideBar .editEntry input[type="text"] {
-	width: 408px;
-}
-
-input.btnBlue,
-aside.sideBar input[type="submit"].clearAll,
-input[type="submit"].exportText,
-input[type="submit"].importText,
-aside.sideBar input[type="submit"].doDelete,
-aside.sideBar input[type="submit"].cancelDelete,
-aside.sideBar input[type="submit"].saveChanges,
-aside.sideBar input[type="submit"].discardChanges {
-	width: 200px;
-	height: 34px;
-	background-color: #10b5d2;
-	border: none;
-	border-top: 1px solid #24ddfe;
-	border-bottom: 1px solid #0997b3;
-	box-shadow: none;
-	box-shadow: inset 0 -1px 0 #0997b3;
-	padding: 0;
-	font-size: 18px;
-	color: #333;
-	text-shadow: 0 1px 1px #24ddfe;
-	margin-left: 4px;
-	margin-right: 0;
-}
-input.btnRed,
-aside.sideBar input[type="submit"].clearAll,
-aside.sideBar input[type="submit"].doDelete,
-aside.sideBar input[type="submit"].discardChanges {
-	margin-left: 10px;
-	margin-right: 20px;
-	text-shadow: 0 1px 1px #f57443;
-	background-color: #e5461e;
-	border: none;
-	border-top: 1px solid #f46332;
-	border-bottom: 1px solid #c63b1b;
-	box-shadow: inset 0 -1px 0 #c63b1b;
-}
-aside.sideBar input[type="submit"].clearAll,
-aside.sideBar input[type="submit"].doDelete {
-	margin-left: 7px;
-	margin-right: 0;
-}
-input[type="submit"].exportText,
-input[type="submit"].importText,
-aside.sideBar input[type="submit"].cancelDelete {
-	margin-left: 10px;
-	margin-right: 20px;
-}
-input:hover.btnBlue,
-input[type="submit"]:hover.exportText,
-input[type="submit"]:hover.importText,
-aside.sideBar input[type="submit"]:hover.saveChanges,
-aside.sideBar input[type="submit"]:hover.cancelDelete {
-	background-color: #1ec7e5;
-	color: #fff;
-	text-shadow: none;
-	border-top: 1px solid #24ddfe;
-	border-bottom: 1px solid #0997b3;
-	box-shadow: inset 0 -1px 0 #0997b3;
-}
-input:hover.btnRed,
-aside.sideBar input[type="submit"]:hover.clearAll,
-aside.sideBar input[type="submit"]:hover.discardChanges,
-aside.sideBar input[type="submit"]:hover.doDelete {
-	background-color: #f6572f;
-	color: #fff;
-	text-shadow: none;
-	border: none;
-	border-top: 1px solid #f46332;
-	border-bottom: 1px solid #c63b1b;
-	box-shadow: inset 0 -1px 0 #c63b1b;
-}
-input:focus.btnBlue,
-input:focus.btnRed,
-aside.sideBar input[type="submit"]:focus.cancelDelete,
-aside.sideBar input[type="submit"]:focus.doDelete,
-aside.sideBar input[type="submit"]:focus.saveChanges,
-aside.sideBar input[type="submit"]:focus.discardChanges {
-	box-shadow: 0 0 5px #fff;
-	color: #000;
+	width: 418px;
 }
 /* ---- */
 
-input.btnBlue,
-input.btnRed,
+input,
+input:hover,
+input:focus,
 .inactive,
 .active,
 .column,
