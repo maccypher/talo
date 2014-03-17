@@ -17,6 +17,7 @@ body {
 	background: #f0f0f0;
 	color: #4f565b;
 	background-size: 100% 100%;
+	background-attachment: fixed !important;
 }
 a {
 	color: #4f565b;

@@ -41,6 +41,14 @@ h2 {
 a {
 	display: block;
 }
+#content div {
+	margin-top: 20px;
+	margin-right: 20px;
+}
+#content div:last-child {
+	margin-right: 0;
+}
+/*
 .one {
 	width: 100%;
 }
@@ -56,6 +64,7 @@ a {
 	width: 21%;
 	margin-right: 4%;
 }
+*/
 #copyright a:hover {
 	color: #ea2525;
 }
