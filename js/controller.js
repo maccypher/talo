@@ -17,6 +17,19 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 	obj.name = '';
 /* ---- */
 
+/* Bof: setting some defaults */
+	$scope.init = function() {
+		if(!$store.get('selection')){
+			$store.set('selection', "default");
+		}
+
+		if(!$store.get('columns')){
+			$store.set('columns', "one");
+		}
+	};
+	$scope.init();
+/* ---- */
+
 /* Bof: Show / Hide sidebar */
 	
 	$scope.toggle = function() {
@@ -216,6 +229,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		for (var key in data) {
 			localStorage[key] = data[key];
 		}
+		$scope.init();
 		$scope.editBookmarks();
 		$scope.clearForm();
 		$scope.closeImport();
