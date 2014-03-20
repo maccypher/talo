@@ -118,11 +118,13 @@
 					To import your former created backup, please open the downloaded file with your favorite text-editor and copy the content from the file into the textarea.
 				</p>
 				<a href="" class="closeImEx" ng-click="closeImport()"><i class="icon-close"></i></a>
-				<textarea ng-model="importJson" class="imexJson"></textarea>
-				<p class="clear">
-					<input class="btnRed btnLeft animateAll" type="submit" ng-click="restoreClean()" value="Restore Clean" />
-					<input class="btnBlue btnRight animateAll" type="submit" ng-click="restoreAdd()" value="Add Data" />
-				</p>
+				<form name="doImport">
+					<textarea ng-model="importJson" class="imexJson" required></textarea>
+					<p class="clear">
+						<input ng-disabled="doImport.$invalid" class="btnRed btnLeft animateAll" type="submit" ng-click="restoreClean()" value="Restore Clean" />
+						<input ng-disabled="doImport.$invalid" class="btnBlue btnRight animateAll" type="submit" ng-click="restoreAdd()" value="Add Data" />
+					</p>
+				</form>
 				<br class="clear" />
 			</div>
 		</div>

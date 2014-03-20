@@ -5,6 +5,7 @@
 var app = angular.module('homePage', ['localStorage']);
 
 app.controller('mainCtrl', function($scope, $rootScope, $store) {
+
 /* Bof: define some vars */
 	$scope.isCollapsed = false;
 	$scope.exportOpen = false;
@@ -15,19 +16,6 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 	obj.cat = '';
 	obj.url = '';
 	obj.name = '';
-/* ---- */
-
-/* Bof: setting some defaults */
-	$scope.init = function() {
-		if(!$store.get('selection')){
-			$store.set('selection', "default");
-		}
-
-		if(!$store.get('columns')){
-			$store.set('columns', "one");
-		}
-	};
-	$scope.init();
 /* ---- */
 
 /* Bof: Show / Hide sidebar */
@@ -42,12 +30,12 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 
 /* Bof: Theming */
 	$scope.themes = [
-			{ name: 'Default', value: 'default' },
-			{ name: 'Fabric', value: 'fabric' },
-			{ name: 'Taxi', value: 'taxi' },
-			{ name: 'Tones', value: 'tones' },
-			{ name: 'Pastel Sky', value: 'pastel' },
-			{ name: 'Clouds', value: 'clouds' }
+		{ name: 'Default', value: 'default' },
+		{ name: 'Fabric', value: 'fabric' },
+		{ name: 'Taxi', value: 'taxi' },
+		{ name: 'Tones', value: 'tones' },
+		{ name: 'Pastel Sky', value: 'pastel' },
+		{ name: 'Clouds', value: 'clouds' }
 	];
 
 	$scope.selectedTheme = $store.get('selection') || $scope.themes[0].value;
@@ -79,15 +67,19 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 	});
 /* ---- */
 
+	$scope.themeUpdate = function() {
+		$scope.selectedTheme = $store.get('selection') || $scope.themes[0].value;
+		$scope.column = $store.get('columns') || $scope.columnDefault;
+	};
+
 /* Bof: read LocalStorage for main content */
 	$scope.bookmarks = function(){
-
 		$scope.items = [];
 
 		for (var i = 0; i < localStorage.length; i++){
 			var lsKey = localStorage.key(i);
 			if(lsKey != "selection" && lsKey != "columns") {
-				$scope.items.push($store.get(lsKey));
+				$scope.items.push($store.get(lsKey));				
 			}
 		}
 
@@ -100,7 +92,6 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 
 /* Bof: read LocalStorage for sidebar (edit mode) */
 	$scope.editBookmarks = function(){
-
 		$scope.editItems = [];
 
 		/* Bof: getting keys from LS */
@@ -229,7 +220,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		for (var key in data) {
 			localStorage[key] = data[key];
 		}
-		$scope.init();
+		$scope.themeUpdate();
 		$scope.editBookmarks();
 		$scope.clearForm();
 		$scope.closeImport();
@@ -245,6 +236,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		$scope.editBookmarks();
 		$scope.clearForm();
 		$scope.closeImport();
+		$scope.themeUpdate();
 	};
 
 	$scope.confirmClearAll = function(){
@@ -263,9 +255,10 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		
 		localStorage.clear();
 		
-		$store.set('selection', tempSelection);
-		$store.set('columns', tempColumns);
+		// $store.set('selection', tempSelection);
+		// $store.set('columns', tempColumns);
 
 		$scope.editBookmarks();
+		$scope.themeUpdate();
 	};
 });

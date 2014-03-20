@@ -224,7 +224,6 @@ input:hover.btnBlue {
 	background-color: #32d7f4; /* light-blue */
 }
 input:hover.btnRed {
-	background-color: #e5461e; /* red */
 	background-color: #f6572f; /* light-red */
 }
 input:hover.btnGreen {
@@ -241,6 +240,12 @@ input:focus.btnRed,
 input:focus.btnGreen {
 	color: #000;
 	text-shadow: none;
+}
+input:disabled.btnBlue,
+input:disabled.btnRed,
+input:disabled.btnGreen {
+	background-color: #ccc;
+	color: #666;
 }
 input.btnFull {
 	width: 440px;
@@ -356,8 +361,9 @@ a:hover.closeImEx {
 	position: absolute;
 	height: 30px;
 	visibility: visible;
-	color: #ccc;
+	color: #fff;
 	margin-top: 35px;
+	font-weight: 300;
 }
 .copyStatusFalse {
 	position: absolute;
@@ -386,6 +392,8 @@ a:hover.closeImEx {
 .infoText {
 	font-size: 18px;
 	line-height: 28px;
+	color: #fff;
+	font-weight: 300;
 }
 /* ---- */
 
