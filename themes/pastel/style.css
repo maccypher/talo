@@ -1,8 +1,12 @@
-@import url(http://fonts.googleapis.com/css?family=Dosis|BenchNine|Pompiere|Pathway+Gothic+One|Text+Me+One|Comfortaa);
+/* pastel */
+
+@import url(http://fonts.googleapis.com/css?family=Dosis);
+
 body {
 	background: #ddd url('PastelSky.jpg') no-repeat center center;
 	color: #fff;
 	background-size: 100% 100%;
+	background-attachment: fixed;
 	font-family: "Dosis";
 }
 ::-webkit-selection {

@@ -1,12 +1,14 @@
+/* clouds */
+
 @import url(http://fonts.googleapis.com/css?family=Raleway:100,300);
 
 body {
-	background: #333 url('Clouds.jpg') no-repeat center center;
+	background: #79c2e5 url('Clouds.jpg') no-repeat center center;
 	color: #fff;
 	font-weight: 300;
-	background-size: 100% 100%;
+	background-size: 100%;
+	background-attachment: fixed;
 	font-family: "Raleway";
-	font-size: 24px;
 }
 h1 {
 	font-size: 60px;
@@ -17,12 +19,13 @@ h2 {
 	font-weight: 300;
 	color: #394355;
 }
-a {
+.bookmarks a {
 	display: block;
 	color: #fff;
+	font-size: 24px;
 	border-radius: 3px;
 }
-a:hover {
+.bookmarks a:hover {
 	color: #000;
 	background-color: rgba(255,255,255,0.3);
 }

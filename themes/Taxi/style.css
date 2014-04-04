@@ -1,9 +1,12 @@
+/* taxi */
+
 @import url(http://fonts.googleapis.com/css?family=Advent+Pro);
 body {
 	background: #333 url('Taxi.jpg') no-repeat center center;
 	color: #aaa;
 	font-weight: 400;
 	background-size: 100% 100%;
+	background-attachment: fixed;
 }
 .column {
 	border-radius: 5px;

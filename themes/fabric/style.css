@@ -1,9 +1,12 @@
+/* fabric */
+
 @import url(http://fonts.googleapis.com/css?family=Nova+Slim);
 body {
 	background: #333 url('Fabric.jpg') no-repeat center center;
 	color: #ccc;
 	font-weight: 400;
 	background-size: 100% 100%;
+	background-attachment: fixed;
 }
 input[type="search"].queryInput {
 	background-color: #ccc;
@@ -23,7 +26,11 @@ input[type="search"]:focus.queryInput {
 	margin: 0;
 	min-height: 450px;
 }
-a:hover {
+.bookmarks a {
+	font-size: 20px;
+	display: block;
+}
+.bookmarks a:hover {
 	color: #ea2525;
 }
 h1, h2 {
@@ -38,9 +45,6 @@ h2 {
 	margin: 5px 0;
 	padding: 0;
 }
-a {
-	display: block;
-}
 #content div {
 	margin-top: 20px;
 	margin-right: 20px;
@@ -48,23 +52,6 @@ a {
 #content div:last-child {
 	margin-right: 0;
 }
-/*
-.one {
-	width: 100%;
-}
-.two {
-	width: 46%;
-	margin-right: 1%;
-}
-.three {
-	width: 28%;
-	margin-right: 5%;
-}
-.four {
-	width: 21%;
-	margin-right: 4%;
-}
-*/
 #copyright a:hover {
 	color: #ea2525;
 }

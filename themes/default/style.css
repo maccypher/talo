@@ -1,8 +1,10 @@
 /* default */
+
 body {
-	background: #f0f0f0 url('worldmap.gif') no-repeat center center;
+	background: #eee url('worldmap.gif') no-repeat center center;
 	color: #4f565b;
-	background-size: 100% 100%;
+	background-size: 100%;
+	background-attachment: fixed;
 }
 section a {
 	display: block;
