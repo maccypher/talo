@@ -1,6 +1,6 @@
 # talo
 
-![Smaller icon](img/icon.png "Kello") 
+![ talo-icon ](img/icon.png "talo") 
 
 
 ### An editable start- / homepage - bookmark collection manager
