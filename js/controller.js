@@ -3,6 +3,14 @@
 'use strict';
 
 var app = angular.module('homePage', ['localStorage']);
+var IS_LINK = /^[http(s)?:\/\/].+/;
+var cleanup = function(obj) {
+	//add entry to default category if category is empty
+	if(!obj.cat || obj.cat.length === 0 ) obj.cat = 'default';
+	//if url misses protocol add default http, to allow link recognition in browser
+	if(!IS_LINK.test(obj.url)) obj.url = 'http://' + obj.url;
+	return obj;
+}
 
 app.controller('mainCtrl', function($scope, $rootScope, $store) {
 
@@ -126,12 +134,15 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 
 /* Bof: add a new bookmark */
 	$scope.addNew = function(){
+		//stop work, if dont have a url and name
+		if (!$scope.newUrl || $scope.newUrl.length === 0 || !$scope.newName || $scope.newName.length === 0) return;
+		
 		var now = new Date();
 		obj.id = now.getTime();
 		obj.cat = $scope.newCat;
 		obj.url = $scope.newUrl;
 		obj.name = $scope.newName;
-		$store.set(obj.id, obj);
+		$store.set(obj.id, cleanup(obj));
 
 		$scope.clearForm();
 		$scope.editBookmarks();
@@ -158,7 +169,9 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 
 /* Bof: save entry */
 	$scope.saveItem = function(item){
-		$store.set(item.id, item);
+		//stop work, if dont have a url and name
+		if (!item.url || item.url.length === 0 || !item.name || item.name.length === 0) return;
+		$store.set(item.id, cleanup(item));
 		$scope.editBookmarks();
 	};
 /* ---- */
