@@ -13,7 +13,6 @@ var cleanup = function(obj) {
 }
 
 app.controller('mainCtrl', function($scope, $rootScope, $store) {
-
 /* Bof: define some vars */
 	$scope.isCollapsed = false;
 	$scope.exportOpen = false;
@@ -228,7 +227,12 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 	$scope.restoreClean = function(){
 		localStorage.clear();
 		var string2json = $scope.importJson;
-		var data = JSON.parse(string2json);
+		try {
+			var data = JSON.parse(string2json);
+		} catch(e) {
+			alert('not valid json string')
+			return;
+		}
 		
 		for (var key in data) {
 			localStorage[key] = data[key];
@@ -241,7 +245,12 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 
 	$scope.restoreAdd = function(){
 		var string2json = $scope.importJson;
-		var data = JSON.parse(string2json);
+		try {
+			var data = JSON.parse(string2json);
+		} catch(e) {
+			alert('not valid json string')
+			return;
+		}
 		
 		for (var key in data) {
 			localStorage[key] = data[key];
@@ -274,4 +283,14 @@ app.controller('mainCtrl', function($scope, $rootScope, $store) {
 		$scope.editBookmarks();
 		$scope.themeUpdate();
 	};
+
+/* Bof: check if first start. First start == localStorage is empty */
+if(localStorage.length <= 2) {
+	for (var key in DEFAULT_ENTRIES) {
+		$store.set(key, DEFAULT_ENTRIES[key]);
+	}
+	$scope.editBookmarks();
+	$scope.themeUpdate();
+}
+/* ---- */
 });
