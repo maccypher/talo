@@ -10,7 +10,7 @@
     "management",
     "storage"
   ],
-  "version": "0.9",
+  "version": "0.10",
   "omnibox": { "keyword": "talo" },
   "background": {
     "scripts": ["js/background.js"]

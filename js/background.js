@@ -22,15 +22,15 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 
     //try to parse localstorage item to json obj
     try {
-      item = JSON.parse(localStorage[lsKey]);
+      var item = JSON.parse(localStorage[lsKey]);
     } catch (e) { //continue if it not works
       continue;
     }
 
     //check if input matches either name or url
-    if(item.name.indexOf(text.toLowerCase()) > -1) {
+    if(item.name.toLowerCase().indexOf(text.toLowerCase()) > -1) {
       addEntry(item);
-    }else if(item.url.indexOf(text.toLowerCase()) > -1) {
+    }else if(item.url.toLowerCase().indexOf(text.toLowerCase()) > -1) {
       addEntry(item)
     }
   };
