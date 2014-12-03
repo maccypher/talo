@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    )
+    script(type="text/javascript" src="assets/ckeditor/ckeditor.js")
+    script(type="text/javascript" src="assets/header.js")
+    script(type="text/javascript" src="assets/footer.js")
+    script(type="text/javascript" src="assets/FileSaver.min.js")
+    script(type="text/javascript" src="app.js")
+
+    link(rel="stylesheet" type="text/css" href="main.css")
+    title(
+      data-ng-bind="'HTML Page Generator - ' + pageTitle"
+    ) Generator
+  body(
+    data-ng-view
+  )
+    div.top-bar
+      div.container
+        span.brand
+          | HTML Page Generator
+
+    div#wrapper
+      div#generator
+        textarea#editor1.ckeditor(
+          name="editor1"
+        )
+      div#fileName
+        input#docTitle(
+          type="text"
+          name="docTitle"
+          value="default"
+        )
+      div#button
+        input#saveAs(
+          type="submit"
+          name="saveAs"
+          value="Generate / Download"
+        )
+      div#console
+        | Console Output:
+        pre#output
