@@ -13,12 +13,9 @@ html
     script(type="text/javascript" src="app.js")
 
     link(rel="stylesheet" type="text/css" href="main.css")
-    title(
-      data-ng-bind="'HTML Page Generator - ' + pageTitle"
-    ) Generator
-  body(
-    data-ng-view
-  )
+    title
+      | HTML Page Generator
+  body
     div.top-bar
       div.container
         span.brand
@@ -43,4 +40,6 @@ html
         )
       div#console
         | Console Output:
-        pre#output
+        textarea#output(
+          readonly
+        )
