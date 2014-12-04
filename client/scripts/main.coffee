@@ -16,6 +16,6 @@ window.onload = ->
 		document.getElementById("output").classList.add('active')
 		blob = new Blob([htmlString], {type: "text/html;charset=utf-8"})
 
-		# saveAs(blob, docTitle)
+		saveAs(blob, docTitle)
 
 	document.getElementById("saveAs").addEventListener 'click', generate
