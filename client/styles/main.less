@@ -43,53 +43,104 @@ html, body {
 	margin: 20px;
 }
 
-#fileName {
+#interAction {
+	position: relative;
+	height: 120px;
 	margin: 20px;
-	text-align: center;
+	clear: both;
+	float: none;
 
-	#docTitle {
-		width: 25%;
-		height: 40px;
-		line-height: 40px;
-		padding: 0 10px;
-		border: 1px solid #ccc;
-		border-radius: 2px;
-		box-shadow: inset 0 0 3px #999;
-		font-size: 18px;
-	}
-
-	&:after {
+	#reset {
 		position: absolute;
-		margin-left: 2px;
-		line-height: 40px;
-		font-size: 18px;
-		color: #999;
-		content: ".htm";
+		left: 0;
+
+		#resetAll {
+			width: 280px;
+			height: 100px;
+			padding: 10px 30px;
+			margin: 0;
+			background-color: #E05F4E;
+			border: 1px solid #742B22;
+			border-radius: 2px;
+			color: #fff;
+			font-size: 18px;
+			font-weight: bold;
+			-webkit-transition: background-color 0.3s ease-out;
+			-moz-transition: background-color 0.3s ease-out;
+			transition: background-color 0.3s ease-out;
+
+			&:hover {
+				cursor: pointer;
+				background-color: #EF8475;
+			}
+
+			&:disabled {
+				cursor: default;
+				background-color: #eee;
+				border: 1px solid #ccc;
+				color: #ccc;
+			}
+
+		}
 	}
-}
 
-#button {
-	margin: 20px;
-	text-align: center;
+	#fileName {
+		position: absolute;
+		left: 50%;
+		width: 400px;
+		margin: 30px 0 0 -200px;
+		text-align: center;
 
-	#saveAs {
-		width: 25%;
-		height: 40px;
-		padding: 10px 30px;
-		margin: 10px;
-		background-color: #21A6D3;
-		border: 1px solid #1095c2;
-		border-radius: 2px;
-		color: #fff;
-		font-size: 18px;
-		font-weight: bold;
-		-webkit-transition: background-color 0.3s ease-out;
-		-moz-transition: background-color 0.3s ease-out;
-		transition: background-color 0.3s ease-out;
+		#docTitle {
+			width: 100%;
+			height: 40px;
+			padding: 0 10px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			box-shadow: inset 0 0 3px #999;
+			font-size: 18px;
+		}
 
-		&:hover {
-			cursor: pointer;
-			background-color: #43C8F5;
+		&:after {
+			position: absolute;
+			margin-left: 2px;
+			line-height: 40px;
+			font-size: 18px;
+			color: #999;
+			content: ".htm";
+		}
+	}
+
+	#button {
+		position: absolute;
+		right: 0;
+
+		#saveAs {
+			width: 280px;
+			height: 100px;
+			padding: 10px 30px;
+			margin: 0;
+			background-color: #21A6D3;
+			border: 1px solid #1095c2;
+			border-radius: 2px;
+			color: #fff;
+			font-size: 18px;
+			font-weight: bold;
+			-webkit-transition: background-color 0.3s ease-out;
+			-moz-transition: background-color 0.3s ease-out;
+			transition: background-color 0.3s ease-out;
+
+			&:hover {
+				cursor: pointer;
+				background-color: #43C8F5;
+			}
+
+			&:disabled {
+				cursor: default;
+				background-color: #eee;
+				border: 1px solid #ccc;
+				color: #ccc;
+			}
 		}
 	}
 }

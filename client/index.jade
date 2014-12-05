@@ -26,18 +26,27 @@ html
         textarea#editor1.ckeditor(
           name="editor1"
         )
-      div#fileName
-        input#docTitle(
-          type="text"
-          name="docTitle"
-          value="default"
-        )
-      div#button
-        input#saveAs(
-          type="submit"
-          name="saveAs"
-          value="Generate / Download"
-        )
+      div#interAction
+        div#reset
+          input#resetAll(
+            type="reset"
+            name="reset"
+            value="Reset All"
+            disabled
+          )
+        div#fileName
+          input#docTitle(
+            type="text"
+            name="docTitle"
+            placeholder="default"
+          )
+        div#button
+          input#saveAs(
+            type="submit"
+            name="saveAs"
+            value="Generate / Download"
+            disabled
+          )
       div#console
         | Console Output:
         textarea#output(
