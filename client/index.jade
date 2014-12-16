@@ -1,54 +1,180 @@
 doctype html
-html
+html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
   head
     meta(charset="UTF-8")
-    meta(
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    )
-    script(type="text/javascript" src="assets/ckeditor/ckeditor.js")
-    script(type="text/javascript" src="assets/header.js")
-    script(type="text/javascript" src="assets/footer.js")
-    script(type="text/javascript" src="assets/FileSaver.min.js")
+    
+    title
+      | New Tab - talo
+    
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    
+    link(rel="stylesheet" type="text/css" href="main.css")
+    link(rel="stylesheet" type="text/css" ng-href="assets/themes/{{cssTheme}}/style.css")
+
+    script(type="text/javascript" src="assets/scripts/angular.min.js")
+    script(type="text/javascript" src="assets/scripts/localStorage.js")
     script(type="text/javascript" src="app.js")
 
-    link(rel="stylesheet" type="text/css" href="main.css")
-    title
-      | HTML Page Generator
-  body
-    div.top-bar
-      div.container
-        span.brand
-          | HTML Page Generator
+  body(
+    ng-class="{'pushRight': isCollapsed, 'pushLeft': !isCollapsed, 'readerOpen': reader, 'readerClosed': !reader}"
+  )
+    section#settingsOpener
+      a.openSettings(
+        ng-click="isCollapsed = !isCollapsed"
+      )
+        i.icon-cog
 
-    div#wrapper
-      div#generator
-        textarea#editor1.ckeditor(
-          name="editor1"
+    aside.sideBar(
+      ng-class="{'showIt': isCollapsed, 'hideIt': !isCollapsed}"
+    )
+      h3 Import / Export:
+      div.container
+        input.btnBlue.btnLeft.animateAll(type="submit" ng-click="exportData(); importOpen = false" value="Create Backup")
+        input.btnBlue.btnRight.animateAll(type="submit" ng-click="openImport(); exportOpen = false" value="Restore Backup")
+
+      h3 Select Theme:
+      div.container
+        select.selectTheme(
+          ng-model="selectedTheme"
+          ng-options="key as name for (key, name) in themes"
         )
-      div#interAction
-        div#reset
-          input#resetAll(
-            type="reset"
-            name="reset"
-            value="Reset All"
-            disabled
-          )
-        div#fileName
-          input#docTitle(
-            type="text"
-            name="docTitle"
-            placeholder="default"
-          )
-        div#button
-          input#saveAs(
-            type="submit"
-            name="saveAs"
-            value="Generate / Download"
-            disabled
-          )
-      div#console
-        | Console Output:
-        textarea#output(
-          readonly
-        )
+        br
+        div.layout
+          h4 Columns to show 
+          input#oneColumn(type="radio" value="one" ng-model="column")
+          label(for="oneColumn" ng-class="{'active': ceckedColumn == 'one', 'inactive': ceckedColumn !== 'one' }")
+            i.icon-ok
+            | One
+          input#twoColumn(type="radio" value="two" ng-model="column")
+          label(for="twoColumn" ng-class="{'active': ceckedColumn == 'two', 'inactive': ceckedColumn !== 'two' }")
+            i.icon-ok
+            | Two
+          input#threeColumn(type="radio" value="three" ng-model="column")
+          label(for="threeColumn" ng-class="{'active': ceckedColumn == 'three', 'inactive': ceckedColumn !== 'three' }")
+            i.icon-ok
+            | Three
+          input#fourColumn(type="radio" value="four" ng-model="column")
+          label(for="fourColumn" ng-class="{'active': ceckedColumn == 'four', 'inactive': ceckedColumn !== 'four' }")
+            i.icon-ok
+            | Four
+
+      h3 Add New Bookmark:
+      div.container
+        input#newCat.animateAll(type="text" ng-model="newCat" placeholder="Category")
+        input#newUrl.animateAll(type="text" ng-model="newUrl" placeholder="Url")
+        input#newName.animateAll(type="text" ng-model="newName" placeholder="Name")
+        input.btnBlue.btnFull.animateAll(type="submit" ng-click="addNew()" value="Add new bookmark")
+        
+      h3 Edit Bookmarks:
+      div.container
+        ul.catList
+          li(ng-repeat="cat in cats track by $index | orderBy: name")
+            h4 {{cat.name}}
+            ul.editBookmarks
+              li(ng-repeat="editItem in cat.items track by $index")
+                div.editEntry(ng-show="editing")
+                  input#modCat.animateAll(type="text" ng-model="editItem.cat")
+                  input#modUrl.animateAll(type="text" ng-model="editItem.url")
+                  input#modName.animateAll(type="text" ng-model="editItem.name")
+                  input.btnBlue.btnLeft.animateAll(type="submit" ng-click="cancelEdit(editItem.id); editing = false" value="Cancel")
+                  input.btnGreen.btnRight.animateAll(type="submit" ng-click="saveItem(editItem); editing = false" value="Save Changes")
+                div.verifyDelete(ng-show="verify")
+                  input.btnBlue.btnLeft.animateAll(type="submit" ng-click="cancelEdit(editItem.id); verify = false" value="Cancel")
+                  input.btnRed.btnRight.animateAll(type="submit" ng-click="delItem(editItem.id); verify = false" value="Delete")
+                div.btn.animateAll(ng-hide="editing || verify")
+                   {{editItem.name}}
+                  a.editBtn.showCursor(ng-click="editing = !editing")
+                    i.icon-edit
+                  a.delBtn.showCursor(ng-click="verify = !verify")
+                    i.icon-delete
+      a.closeSettings(ng-click="toggle()")
+        i.icon-close
+      p.clear
+        input.btnRed.btnFull.animateAll(type="submit" ng-click="confirmClearAll()" value="Delete All & Restore Defaults")
+
+    section#dialogs
+      div#confirmClearBox(ng-show="confirmClear")
+        div.container
+          h3 Confirm Delete and Restore
+          input.btnBlue.btnLeft.animateAll(type="submit" ng-click="cancelClear(); confirmClear = false" value="Cancel")
+          input.btnRed.btnRight.animateAll(type="submit" ng-click="clearAll(); confirmClear = false" value="Delete All")
+          br.clear
+
+      div#exportBox(ng-show="exportOpen")
+        div.container
+          h3 Export
+          p.infoText
+            | You can either copy the content from the textarea and save it in a text file manually or download the pre-defined file called "talo_backup.txt".
+          a.closeImEx(ng-click="closeExport()")
+            i.icon-close
+          textarea.imexJson(ng-bind="exportJson" ng-copy="copied=true" ng-init="copied=false" readonly)
+          span(ng-class="{'copyStatusTrue': copied, 'copyStatusFalse': !copied}")
+            | All copied to clipboard
+          p.clear
+            input.btnBlue.btnRight.animateAll(type="submit" ng-click="download()" value="Download File")
+          br.clear
+
+      div#importBox(ng-show="importOpen")
+        div.container
+          h3 Import
+          p.infoText
+            | To import your former created backup, please open the downloaded file with your favorite text-editor and copy the content from the file into the textarea.
+          
+          a.closeImEx(ng-click="closeImport()")
+            i.icon-close
+          form(name="doImport")
+            textarea.imexJson(ng-model="importJson" required)
+            p.clear
+              input.btnRed.btnLeft.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreClean()" value="Restore Clean")
+              input.btnBlue.btnRight.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreAdd()" value="Add Data")
+
+          br.clear
+
+    section.mainSection(ng-class="{'swipeRight': isCollapsed, 'swipeLeft': !isCollapsed, 'showReader': reader, 'hideReader': !reader}")
+      div(ng-class="{'overlay': isCollapsed}" ng-click="toggle()")
+    
+      div.headLine
+        h1 Bookmarks
+
+      div.filter
+        input.queryInput(type="search" ng-model="query" placeholder="Search Bookmarks ...")
+
+      div#content
+        div.column(ng-repeat="cat in cats track by $index" class="{{column}}")
+          h2 {{cat.name}}
+          ul.bookmarks
+            li(ng-repeat="item in cat.items track by $index | filter: query")
+              a(href="{{item.url}}")
+                 {{item.name}}
+    
+      div#readerPanel(ng-class="{'showReader': reader, 'hideReader': !reader}")
+        div#rssSettings(ng-class="{'showRssSettings': rssSettingsOpen, 'hideRssSettings': !rssSettingsOpen}")
+          a.closeRssSettings(ng-click="rssSettingsToggle()")
+            i.icon-close
+
+          div.currentFeedUrl
+            | Current Feed URL:
+            textarea(readonly) {{feedUrl}}
+
+          input#feedUrl.animateAll(type="text" ng-model="newFeedUrl" placeholder="New Feed URL")
+          input.btnBlue.animateAll(type="submit" ng-click="setFeedUrl()" value="Save Feed Url")
+
+        div.headLineBlock
+          h1 RSS Reader
+          a.rssSettingsTrigger(ng-click="rssSettingsToggle()")
+            i.icon-cog
+
+        div.readerWrapper
+          div.readerContent
+
+            //- Feed content starts here
+
+            feeds.feedList
+
+            //- Feed content ends here
+
+    section
+      div#copyright
+        a(href="https://github.com/maccypher/talo")
+          | talo &copy; 2014 by MacCypher
+          i.icon-github

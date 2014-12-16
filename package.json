@@ -1,6 +1,7 @@
 {
-  "name": "Skeleton",
-  "version": "0.0.1",
+  "name": "talo",
+  "repository": "git://github.com/maccypher/talo",
+  "version": "1.0.1",
   "description": "Dev boilerplate with Bower, Gulp and Live-Reload with JADE and LESS support",
   "main": "index.js",
   "scripts": {

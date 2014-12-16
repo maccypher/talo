@@ -24,7 +24,6 @@ src =
     files: "#{__dirname}/client/styles/**/*.less"
   vendors: [
     "#{__dirname}/client/vendor/**/*"
-    "#{bower}/FileSaver/FileSaver.min.js"
   ]
   
 gulp.task 'build', [
