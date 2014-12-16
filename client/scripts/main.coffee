@@ -2,7 +2,7 @@
 
 app = angular.module 'homePage', ['localStorage']
 
-app.controller 'mainCtrl', ($scope, $rootScope, $store) ->
+app.controller 'mainCtrl', ($scope, $rootScope, $store, $http) ->
 
 # Bof: define some vars
 	$scope.isCollapsed = false
@@ -77,7 +77,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store) ->
 
 		# Bof: getting keys from LS
 		for lsKey, value of localStorage
-			if lsKey isnt "selection" and lsKey isnt "columns" and lsKey isnt "view" and lsKey isnt "feedUrl"
+			unless lsKey in ["selection", "columns", "view", "feedUrl", "latestFeed"]
 				try
 					value = JSON.parse value
 				catch e
@@ -213,22 +213,43 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store) ->
 # -------------------- #
 
 # Bof: Show / Hide RSS settings	
-	$scope.feed = 
-		default: 'http://web.de'
-		# default: 'http://feeds.delicious.com/v2/rss/fdrei/mupat'
-
 	$scope.rssSettingsToggle = () ->
 		$scope.rssSettingsOpen = !$scope.rssSettingsOpen
 		$rootScope.$broadcast 'mainCtrl.rssSettingsOpen', $scope.rssSettingsOpen
-		$scope.feedUrl = $store.get('feedUrl') or $scope.feed.default
+		$scope.feedUrl = $store.get('feedUrl')
 
 	$scope.setFeedUrl = () ->
 		$store.set 'feedUrl', $scope.newFeedUrl
-		$rootScope.$broadcast 'feedUrl.update', $scope.newFeedUrl
+		$scope.feedUrl = $scope.newFeedUrl
 		$scope.newFeedUrl = ''
+		$scope.fetchFeed();
 
-	$scope.$on 'feedUrl.update', (evt, val) ->
-		$scope.feedUrl = val
+# Bof: fetching the feed Json
+# URL has to be something like: 'http://feeds.delicious.com/v2/json/fdrei?callback=JSON_CALLBACK'
+	$scope.fetchFeed = () ->
+		feedUrl = $store.get 'feedUrl'
+		return unless feedUrl?
+		
+		request = $http.jsonp feedUrl
+
+		request.success (data, status) ->
+			$scope.feedItems = data
+			$scope.feedStatus = status
+			latestStoredItem = $store.get 'latestFeed'
+			latestItem = new window.Date(data[0].dt).getTime()
+
+			if not latestStoredItem? or latestStoredItem < latestItem
+				$store.set 'latestFeed', latestItem
+
+				for item in $scope.feedItems
+					tempTime = new window.Date(item.dt).getTime()
+					item.new = true if tempTime > latestStoredItem
+
+		request.error (data, status) ->
+			$scope.feedStatus = status
+			console.log 'Error: ', status
+
+	$scope.fetchFeed();
 
 
 

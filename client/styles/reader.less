@@ -3,6 +3,7 @@
 /* Bof: some global stuff */
 
 #readerPanel {
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -11,8 +12,74 @@
 	margin: 0;
 	padding: 0;
 	background-color: rgba(46,47,51,0.8);
-	overflow-y: auto;
+	overflow: hidden;
 	box-shadow: inset 2px 0 5px rgba(0,0,0,0.5);
+
+	.feedList {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 100%;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		color: #fff;
+		overflow-y: auto;
+
+		a {
+			color: #bbb;
+			display: block;
+			font-weight: 700;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.timeStamp {
+			display: block;
+			text-align: right;
+			padding: 5px;
+			font-size: 12px;
+		}
+
+		ul {
+			margin: 40px 0 20px 0;
+
+			li {
+				position: relative;
+				margin: 0;
+				padding: 10px 10px;
+				font-size: 16px;
+				overflow: hidden;
+
+				&:nth-child(odd) {
+					background-color: rgba(255,255,255,0.1);
+				}
+
+				&:last-child {
+					border-bottom: 2px solid rgba(255,255,255,0.1);
+				}
+				
+				&.newItem {
+					a {
+						color: #eee;
+					}
+
+					&:after {
+						position: absolute;
+						top: -17px;
+						left: -17px;
+						font-family: "talo";
+						font-size: 32px;
+						content: '\e800';
+						color: #82e5f7;
+						text-shadow: 0 0 3px #000;
+						transform: rotate(45deg);
+					}
+				}
+			}
+		}
+	}
 
 	.rssSettingsTrigger {
 		position: absolute;
@@ -28,6 +95,11 @@
 		background-color: rgba(46,47,51,0.8);
 		box-shadow: 0 3px 5px rgba(0,0,0,0.7);
 		color: #fff;
+
+		.header {
+			height: 60px;
+			background-color: rgba(46,47,51,1);
+		}
 
 		&.hideRssSettings {
 			right: -100%;
@@ -46,7 +118,7 @@
 		.currentFeedUrl {
 			display: block;
 			width: 84%;
-			margin: 15% auto 0 auto;
+			margin: 30px auto 0 auto;
 			padding: 0;
 
 			textarea {
@@ -113,18 +185,31 @@
 
 	.headLineBlock {
 		position: absolute;
+		z-index: 99;
 		top: 0;
-		left: 0;
+		right: 0;
 		width: 100%;
 		height: 60px;
 		margin: 0;
 		padding: 0;
-		background-color: rgba(0,0,0,0.6);
+		background-color: rgba(0,0,0,0.8);
 
 		h1 {
 			font-size: 24px;
 			margin: 15px 20px;
 			padding: 0;
+		}
+	}
+
+	.infoText {
+		display: block;
+		position: relative;
+		margin: 70px 0 0 0;
+		padding: 0 30px;
+		font-size: 16px;
+
+		i {
+			color: #82e5f7;
 		}
 	}
 }

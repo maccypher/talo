@@ -149,9 +149,16 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
     
       div#readerPanel(ng-class="{'showReader': reader, 'hideReader': !reader}")
         div#rssSettings(ng-class="{'showRssSettings': rssSettingsOpen, 'hideRssSettings': !rssSettingsOpen}")
-          a.closeRssSettings(ng-click="rssSettingsToggle()")
-            i.icon-close
+          div.headLineBlock
+            h1 Settings
+            a.closeRssSettings(ng-click="rssSettingsToggle()")
+              i.icon-close
 
+          div.infoText
+            p
+              strong ATTENTION:
+            | Make sure your feed URL links to an JSONP based feed. Additionally the feed URL MUST have a JSON callback parameter! Your feed URL should look like this:<br>"<i>http://feeds.domain.tld/json/feedname?callback=JSON_CALLBACK</i>"
+            
           div.currentFeedUrl
             | Current Feed URL:
             textarea(readonly) {{feedUrl}}
@@ -164,14 +171,15 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
           a.rssSettingsTrigger(ng-click="rssSettingsToggle()")
             i.icon-cog
 
-        div.readerWrapper
-          div.readerContent
-
-            //- Feed content starts here
-
-            feeds.feedList
-
-            //- Feed content ends here
+        //- Feed content starts here
+        div.feedList
+          ul
+            li(ng-repeat="item in feedItems track by $index" ng-class="{'newItem': item.new}")
+              a(href="{{item.u}}" target="_blank")
+                {{item.d}}
+              div.timeStamp
+                {{item.dt | date: 'yyyy-MM-dd (HH:mm)'}}
+        //- Feed content ends here
 
     section
       div#copyright
