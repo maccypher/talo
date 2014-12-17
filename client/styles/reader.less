@@ -1,25 +1,6 @@
 /* reader.css */
 
 /* Bof: some global stuff */
-#useReader {
-	display: none;
-
-
-	.inactive {
-		color: #666;
-		cursor: pointer;
-	}
-
-	.inactive:hover {
-		color: #ddd;
-	}
-
-	.active {
-		color: #10b5d2;
-		cursor: default;
-	}
-}
-
 /* Bof: reader panel definitions */
 	
 .readerClosed {
@@ -73,10 +54,12 @@
 			color: #82e5f7;
 		}
 
-		.reloadTrigger {
+		#reloadTrigger {
+			display: block;
 			margin-top: 40px;
 			font-size: 48px;
 			color: #bbb;
+			cursor: pointer;
 			background: none !important;
 
 			&:hover {
@@ -85,10 +68,13 @@
 			}
 
 			&.run {
-				-webkit-animation: spin 2s 1 linear;
-				-moz-animation: spin 2s 1 linear;
-				animation: spin 2s 1 linear;
+				color: #fff;
+				text-shadow: 0 0 10px #82e5f7;
+				-webkit-animation: spin 1s 2 linear;
+				-moz-animation: spin 1s 2 linear;
+				animation: spin 1s 2 linear;
 			}
+
 			&.stopped {
 				-webkit-animation: none;
 				-moz-animation: none;

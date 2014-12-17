@@ -29,10 +29,11 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
     )
       h3 RSS Reader:
       div.container
-        input#useReader(type="checkbox" value="true" ng-model="useReader")
-        label(for="useReader" ng-class="{'active': useReader == true, 'inactive': useReader == false }")
-          i.icon-ok
-          | Use RSS Reader ({{useReader}})
+        div.rssSettings
+          input#useReader(type="checkbox" value="true" ng-model="useReader")
+          label(for="useReader" ng-class="{'active': useReader == true, 'inactive': useReader == false }")
+            i.icon-ok
+            | Use RSS Reader
 
       h3 Import / Export:
       div.container
@@ -137,10 +138,8 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
 
           br.clear
 
-    section.mainSection(ng-class="{'swipeRight': isCollapsed, 'swipeLeft': !isCollapsed, 'showReader': reader, 'hideReader': !reader}")
+    section.mainSection(ng-class="{'swipeRight': isCollapsed, 'swipeLeft': !isCollapsed}")
       div(ng-class="{'overlay': isCollapsed}" ng-click="toggle()")
-    
-      {{view}}
 
       div.headLine
         h1 Bookmarks
@@ -148,7 +147,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
       div.filter
         input.queryInput(type="search" ng-model="query" placeholder="Search Bookmarks ...")
 
-      div#content
+      div#content(ng-class="{'rssOpen': view == true, 'rssClosed': view == false}")
         div.column(ng-repeat="cat in cats track by $index" class="{{column}}")
           h2 {{cat.name}}
           ul.bookmarks
@@ -160,9 +159,8 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
       div#innerReader(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
         div.info(ng-class="{'offline': offline}")
           | You are probably offline
-          a.reloadTrigger(ng-click="fetchIndicator();" ng-class="{'run': reload == true, 'stopped': reload == false}")
+          a#reloadTrigger(ng-class="{'run': refresh == true, 'stopped': refresh == false}" ng-click="fetchFeed(); fetchIndicator();")
             i.icon-update
-          span {{reload}}
 
         div#rssSettings(ng-class="{'showRssSettings': rssSettingsOpen, 'hideRssSettings': !rssSettingsOpen}")
           div.headLineBlock
@@ -198,7 +196,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
         //- Feed content ends here
 
     section
-      div#copyright
+      div#copyright(ng-class="{'rssOpen': view == true, 'rssClosed': view == false}")
         a(href="https://github.com/maccypher/talo")
           | talo &copy; 2014 by MacCypher
           i.icon-github

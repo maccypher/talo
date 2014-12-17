@@ -2,7 +2,7 @@
 
 app = angular.module 'homePage', ['localStorage']
 
-app.controller 'mainCtrl', ($scope, $rootScope, $store, $http) ->
+app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 # Bof: define some vars
 	$scope.reload = false
@@ -206,21 +206,27 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http) ->
 # Bof: Show / Hide RSS reader
 	# Bof: Show / Hide Reader
 	
-	# $scope.$on 'view.update', (evt, val) ->
-	# 	$scope.view = val
+	$scope.$on 'view.update', (evt, val) ->
+		$scope.view = val
 
-	$scope.viewDefault = 'false'
+	$scope.viewDefault = false
 	$scope.useReader = $store.get('view') or $scope.viewDefault
+
 	$scope.$watch 'useReader', (newVal, oldVal) ->
 		$store.set 'view', $scope.useReader
 		$scope.view = newVal
+		$rootScope.$broadcast 'view.update', newVal
 
 	$scope.getView = () ->
 		$scope.view = $store.get('view') or $scope.viewDefault
+		$rootScope.$broadcast 'view.update', $scope.view
 
 	$scope.getView()
 
-# Bof: Show / Hide RSS settings	
+
+
+# Bof: Show / Hide RSS settings
+
 	$scope.rssSettingsToggle = () ->
 		$scope.rssSettingsOpen = !$scope.rssSettingsOpen
 		$rootScope.$broadcast 'mainCtrl.rssSettingsOpen', $scope.rssSettingsOpen
@@ -235,14 +241,20 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http) ->
 # Bof: fetching the feed Json
 # URL has to be something like: 'http://feeds.delicious.com/v2/json/fdrei?callback=JSON_CALLBACK'
 
+	$scope.$on 'refresh.update', (evt, val) ->
+		console.log "evt: ", evt
+		console.log "val: ", val
+		$scope.refresh = val
+		console.log "$scope.refresh: ", $scope.refresh
+
 	$scope.fetchIndicator = () ->
-		$scope.reload = !$scope.reload
-		console.log "$scope.reload: ", $scope.reload
-		setTimeout(stopFetchIndicator, 3000)
+		$scope.refresh = true
+		$rootScope.$broadcast 'refresh.update', $scope.refresh
+		$timeout(stopFetchIndicator, 2500);
 
 	stopFetchIndicator = () ->
-		$scope.reload = !$scope.reload
-		console.log "$scope.reload: ", $scope.reload
+		$scope.refresh = false
+		$rootScope.$broadcast 'refresh.update', $scope.refresh
 
 	$scope.fetchFeed = () ->
 		$scope.offline = true

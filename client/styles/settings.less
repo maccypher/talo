@@ -173,6 +173,47 @@ aside.sideBar :-ms-input-placeholder { color: #aaa; } /* ie */
 aside.sideBar input:-moz-placeholder { color: #aaa; }
 /* ---- */
 
+/* Bof: RSS feed settings */
+#useReader {
+	display: none;
+
+	.inactive {
+		color: #ccc;
+		cursor: pointer;
+	}
+
+	.inactive:hover {
+		color: #ddd;
+	}
+
+	.active {
+		color: #10b5d2;
+		cursor: default;
+	}
+}
+.rssSettings {
+	color: #fff;
+	padding: 5px 10px;
+	margin: 0 10px;
+	background-color: #2e2f33;
+	background-color: #29292e;
+	box-shadow: inset 0 1px #111, 0 1px #333;
+}
+.rssSettings h4 {
+	font-size: 18px;
+	margin: 0 0 10px 0;
+}
+.rssSettings input[type="check"] {
+	display: none;
+}
+.rssSettings label {
+	display: inline-block;
+	margin: 0 5% 0 0;
+	font-size: 18px;
+	font-weight: 300;
+}
+/* ---- */
+
 /* Bof: Input field styling */
 .sideBar input[type="text"] {
 	width: 418px;

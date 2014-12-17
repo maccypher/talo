@@ -102,13 +102,20 @@ input[type="search"].queryInput {
 }
 
 #content {
-	// width: 88%;
-	// margin: 9% auto 0 auto;
-	width: 70%;
-	margin: 9% auto 0 2%;
 	padding: 1% 0 3% 0;
 	float: none;
 	clear: both;
+	display: block;
+
+	&.rssClosed {
+		width: 90%;
+		margin: 9% auto 0 auto;
+	}
+
+	&.rssOpen {
+		width: 70%;
+		margin: 9% auto 0 2%;
+	}
 }
 
 .column {
@@ -153,7 +160,6 @@ input[type="search"].queryInput {
 
 #copyright {
 	position: absolute;
-	right: 26%;
 	bottom: 5px;
 
 	a {
@@ -164,5 +170,13 @@ input[type="search"].queryInput {
 			background: none;
 			color: #f36c3f;
 		}
+	}
+
+	&.rssClosed {
+		right: 5px;
+	}
+
+	&.rssOpen {
+		right: 26%;
 	}
 }
