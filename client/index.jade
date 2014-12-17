@@ -16,7 +16,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
     script(type="text/javascript" src="app.js")
 
   body(
-    ng-class="{'pushRight': isCollapsed, 'pushLeft': !isCollapsed, 'readerOpen': reader, 'readerClosed': !reader}"
+    ng-class="{'pushRight': isCollapsed, 'pushLeft': !isCollapsed}"
   )
     section#settingsOpener
       a.openSettings(
@@ -27,6 +27,13 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
     aside.sideBar(
       ng-class="{'showIt': isCollapsed, 'hideIt': !isCollapsed}"
     )
+      h3 RSS Reader:
+      div.container
+        input#useReader(type="checkbox" value="true" ng-model="useReader")
+        label(for="useReader" ng-class="{'active': useReader == true, 'inactive': useReader == false }")
+          i.icon-ok
+          | Use RSS Reader ({{useReader}})
+
       h3 Import / Export:
       div.container
         input.btnBlue.btnLeft.animateAll(type="submit" ng-click="exportData(); importOpen = false" value="Create Backup")
@@ -133,6 +140,8 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
     section.mainSection(ng-class="{'swipeRight': isCollapsed, 'swipeLeft': !isCollapsed, 'showReader': reader, 'hideReader': !reader}")
       div(ng-class="{'overlay': isCollapsed}" ng-click="toggle()")
     
+      {{view}}
+
       div.headLine
         h1 Bookmarks
 
@@ -146,8 +155,15 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             li(ng-repeat="item in cat.items track by $index | filter: query")
               a(href="{{item.url}}")
                  {{item.name}}
-    
-      div#readerPanel(ng-class="{'showReader': reader, 'hideReader': !reader}")
+
+      div#readerPanel(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
+      div#innerReader(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
+        div.info(ng-class="{'offline': offline}")
+          | You are probably offline
+          a.reloadTrigger(ng-click="fetchIndicator();" ng-class="{'run': reload == true, 'stopped': reload == false}")
+            i.icon-update
+          span {{reload}}
+
         div#rssSettings(ng-class="{'showRssSettings': rssSettingsOpen, 'hideRssSettings': !rssSettingsOpen}")
           div.headLineBlock
             h1 Settings

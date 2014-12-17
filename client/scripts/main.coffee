@@ -5,8 +5,8 @@ app = angular.module 'homePage', ['localStorage']
 app.controller 'mainCtrl', ($scope, $rootScope, $store, $http) ->
 
 # Bof: define some vars
+	$scope.reload = false
 	$scope.isCollapsed = false
-	$scope.reader = false
 	$scope.exportOpen = false
 	$scope.importOpen = false
 	$scope.confirmClear = false
@@ -21,15 +21,6 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http) ->
 		if not $scope.exportOpen and not $scope.importOpen and not $scope.confirmClear
 			$scope.isCollapsed = !$scope.isCollapsed
 			$rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
-
-# Bof: Show / Hide Reader
-	$scope.toggleReader = () ->
-		$scope.reader = !$scope.reader
-		$rootScope.$broadcast 'mainCtrl.reader', $scope.reader
-		if $scope.reader is true
-			$store.set 'view', 'readerOpen'
-		else
-			$store.set 'view', 'readerClosed'
 
 # THEMING
 # Bof: put theme names in an object
@@ -212,6 +203,23 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http) ->
 # ---- RSS Reader ---- #
 # -------------------- #
 
+# Bof: Show / Hide RSS reader
+	# Bof: Show / Hide Reader
+	
+	# $scope.$on 'view.update', (evt, val) ->
+	# 	$scope.view = val
+
+	$scope.viewDefault = 'false'
+	$scope.useReader = $store.get('view') or $scope.viewDefault
+	$scope.$watch 'useReader', (newVal, oldVal) ->
+		$store.set 'view', $scope.useReader
+		$scope.view = newVal
+
+	$scope.getView = () ->
+		$scope.view = $store.get('view') or $scope.viewDefault
+
+	$scope.getView()
+
 # Bof: Show / Hide RSS settings	
 	$scope.rssSettingsToggle = () ->
 		$scope.rssSettingsOpen = !$scope.rssSettingsOpen
@@ -226,13 +234,25 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http) ->
 
 # Bof: fetching the feed Json
 # URL has to be something like: 'http://feeds.delicious.com/v2/json/fdrei?callback=JSON_CALLBACK'
+
+	$scope.fetchIndicator = () ->
+		$scope.reload = !$scope.reload
+		console.log "$scope.reload: ", $scope.reload
+		setTimeout(stopFetchIndicator, 3000)
+
+	stopFetchIndicator = () ->
+		$scope.reload = !$scope.reload
+		console.log "$scope.reload: ", $scope.reload
+
 	$scope.fetchFeed = () ->
+		$scope.offline = true
 		feedUrl = $store.get 'feedUrl'
 		return unless feedUrl?
 		
 		request = $http.jsonp feedUrl
 
 		request.success (data, status) ->
+			$scope.offline = false
 			$scope.feedItems = data
 			$scope.feedStatus = status
 			latestStoredItem = $store.get 'latestFeed'
