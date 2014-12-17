@@ -31,6 +31,10 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		tones: 'Tones'
 		pastel: 'Pastel Sky'
 		clouds: 'Clouds'
+		bb_corp_1: 'BB Corporate 1'
+		bb_corp_2: 'BB Corporate 2'
+		grass: 'Soccer Grass'
+		retro: 'Retro Feeling'
 
 	$scope.selectedTheme = $store.get('selection') or $scope.themes.default
 	$scope.cssTheme = $scope.selectedTheme
