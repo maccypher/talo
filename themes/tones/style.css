@@ -1,0 +1,71 @@
+/* tones */
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:100);
+body {
+	background: #333 url('Tones.jpg') no-repeat center center;
+	color: #111;
+	font-weight: 100;
+	background-size: 100% 100%;
+	font-family: "Roboto";
+	background-attachment: fixed;
+}
+h1, h2 {
+	margin: 5px 0;
+	font-size: 48px;
+	color: #fff;
+}
+h2 {
+	text-transform: capitalize;
+	font-size: 36px;
+	margin: 5px 0;
+	padding: 0;
+}
+a.openSettings {
+	color: #000;
+}
+a:hover.openSettings {
+	color: #fff;
+	text-shadow: 0 0 10px #fff;
+}
+input[type="search"].queryInput {
+	background-color: #eee;
+	border: 1px solid #ccc;
+}
+input[type="search"].queryInput:hover {
+	background-color: #fff;
+}
+input[type="search"].queryInput:focus {
+	box-shadow: 0 0 10px #fff, 0 0 10px #fff;
+	border: 1px solid #eee;
+}
+::-webkit-input-placeholder { color: #ddd; }
+::-moz-placeholder { color: #ddd; }
+:-ms-input-placeholder { color: #ddd; }
+input:-moz-placeholder { color: #ddd; }
+.bookmarks a {
+	color: #111;
+	font-size: 24px;
+}
+.bookmarks a:hover {
+	color: #fff;
+}
+
+a,
+a:hover,
+.bookmarks a,
+.bookmarks a:hover,
+input,
+input:hover,
+input:focus,
+.copyright {
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+#copyright a {
+	color: #ccc;
+}
+#copyright a:hover {
+	color: #fff;
+	text-shadow: 0 0 10px #fff;
+}
