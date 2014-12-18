@@ -5,7 +5,7 @@
   },
   "name": "talo",
   "description": "An editable start- / homepage - bookmark collection manager",
-  "icons": { "128": "img/icon.png" },
+  "icons": { "128": "assets/img/icon.png" },
   "permissions": [
     "management",
     "storage"
@@ -13,6 +13,6 @@
   "version": "0.10",
   "omnibox": { "keyword": "talo" },
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": ["assets/scripts/background.js"]
   }
 }

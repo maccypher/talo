@@ -19,9 +19,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
     ng-class="{'pushRight': isCollapsed, 'pushLeft': !isCollapsed}"
   )
     section#settingsOpener
-      a.openSettings(
-        ng-click="isCollapsed = !isCollapsed"
-      )
+      a.openSettings(ng-click="isCollapsed = !isCollapsed" title="Feed URL Settings")
         i.icon-cog
 
     aside.sideBar(
@@ -89,11 +87,10 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
                 div.verifyDelete(ng-show="verify")
                   input.btnBlue.btnLeft.animateAll(type="submit" ng-click="cancelEdit(editItem.id); verify = false" value="Cancel")
                   input.btnRed.btnRight.animateAll(type="submit" ng-click="delItem(editItem.id); verify = false" value="Delete")
-                div.btn.animateAll(ng-hide="editing || verify")
-                   {{editItem.name}}
-                  a.editBtn.showCursor(ng-click="editing = !editing")
+                div.btn.animateAll(ng-hide="editing || verify") {{editItem.name}}
+                  a.editBtn(ng-click="editing = !editing")
                     i.icon-edit
-                  a.delBtn.showCursor(ng-click="verify = !verify")
+                  a.delBtn(ng-click="verify = !verify")
                     i.icon-delete
       a.closeSettings(ng-click="toggle()")
         i.icon-close
@@ -158,7 +155,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
       div#readerPanel(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
       div#innerReader(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
         div.info(ng-class="{'offline': offline}")
-          | You are probably offline
+          p You are probably offline
           a#reloadTrigger(ng-class="{'run': refresh == true, 'stopped': refresh == false}" ng-click="fetchFeed(); fetchIndicator();")
             i.icon-update
 
@@ -175,7 +172,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             
           div.currentFeedUrl
             | Current Feed URL:
-            textarea(readonly) {{feedUrl}}
+            textarea#currentURL(onClick="SelectAll('currentURL')" readonly) {{feedUrl}}
 
           input#feedUrl.animateAll(type="text" ng-model="newFeedUrl" placeholder="New Feed URL")
           input.btnBlue.animateAll(type="submit" ng-click="setFeedUrl()" value="Save Feed Url")
@@ -183,7 +180,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
         div.headLineBlock
           h1 RSS Reader
           a.rssSettingsTrigger(ng-click="rssSettingsToggle()")
-            i.icon-cog
+            i.icon-cog(title="Feed URL Settings")
 
         //- Feed content starts here
         div.feedList

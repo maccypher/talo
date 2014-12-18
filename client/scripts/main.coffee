@@ -208,6 +208,9 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # -------------------- #
 
 # Bof: Show / Hide RSS reader
+	window.SelectAll = (id) ->
+		document.getElementById(id).focus()
+		document.getElementById(id).select()
 	# Bof: Show / Hide Reader
 	
 	$scope.$on 'view.update', (evt, val) ->

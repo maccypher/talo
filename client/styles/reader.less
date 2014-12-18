@@ -19,13 +19,14 @@
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background: #333 url('assets/themes/clouds/Clouds.jpg') no-repeat top right;
-	background-size: auto 100%;
+	// background: #333 url('assets/themes/clouds/Clouds.jpg') no-repeat top right;
+	background: #333 url('assets/img/rss-bg.jpg') no-repeat center center;
+	background-size: 100% 100%;
 	overflow: hidden;
 
-	-webkit-filter: blur(25px);
-	-moz-filter: blur(25px);
-	filter: blur(25px);
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	filter: blur(5px);
 }
 #innerReader {
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -55,12 +56,10 @@
 		}
 
 		#reloadTrigger {
-			display: block;
-			margin-top: 40px;
+			margin: 40px auto;
 			font-size: 48px;
 			color: #bbb;
 			cursor: pointer;
-			background: none !important;
 
 			&:hover {
 				color: #fff;
@@ -167,6 +166,7 @@
 	}
 
 	.rssSettingsTrigger {
+		cursor: pointer;
 		position: absolute;
 		z-index: 99;
 		top: 15px;
@@ -251,6 +251,7 @@
 		:-moz-placeholder { color: #aaa; }
 
 		.btnBlue {
+			cursor: pointer;
 			position: relative;
 			display: block;
 			width: 86%;
@@ -258,6 +259,7 @@
 		}
 
 		.closeRssSettings{
+			cursor: pointer;
 			position: absolute;
 			top: 15px;
 			right: 15px;

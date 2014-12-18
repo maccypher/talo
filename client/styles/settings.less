@@ -53,13 +53,11 @@ aside a:hover,
 	min-height: 100%;
 	background-color: rgba(0,0,0,0.2);
 }
-.showCursor {
-	cursor: pointer;
-}
 /* ---- */
 
 /* Bof: Theme selector */
 select.selectTheme {
+	cursor: pointer;
 	width: 440px;
 	height: 40px;
 	border: none;
@@ -87,9 +85,10 @@ select.selectTheme {
 	margin: 0 0 40px 0;
 	background-color: #242428;
 	box-shadow: inset 0 -2px 0 #1a1a1a;
-}
-.container:first-child {
-	margin-top: 30px;
+	
+	&:first-child {
+		margin-top: 30px;
+	}
 }
 .layout {
 	color: #fff;
@@ -98,34 +97,45 @@ select.selectTheme {
 	background-color: #2e2f33;
 	background-color: #29292e;
 	box-shadow: inset 0 1px #111, 0 1px #333;
-}
-.layout h4 {
-	font-size: 18px;
-	margin: 0 0 10px 0;
-}
-.layout input[type="radio"] {
-	display: none;
-}
-.layout label {
-	display: inline-block;
-	width: 85px;
-	margin: 0 5% 0 0;
-	font-size: 18px;
-	font-weight: 300;
-}
-.layout label:last-child {
-	margin-right: 0;
+
+	h4 {
+		font-size: 18px;
+		margin: 0 0 10px 0;
+	}
+
+	input[type="radio"] {
+		display: none;
+	}
+	
+	label {
+		cursor: pointer;
+		display: inline-block;
+		width: 85px;
+		margin: 0 5% 0 0;
+		font-size: 18px;
+		font-weight: 300;
+		
+		&:last-child {
+			margin-right: 0;
+		}
+	}
 }
 .inactive {
 	color: #666;
 	cursor: pointer;
+	
+	&:hover {
+		color: #ddd;
+	}
 }
-.inactive:hover {
-	color: #ddd;
-}
+
 .active {
 	color: #10b5d2;
 	cursor: default;
+	
+	&:hover {
+		text-shadow: 0 0 10px #10b5d2;
+	}
 }
 /* ---- */
 
@@ -141,36 +151,42 @@ select.selectTheme {
 	background-color: #2f3035;
 	color: #ddd;
 	border: none;
+
+	i {
+		color: #ddd;
+	}
 }
-.closeSettings i {
-	color: #ddd;
-}
+
 .closeSettings:hover,
 .closeSettings:hover i {
 	color: #df5e3c;
 	border: none;
 }
-aside h3 {
-	color: #ccc;
-	text-shadow: inset 0 1px #000;
-	font-weight: 400;
-	margin: 0 10px 10px 10px;
+aside {
+	h3 {
+		color: #ccc;
+		text-shadow: inset 0 1px #000;
+		font-weight: 400;
+		margin: 0 10px 10px 10px;
+	}
+	
+	&.sideBar {
+		background: #2e2f33;
+		position: absolute;
+		display: inline-block;
+		width: 460px;
+		height: 100%;
+		min-height: 100%;
+		padding: 10px 20px;
+		overflow: auto;
+		z-index: 110;
+
+		::-webkit-input-placeholder { color: #aaa; }
+		::-moz-placeholder { color: #aaa; } /* firefox 19+ */
+		:-ms-input-placeholder { color: #aaa; } /* ie */
+		input:-moz-placeholder { color: #aaa; }
+	}
 }
-aside.sideBar {
-	background: #2e2f33;
-	position: absolute;
-	display: inline-block;
-	width: 460px;
-	height: 100%;
-	min-height: 100%;
-	padding: 10px 20px;
-	overflow: auto;
-	z-index: 110;
-}
-aside.sideBar ::-webkit-input-placeholder { color: #aaa; }
-aside.sideBar ::-moz-placeholder { color: #aaa; } /* firefox 19+ */
-aside.sideBar :-ms-input-placeholder { color: #aaa; } /* ie */
-aside.sideBar input:-moz-placeholder { color: #aaa; }
 /* ---- */
 
 /* Bof: RSS feed settings */
@@ -180,10 +196,9 @@ aside.sideBar input:-moz-placeholder { color: #aaa; }
 	.inactive {
 		color: #ccc;
 		cursor: pointer;
-	}
-
-	.inactive:hover {
-		color: #ddd;
+		&:hover {
+			color: #ddd;
+		}
 	}
 
 	.active {
@@ -198,110 +213,128 @@ aside.sideBar input:-moz-placeholder { color: #aaa; }
 	background-color: #2e2f33;
 	background-color: #29292e;
 	box-shadow: inset 0 1px #111, 0 1px #333;
-}
-.rssSettings h4 {
-	font-size: 18px;
-	margin: 0 0 10px 0;
-}
-.rssSettings input[type="check"] {
-	display: none;
-}
-.rssSettings label {
-	display: inline-block;
-	margin: 0 5% 0 0;
-	font-size: 18px;
-	font-weight: 300;
+
+	h4 {
+		font-size: 18px;
+		margin: 0 0 10px 0;
+	}
+	
+	input[type="check"] {
+		display: none;
+	}
+	
+	label {
+		cursor: pointer;
+		display: inline-block;
+		margin: 0 5% 0 0;
+		font-size: 18px;
+		font-weight: 300;
+	}
 }
 /* ---- */
 
 /* Bof: Input field styling */
-.sideBar input[type="text"] {
-	width: 418px;
-	height: 30px;
-	border: none;
-	outline: none;
-	box-shadow: inset 0 0 3px #999;
-	background-color: #ddd;
-	border: 1px solid #4f565b;
-	font-size: 18px;
-	padding: 2px 10px;
-	margin: 0 10px 10px 10px;
-}
-.sideBar input[type="text"]:hover {
-	background-color: #fff;
-}
-.sideBar input[type="text"]:focus {
-	background-color: #fff;
-	border: 1px solid #00dcff;
-	box-shadow: 0 0 10px #00dcff;
+.sideBar {
+	input[type="text"] {
+		width: 418px;
+		height: 30px;
+		border: none;
+		outline: none;
+		box-shadow: inset 0 0 3px #999;
+		background-color: #ddd;
+		border: 1px solid #4f565b;
+		font-size: 18px;
+		padding: 2px 10px;
+		margin: 0 10px 10px 10px;
+
+		&:hover {
+			background-color: #fff;
+		}
+
+		&:focus {
+			background-color: #fff;
+			border: 1px solid #00dcff;
+			box-shadow: 0 0 10px #00dcff;
+		}
+	}		
 }
 /* ---- */
 
 /* Bof: Button styling */
-input.btnBlue {
-	background-color: #10b5d2; /* blue */
+input {
+	&.btnBlue {
+		background-color: #10b5d2; /* blue */
+	}
+	
+	&.btnRed {
+		background-color: #e5461e; /* red */
+	}
+	
+	&.btnGreen {
+		background-color: #a0c61b; /* green */
+	}
+	
+	&.btnBlue,
+	&.btnRed,
+	&.btnGreen {
+		cursor: pointer;
+		border: none;
+		border-top: 1px solid rgba(255,255,255,.2);
+		box-shadow: none;
+		box-shadow: inset 0 -2px 0 rgba(0,0,0,.2);
+		padding: 2px 0;
+		margin: 10px;
+		font-size: 18px;
+		color: #333;
+		text-shadow: 0 1px 1px rgba(255,255,255,.2);
+		line-height: 36px;
+	}
+	&:hover.btnBlue {
+		background-color: #32d7f4; /* light-blue */
+	}
+	&:hover.btnRed {
+		background-color: #f6572f; /* light-red */
+	}
+	&:hover.btnGreen {
+		background-color: #c2e83d; /* light-green */
+	}
+	&:hover.btnBlue,
+	&:hover.btnRed,
+	&:hover.btnGreen {
+		color: #fff;
+		text-shadow: none;
+	}
+	&:focus.btnBlue,
+	&:focus.btnRed,
+	&:focus.btnGreen {
+		color: #000;
+		text-shadow: none;
+	}
+	&:disabled.btnBlue,
+	&:disabled.btnRed,
+	&:disabled.btnGreen {
+		background-color: #ccc;
+		color: #666;
+	}
+	&.btnFull {
+		width: 440px;
+	}
+	&.btnLeft,
+	&.btnRight {
+		width: 208px;
+	}
 }
-input.btnRed {
-	background-color: #e5461e; /* red */
-}
-input.btnGreen {
-	background-color: #a0c61b; /* green */
-}
-input.btnBlue,
-input.btnRed,
-input.btnGreen {
-	border: none;
-	border-top: 1px solid rgba(255,255,255,.2);
-	box-shadow: none;
-	box-shadow: inset 0 -2px 0 rgba(0,0,0,.2);
-	padding: 2px 0;
-	margin: 10px;
-	font-size: 18px;
-	color: #333;
-	text-shadow: 0 1px 1px rgba(255,255,255,.2);
-	line-height: 36px;
-}
-input:hover.btnBlue {
-	background-color: #32d7f4; /* light-blue */
-}
-input:hover.btnRed {
-	background-color: #f6572f; /* light-red */
-}
-input:hover.btnGreen {
-	background-color: #c2e83d; /* light-green */
-}
-input:hover.btnBlue,
-input:hover.btnRed,
-input:hover.btnGreen {
-	color: #fff;
-	text-shadow: none;
-}
-input:focus.btnBlue,
-input:focus.btnRed,
-input:focus.btnGreen {
-	color: #000;
-	text-shadow: none;
-}
-input:disabled.btnBlue,
-input:disabled.btnRed,
-input:disabled.btnGreen {
-	background-color: #ccc;
-	color: #666;
-}
-input.btnFull {
-	width: 440px;
-}
-input.btnLeft,
-input.btnRight {
-	width: 208px;
-}
-#exportBox .btnLeft,
-#importBox .btnLeft {
-	float: left;
-}
-#exportBox .btnRight,
-#importBox .btnRight {
-	float: right;
+#exportBox,
+#importBox {
+ .btnLeft,
+ .btnLeft {
+		float: left;
+	}
+
+	.btnRight,
+	.btnRight {
+		float: right;
+	}
 }
 /* ---- */
 
@@ -316,37 +349,42 @@ aside hr {
 /* Bof: Edit bookmarks */
 aside .catList {
 	margin: 0 0 10px 0;
-}
-aside .catList li {
-	margin: 0 0 20px 0;
-}
-aside .catList li h4 {
-	display: block;
-	height: 30px;
-	margin: -20px 0 0 0;
-	padding: 5px 0 5px 15px;
-	background-color: #29292e;
-	line-height: 30px;
-	font-size: 20px;
-	font-style: italic;
-	text-transform: capitalize;
-	color: #e5461e;
+
+	li {
+		margin: 0 0 20px 0;
+
+		h4 {
+			display: block;
+			height: 30px;
+			margin: -20px 0 0 0;
+			padding: 5px 0 5px 15px;
+			background-color: #29292e;
+			line-height: 30px;
+			font-size: 20px;
+			font-style: italic;
+			text-transform: capitalize;
+			color: #e5461e;
+		}
+	}
 }
 aside .editBookmarks {
 	margin: 0 0 23px 0;
 	padding: 0;
-}
-aside .editBookmarks:last-child {
-	margin: 0 0 0 0;
-	padding: 0;
-}
-aside .editBookmarks li {
-	list-style-type: none;
-	margin: 0 0 0 0;
-	padding: 0;
-}
-aside .editBookmarks li:last-child {
-	margin-bottom: 10px;
+
+	&:last-child {
+		margin: 0 0 0 0;
+		padding: 0;
+	}
+
+	li {
+		list-style-type: none;
+		margin: 0 0 0 0;
+		padding: 0;
+	
+		&:last-child {
+			margin-bottom: 10px;
+		}
+	}
 }
 /* ---- */
 
@@ -390,16 +428,18 @@ aside .editBookmarks li:last-child {
 	font-size: 18px;
 	padding: 2px 10px;
 }
-a.closeImEx {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-}
-a:hover.closeImEx {
-	color: #e5461e;
+a {
+	.closeImEx {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+	&:hover.closeImEx {
+		color: #e5461e;
+	}
 }
 .copyStatusTrue {
-	position: absolute;
+	position: relative;
 	height: 30px;
 	visibility: visible;
 	color: #fff;
@@ -407,7 +447,7 @@ a:hover.closeImEx {
 	font-weight: 300;
 }
 .copyStatusFalse {
-	position: absolute;
+	position: relative;
 	height: 30px;
 	visibility: hidden;
 	margin-top: 35px;
@@ -424,11 +464,12 @@ a:hover.closeImEx {
 	padding: 0;
 	box-shadow: 0 0 10px #000;
 	font-family: "Lato";
-}
-#confirmClearBox .container {
-	width: 462px;
-	padding: 20px 20px 20px 20px;
-	margin: 0;
+
+	.container {
+		width: 462px;
+		padding: 20px 20px 20px 20px;
+		margin: 0;
+	}
 }
 .infoText {
 	font-size: 18px;
@@ -439,6 +480,7 @@ a:hover.closeImEx {
 /* ---- */
 
 aside .btn {
+	cursor: default;
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-weight: 300;
@@ -453,36 +495,45 @@ aside .btn {
 	border-bottom: 1px solid #1b1b1b;
 	color: #eee;
 	background: none;
+	
+	&:hover {
+		background-color: #e5461e;
+		color: #fff;
+		border: none;
+		border-top: 1px solid rgba(255,255,255,.2);
+		border-bottom: 1px solid #1b1b1b;
+		box-shadow: 0 -2px 4px -2px #111, inset 0 -2px 0 rgba(0,0,0,.2);
+		text-shadow: 0 1px 1px #000;
+	}
+
+	.editBtn,
+	.delBtn {
+		cursor: pointer;
+		position: absolute;
+		right: 33px;
+		font-size: 14px;
+		color: #242428;
+		display: inline-block;
+		text-shadow: none;
+	}
 }
-aside .btn:hover {
-	background-color: #e5461e;
-	color: #fff;
-	border: none;
-	border-top: 1px solid rgba(255,255,255,.2);
-	border-bottom: 1px solid #1b1b1b;
-	box-shadow: 0 -2px 4px -2px #111, inset 0 -2px 0 rgba(0,0,0,.2);
-	text-shadow: 0 1px 1px #000;
+aside .btn {
+	.editBtn {
+		right: 60px;
+	}
+
+	&:hover {
+		.editBtn,
+		.delBtn {
+			color: #eee;
+
+			&:hover {
+				color: #000;
+			}
+		}
+	}
 }
-aside .btn .editBtn,
-aside .btn .delBtn {
-	position: absolute;
-	right: 33px;
-	font-size: 14px;
-	color: #242428;
-	display: inline-block;
-	text-shadow: none;
-}
-aside .btn .editBtn {
-	right: 60px;
-}
-aside .btn:hover .editBtn,
-aside .btn:hover .delBtn {
-	color: #eee;
-}
-aside .btn .editBtn:hover,
-aside .btn .delBtn:hover {
-	color: #000;
-}
+
 aside.sideBar .editEntry input[type="text"] {
 	width: 418px;
 }
