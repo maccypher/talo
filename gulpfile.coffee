@@ -59,8 +59,3 @@ gulp.task 'watch', ['build', 'server'], ->
   gulp.watch [src.styles.index, src.styles.files], ['build:styles']
 
 gulp.task 'default', ['watch']
-
-
-
-
-

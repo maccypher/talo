@@ -268,7 +268,11 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		feedUrl = $store.get 'feedUrl'
 		return unless feedUrl?
 		
-		request = $http.jsonp feedUrl
+		#  Use "jsonp" as long as you are on develop and you are running a local server
+		# request = $http.jsonp feedUrl
+
+		#  Use "get" if you are on file base or you are running it as a Chrome Extension
+		request = $http.get feedUrl
 
 		request.success (data, status) ->
 			$scope.offline = false
