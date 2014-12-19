@@ -13,7 +13,7 @@ body {
 }
 section a {
 	display: block;
-	font-family: 'Oregano';
+	font-family: 'Oregano', Georgia;
 	font-style: italic;
 	font-size: 22px;
 	color: #333;
@@ -57,7 +57,7 @@ section a:hover {
 	min-height: 450px;
 }
 .column h2 {
-	font-family: 'Lily Script One';
+	font-family: 'Lily Script One', Georgia;
 	font-style: italic;
 	text-transform: capitalize;
 	display: block;
@@ -71,8 +71,9 @@ section ul li {
 	line-height: 28px;
 	margin: 5px 5px 5px 0;
 }
-#headLine {
-	display: none;
+.mainSection .headLine {
+	font-family: 'Lily Script One', Georgia;
+	left: 10%;
 }
 #logo img {
 	display: none;

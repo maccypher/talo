@@ -10,7 +10,7 @@ body {
 	color: #111;
 	font-weight: 100;
 	background-size: 100% 100%;
-	font-family: "Roboto";
+	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	background-attachment: fixed;
 }
 h1, h2 {

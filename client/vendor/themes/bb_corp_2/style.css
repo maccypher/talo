@@ -5,7 +5,7 @@ body {
 	color: #333;
 	font-weight: 400;
 }
-#headLine {
+.headLine {
 	left: 17%;
 	color: #f0f0f0;
 }

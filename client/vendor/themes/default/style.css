@@ -12,6 +12,7 @@ body {
 }
 section a {
 	display: block;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 300;
 	font-size: 18px;
 	line-height: 22px;
