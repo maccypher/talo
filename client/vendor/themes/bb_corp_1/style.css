@@ -35,7 +35,8 @@ input[type="search"]:focus.queryInput {
 .four {
 	margin-right: 0px; 
 	width: 90%;
-	float: left; 
+	/*float: left;*/
+	display: inline-block;
 }
 .one {
 	width: 80%;
@@ -49,8 +50,8 @@ input[type="search"]:focus.queryInput {
 	margin-right: 10%;
 }
 .four {
-	width: 20%;
-	margin-right: 3%;
+	width: 18%;
+	margin: 0 2%;
 }
 .bookmarks a {
 	color: #797971;
@@ -87,7 +88,7 @@ a {
 	margin-top: 20px;
 }
 #content div:last-child {
-	margin-right: 0;
+	/*margin-right: 0;*/
 }
 .filter {
 	display: block;
@@ -97,7 +98,7 @@ a {
 	width: 25%;
 	margin: 7px 0 0 0;
 }
-#headLine {
+.headLine {
 	display: block;
 	position: absolute;
 	top: 20px;

@@ -12,12 +12,12 @@ body {
 	font-weight: 300;
 	background-size: 100%;
 	background-attachment: fixed;
-	font-family: "Raleway";
+	font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h1 {
 	font-size: 60px;
 	font-weight: 100;
-	font-family: "Raleway";
+	font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h2 {
 	font-weight: 300;

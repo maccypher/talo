@@ -13,16 +13,16 @@ body {
 	font-weight: 300;
 	background-size: cover;
 	background-attachment: fixed;
-	font-family: "Lato";
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h1 {
 	font-size: 70px;
 	font-weight: 100;
-	font-family: "Lato";
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-shadow: 0 2px 8px #000;
 }
 h2 {
-	font-family: "Lato";
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 300;
 	font-size: 40px;
 	color: #264808;
@@ -40,8 +40,9 @@ h2 {
 .filter {
 	top: 7%;
 }
-#headLine {
+.headLine {
 	top: 6%;
+	left: 10%;
 }
 #content {
 	margin: 7% auto 0 auto;
