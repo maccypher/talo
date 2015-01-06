@@ -25,7 +25,8 @@ src =
   vendors: [
     "#{__dirname}/client/vendor/**/*"
   ]
-  
+  manifest: "#{__dirname}/manifest.json"
+
 gulp.task 'build', [
   'build:scripts'
   'build:templates'
@@ -39,13 +40,16 @@ gulp.task 'build:scripts', [
 gulp.task 'build:scripts:app', ->
   gTasks.browserify.build src.scripts.main, dest.base
   gTasks.misc.copy src.vendors, dest.assets
-  
+
 gulp.task 'build:templates', ->
   gTasks.jade.build src.templates.index, dest.base, lPort
   gTasks.jade.build src.templates.files, dest.templates
 
 gulp.task 'build:styles', ->
   gTasks.less.build src.styles.index, dest.base
+
+gulp.task 'build:local', ['build'], ->
+  gTasks.misc.copy src.manifest, dest.base
 
 gulp.task 'server', ->
   gTasks.livereload.livereloadServer dest.base, lPort

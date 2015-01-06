@@ -38,6 +38,7 @@ h2 {
 }
 input[type="search"].queryInput {
 	background-color: #eee;
+	margin-left: 50px;
 }
 input[type="search"].queryInput:hover {
 	background-color: #fff;

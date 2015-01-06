@@ -2,12 +2,12 @@ doctype html
 html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
   head
     meta(charset="UTF-8")
-    
+
     title
       | New Tab - talo
-    
+
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
-    
+
     link(rel="stylesheet" type="text/css" href="main.css")
     link(rel="stylesheet" type="text/css" ng-href="assets/themes/{{cssTheme}}/style.css")
 
@@ -46,7 +46,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
         )
         br
         div.layout
-          h4 Columns to show 
+          h4 Columns to show
           input#oneColumn(type="radio" value="one" ng-model="column")
           label(for="oneColumn" ng-class="{'active': ceckedColumn == 'one', 'inactive': ceckedColumn !== 'one' }")
             i.icon-ok
@@ -70,7 +70,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
         input#newUrl.animateAll(type="text" ng-model="newUrl" placeholder="Url")
         input#newName.animateAll(type="text" ng-model="newName" placeholder="Name")
         input.btnBlue.btnFull.animateAll(type="submit" ng-click="addNew()" value="Add new bookmark")
-        
+
       h3 Edit Bookmarks:
       div.container
         ul.catList
@@ -124,7 +124,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
           h3 Import
           p.infoText
             | To import your former created backup, please open the downloaded file with your favorite text-editor and copy the content from the file into the textarea.
-          
+
           a.closeImEx(ng-click="closeImport()")
             i.icon-close
           form(name="doImport")
@@ -149,8 +149,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
           h2 {{cat.name}}
           ul.bookmarks
             li(ng-repeat="item in cat.items track by $index | filter: query")
-              a(href="{{item.url}}")
-                 {{item.name}}
+              a(href="{{item.url}}") {{item.name}}
 
       div#readerPanel(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
       div#innerReader(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
@@ -169,7 +168,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             p
               strong ATTENTION:
             | Make sure your feed URL links to an JSONP based feed. Additionally the feed URL MUST have a JSON callback parameter! Your feed URL should look like this:<br>"<i>http://feeds.domain.tld/json/feedname?callback=JSON_CALLBACK</i>"
-            
+
           div.currentFeedUrl
             | Current Feed URL:
             textarea#currentURL(onClick="SelectAll('currentURL')" readonly) {{feedUrl}}
@@ -186,10 +185,8 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
         div.feedList
           ul
             li(ng-repeat="item in feedItems track by $index" ng-class="{'newItem': item.new}")
-              a(href="{{item.u}}" target="_blank")
-                {{item.d}}
-              div.timeStamp
-                {{item.dt | date: 'yyyy-MM-dd (HH:mm)'}}
+              a(href="{{item.u}}" target="_blank") {{item.d}}
+              div.timeStamp {{item.dt | date: 'yyyy-MM-dd (HH:mm)'}}
         //- Feed content ends here
 
     section
