@@ -10,11 +10,7 @@ Thanks to [Mupat](https://github.com/mupat) for the [Gulp-Tasks](https://github.
 =======
 # talo
 
-![ talo-icon ](img/icon.png "talo") 
-
-
 ### An editable start- / homepage - bookmark collection manager
-
 
 ## To Do:
 
