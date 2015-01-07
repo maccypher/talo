@@ -1,7 +1,7 @@
 gulp = require 'gulp'
 gTasks = require 'gulp-tasks'
 
-cPort = Number(process.env.PORT) || 5000
+cPort = Number(process.env.PORT) if process.env.PORT?
 lPort = cPort+1 if cPort?
 
 base = "#{__dirname}/dest"
