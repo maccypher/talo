@@ -9,8 +9,8 @@ bower = "#{__dirname}/bower_components"
 dest =
   base: base
   templates: "#{base}/templates"
-  assets:
-    "#{base}/assets"
+  assets: "#{base}/assets"
+  themes: "#{base}/assets/themes"
 
 src =
   scripts:
@@ -22,6 +22,7 @@ src =
   styles:
     index: "#{__dirname}/client/styles/main.less"
     files: "#{__dirname}/client/styles/**/*.less"
+    themes: "#{__dirname}/client/vendor/themes/**/*.less"
   vendors: [
     "#{__dirname}/client/vendor/**/*"
   ]
@@ -39,7 +40,7 @@ gulp.task 'build:scripts', [
 
 gulp.task 'build:scripts:app', ->
   gTasks.browserify.build src.scripts.main, dest.base
-  gTasks.misc.copy src.vendors, dest.assets
+  # gTasks.misc.copy src.vendors, dest.assets
 
 gulp.task 'build:templates', ->
   gTasks.jade.build src.templates.index, dest.base, lPort
@@ -47,6 +48,7 @@ gulp.task 'build:templates', ->
 
 gulp.task 'build:styles', ->
   gTasks.less.build src.styles.index, dest.base
+  gTasks.less.build src.styles.themes, dest.themes
 
 gulp.task 'build:local', ['build'], ->
   gTasks.misc.copy src.manifest, dest.base
@@ -60,6 +62,6 @@ gulp.task 'start', ['build', 'server']
 gulp.task 'watch', ['build', 'server'], ->
   gulp.watch src.scripts.watch, ['build:scripts:app']
   gulp.watch [src.templates.index, src.templates.files], ['build:templates']
-  gulp.watch [src.styles.index, src.styles.files], ['build:styles']
+  gulp.watch [src.styles.index, src.styles.files, src.styles.themes], ['build:styles']
 
 gulp.task 'default', ['watch']

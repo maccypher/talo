@@ -7,6 +7,11 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: define some vars
 	$scope.reload = false
 	$scope.isCollapsed = false
+	$scope.subOpened = false
+	$scope.closeSubMenu = false
+	$scope.searchActive = false
+	$scope.addBookmarkOpen = false
+	$scope.editBookmarkOpen = false
 	$scope.exportOpen = false
 	$scope.importOpen = false
 	$scope.confirmClear = false
@@ -21,20 +26,46 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		if not $scope.exportOpen and not $scope.importOpen and not $scope.confirmClear
 			$scope.isCollapsed = !$scope.isCollapsed
 			$rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
+			$scope.closeSubMenu()
+
+	$scope.sToggle = (event) ->
+		qInput = event.target.nextSibling
+		qInput.focus() if qInput?
+		$scope.searchActive = !$scope.searchActive
+		$rootScope.$broadcast 'mainCtrl.searchActive', $scope.searchActive
+
+	$scope.sClose = (event) ->
+		qInput = event.target.nextSibling
+		qInput.focus() if qInput?
+		$scope.searchActive = false
+		$rootScope.$broadcast 'mainCtrl.searchActive', $scope.searchActive
+
+	$scope.addBookmarkToggle = () ->
+		$scope.addBookmarkOpen = !$scope.addBookmarkOpen
+		$rootScope.$broadcast 'mainCtrl.addBookmarkOpen', $scope.addBookmarkOpen
+
+	$scope.editBmOpen = () ->
+		$scope.editBookmarkOpen = !$scope.editBookmarkOpen
+		$rootScope.$broadcast 'mainCtrl.editBmOpen', $scope.editBookmarkOpen
+
+	$scope.openSubMenu = () ->
+		$scope.subOpened = true
+		$rootScope.$broadcast 'mainCtrl.subOpened', $scope.subOpened
+		$scope.addBookmarkOpen = false
+		$rootScope.$broadcast 'mainCtrl.addBookmarkOpen', $scope.addBookmarkOpen
+
+	$scope.closeSubMenu = () ->
+		$scope.addBookmarkOpen = false
+		$rootScope.$broadcast 'mainCtrl.addBookmarkOpen', $scope.addBookmarkOpen
+		$scope.editBookmarkOpen = false
+		$rootScope.$broadcast 'mainCtrl.editBmOpen', $scope.editBookmarkOpen
+		$scope.subOpened = false
+		$rootScope.$broadcast 'mainCtrl.subOpened', $scope.subOpened
 
 # THEMING
 # Bof: put theme names in an object
 	$scope.themes =
 		default: 'Default'
-		fabric: 'Fabric'
-		taxi: 'Taxi'
-		tones: 'Tones'
-		pastel: 'Pastel Sky'
-		clouds: 'Clouds'
-		bb_corp_1: 'BB Corporate 1'
-		bb_corp_2: 'BB Corporate 2'
-		grass: 'Soccer Grass'
-		retro: 'Retro Feeling'
 
 	$scope.selectedTheme = $store.get('selection') or $scope.themes.default
 	$scope.cssTheme = $scope.selectedTheme
@@ -66,6 +97,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 # EDIT MODE / SETTINGS SECTION STARTS HERE
 # Bof: read LocalStorage for sidebar (edit mode)
+	
 	$scope.editBookmarks = () ->
 		$scope.cats = []
 		cats = {}
@@ -98,6 +130,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 		$scope.clearForm()
 		$scope.editBookmarks()
+		$scope.addBookmarkToggle()
 
 # Bof: reset "add new" form
 	$scope.clearForm = () ->
@@ -268,11 +301,12 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		feedUrl = $store.get 'feedUrl'
 		return unless feedUrl?
 		
-		#  Use "jsonp" as long as you are on develop and you are running a local server
-		# request = $http.jsonp feedUrl
+		# Use "jsonp" as long as you are on develop and you are running a local server
+		# Additonally you MUST specify a callback parameter at the end of the URL
+		request = $http.jsonp feedUrl
 
-		#  Use "get" if you are on file base or you are running it as a Chrome Extension
-		request = $http.get feedUrl
+		# Use "get" if you are on file base or you are running it as a Chrome Extension
+		# request = $http.get feedUrl
 
 		request.success (data, status) ->
 			$scope.offline = false

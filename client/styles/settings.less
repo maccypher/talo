@@ -1,8 +1,49 @@
 /* settings.css */
 
 /* Bof: some global stuff */
+
+@settings-layer: 100010;
+
+#rssSettings,
+#backup,
+#appearance {
+	display: none;
+}
+
+.sidebarHeader {
+	display: block;
+	position: absolute;
+	top: 10px;
+	margin: 0;
+	padding: 0;
+	color: rgba(0,0,0,0.56);
+	line-height: 36px;
+
+	i {
+		color: @teal;
+		margin: 0 15px 0 0;
+		position: absolute;
+		top: 0;
+		font-size: 32px;
+	}
+	span .settingsHead,
+	a .settingsHead {
+		font-size: 22px;
+		font-weight: 400;
+		color: @trans-grey-56;
+		position: absolute;
+		top: -1px;
+		left: 52px;
+		margin: 0;
+		padding: 0;
+		white-space: nowrap;
+	}
+	a .settingsHead {
+		top: 6px;
+	}
+}
 aside {
-	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: @font-family;
 	font-size: 18px;
 }
 section.mainSection {
@@ -12,12 +53,14 @@ section.mainSection {
 	height: 100%;
 	min-height: 100%;
 }
+/*
 aside a,
 aside a:hover,
 #dialogs a,
 #dialogs a:hover {
 	background: none;
 }
+*/
 .clear {
 	float: none;
 	clear: both;
@@ -26,7 +69,8 @@ aside a:hover,
 	display: none;
 }
 .hideIt {
-	left: -500px;
+	left: -360px;
+	box-shadow: 0 !important;
 }
 .showIt {
 	left: 0;
@@ -35,27 +79,27 @@ aside a:hover,
 	left: 0;
 }
 .swipeRight {
-	left: 500px;
+	left: 350px;
 	box-shadow: 2px 0 20px #000;
 }
-.pushLeft {
-	background-position: 0 0;
+.show {
+	display: block;
 }
-.pushRight {
-	background-position: 500px 0;
-	overflow: hidden;
+.hide {
+	display: none;
 }
 .overlay {
 	position: absolute;
-	z-index: 990;
+	z-index: @settings-layer - 10;
 	width: 100%;
 	height: 100%;
 	min-height: 100%;
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0,0,0,0.4);
 }
 /* ---- */
 
 /* Bof: Theme selector */
+/*
 select.selectTheme {
 	cursor: pointer;
 	width: 440px;
@@ -81,14 +125,14 @@ select.selectTheme {
 	color: #333;
 }
 .container {
-	padding: 20px 0 10px 0;
-	margin: 0 0 40px 0;
-	background-color: #242428;
-	box-shadow: inset 0 -2px 0 #1a1a1a;
+	// padding: 20px 0 10px 0;
+	// margin: 0 0 40px 0;
+	// background-color: #242428;
+	// box-shadow: inset 0 -2px 0 #1a1a1a;
 	
-	&:first-child {
-		margin-top: 30px;
-	}
+	// &:first-child {
+	// 	margin-top: 30px;
+	// }
 }
 .layout {
 	color: #fff;
@@ -137,31 +181,34 @@ select.selectTheme {
 		text-shadow: 0 0 10px #10b5d2;
 	}
 }
+*/
 /* ---- */
 
 /* Bof: Add new bookmark */
 .closeSettings {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 16px;
+	right: 4px;
 	display: block;
-	z-index: 1010;
 	width: 30px;
 	height: 20px;
-	background-color: #2f3035;
-	color: #ddd;
+	background-color: transparent;
+	color: #333;
 	border: none;
+	cursor: pointer;
 
 	i {
-		color: #ddd;
+		font-size: 24px;
+		color: rgba(0,0,0,0.56);
+	}
+
+	&:hover,
+	&:hover i {
+		color: #000;
+		border: none;
 	}
 }
 
-.closeSettings:hover,
-.closeSettings:hover i {
-	color: #df5e3c;
-	border: none;
-}
 aside {
 	h3 {
 		color: #ccc;
@@ -171,15 +218,17 @@ aside {
 	}
 	
 	&.sideBar {
-		background: #2e2f33;
+		background: #FFFFFF;
 		position: absolute;
 		display: inline-block;
-		width: 460px;
+		width: 330px;
 		height: 100%;
 		min-height: 100%;
-		padding: 10px 20px;
-		overflow: auto;
-		z-index: 110;
+		padding: 0 10px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		z-index: @settings-layer;
+		box-shadow: 0 0 4px rgba(0,0,0,0.12), 4px 0 4px rgba(0,0,0,0.24);
 
 		::-webkit-input-placeholder { color: #aaa; }
 		::-moz-placeholder { color: #aaa; } /* firefox 19+ */
@@ -190,6 +239,7 @@ aside {
 /* ---- */
 
 /* Bof: RSS feed settings */
+/*
 #useReader {
 	display: none;
 
@@ -231,47 +281,48 @@ aside {
 		font-weight: 300;
 	}
 }
+*/
 /* ---- */
 
 /* Bof: Input field styling */
 .sideBar {
 	input[type="text"] {
-		width: 418px;
-		height: 30px;
+		width: 260px;
+		height: 48px;
+		line-height: 48px;
 		border: none;
 		outline: none;
-		box-shadow: inset 0 0 3px #999;
-		background-color: #ddd;
-		border: 1px solid #4f565b;
+		background-color: transparent;
+		border: none;
+		border-bottom: 2px solid @trans-grey-12;
 		font-size: 18px;
-		padding: 2px 10px;
-		margin: 0 10px 10px 10px;
+		padding: 0;
+		margin: 20px 10px 10px 0;
 
 		&:hover {
-			background-color: #fff;
+			border-bottom: 2px solid @trans-grey-26;
 		}
 
 		&:focus {
-			background-color: #fff;
-			border: 1px solid #00dcff;
-			box-shadow: 0 0 10px #00dcff;
+			border-bottom: 2px solid @teal;
 		}
-	}		
+	}
 }
 /* ---- */
 
 /* Bof: Button styling */
+/*
 input {
 	&.btnBlue {
-		background-color: #10b5d2; /* blue */
+		background-color: #10b5d2;
 	}
 	
 	&.btnRed {
-		background-color: #e5461e; /* red */
+		background-color: #e5461e;
 	}
 	
 	&.btnGreen {
-		background-color: #a0c61b; /* green */
+		background-color: #a0c61b;
 	}
 	
 	&.btnBlue,
@@ -290,13 +341,13 @@ input {
 		line-height: 36px;
 	}
 	&:hover.btnBlue {
-		background-color: #32d7f4; /* light-blue */
+		background-color: #32d7f4;
 	}
 	&:hover.btnRed {
-		background-color: #f6572f; /* light-red */
+		background-color: #f6572f;
 	}
 	&:hover.btnGreen {
-		background-color: #c2e83d; /* light-green */
+		background-color: #c2e83d;
 	}
 	&:hover.btnBlue,
 	&:hover.btnRed,
@@ -336,8 +387,9 @@ input {
 		float: right;
 	}
 }
+*/
 /* ---- */
-
+/*
 aside hr {
 	color: #2e2f33;
 	background-color: #2e2f33;
@@ -345,8 +397,9 @@ aside hr {
 	border: none;
 	border-bottom: 1px solid #444;
 }
-
+*/
 /* Bof: Edit bookmarks */
+/*
 aside .catList {
 	margin: 0 0 10px 0;
 
@@ -386,9 +439,11 @@ aside .editBookmarks {
 		}
 	}
 }
+*/
 /* ---- */
 
 /* Bof: Import / Export functionality */
+/*
 #importBox,
 #exportBox {
 	position: absolute;
@@ -397,7 +452,7 @@ aside .editBookmarks {
 	z-index: 1110;
 	padding: 0;
 	box-shadow: 0 0 10px #000;
-	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: @font-family;
 }
 #confirmClearBox h3,
 #importBox h3,
@@ -464,7 +519,7 @@ a {
 	z-index: 1110;
 	padding: 0;
 	box-shadow: 0 0 10px #000;
-	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: @font-family;
 
 	.container {
 		width: 462px;
@@ -478,68 +533,408 @@ a {
 	color: #fff;
 	font-weight: 300;
 }
+*/
 /* ---- */
 
-aside .btn {
-	cursor: default;
-	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 16px;
+.btnSave,
+.btnDelete {
+	height: 36px;
+	line-height: 38px;
+	margin: 40px 10px;
+	padding: 0 22px;
+	border: none;
+	border-radius: 3px;
+	font-family: @font-family;
+	font-size: 18px;
 	font-weight: 300;
-	font-style: normal;
-	text-decoration: none;
-	padding: 2px 10px 2px 30px;
-	margin: 0;
-	display: block;
-	line-height: 30px;
-	border-top: 1px solid #2f2f2f;
-	/*border-bottom: 1px solid #242428;*/
-	border-bottom: 1px solid #1b1b1b;
-	color: #eee;
-	background: none;
-	
-	&:hover {
-		background-color: #e5461e;
-		color: #fff;
-		border: none;
-		border-top: 1px solid rgba(255,255,255,.2);
-		border-bottom: 1px solid #1b1b1b;
-		box-shadow: 0 -2px 4px -2px #111, inset 0 -2px 0 rgba(0,0,0,.2);
-		text-shadow: 0 1px 1px #000;
-	}
+	text-transform: uppercase;
+	color: white;
+	background-color: @dark-teal;
+	box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
 
-	.editBtn,
-	.delBtn {
-		cursor: pointer;
-		position: absolute;
-		right: 33px;
-		font-size: 14px;
-		color: #242428;
-		display: inline-block;
-		text-shadow: none;
+	&:hover {
+		background-color: darken(@dark-teal, 5%);
+		box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.24);
 	}
 }
-aside .btn {
-	.editBtn {
-		right: 60px;
-	}
+.btnDelete {
+	background-color: @deep-orange;
+	padding: 0 14px;
+	margin: 40px 5px 20px 5px;
 
 	&:hover {
-		.editBtn,
-		.delBtn {
-			color: #eee;
+		background-color: @dark-orange;
+	}
+
+	&.btnDeleteAll {
+		margin: 40px 5px 20px -21px;
+	}
+}
+.btnCancel {
+	height: 36px;
+	line-height: 38px;
+	margin: 40px 10px;
+	padding: 0 22px;
+	border: none;
+	border-radius: 3px;
+	font-family: @font-family;
+	font-size: 18px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: @dark-teal;
+	background-color: transparent;
+
+	&:hover {
+		background-color: @trans-grey-12;
+		box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.12);
+	}
+}
+
+#editBookmarks {
+	.transition03();
+	position: absolute;
+	left: 350px;
+}
+.sideBar {
+	overflow: hidden;
+	width: 350px;
+	#addBookmark {
+		position: relative;
+		display: block;
+		top: 100px;
+		width: 280px;
+
+		.addButton {
+			cursor: pointer;
+			position: absolute;
+			z-index: @settings-layer + 10;
+			top: -28px;
+			left: 50%;
+			display: block;
+			width: 56px;
+			height: 56px;
+			background-color: white;
+			border-radius: 50%;
+			box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
+			color: black;
+
+			i {
+				display: block;
+				width: 56px;
+				height: 56px;
+				text-align: center;
+				line-height: 58px;
+				font-size: 24px;
+				color: @trans-grey-56;
+				.transition01();
+			}
+
+			.tooltip {
+				position: absolute;
+				display: block;
+				width: auto;
+				height: 22px;
+				line-height: 22px;
+				font-size: 10px;
+				font-weight: 400;
+				white-space: nowrap;
+				margin: 10px 0 0 -25%;
+				padding: 0 8px;
+				background-color: @trans-grey-90;
+				color: @trans-white-56;
+				border-radius: 3px;
+				opacity: 0;
+				.transition03();
+			}
 
 			&:hover {
-				color: #000;
+				.tooltip {
+					.transitionTooltip();
+					opacity: 1;
+				}
+			}
+		
+			&.open {
+				i {
+					-webkit-transform: rotate(45deg);
+					transform: rotate(45deg);
+					font-size: 32px;
+				}
+
+				&:hover {
+					.tooltip {
+						.transition03();
+						opacity: 0;
+					}
+				}
+			}
+		}
+
+		.container {
+			position: relative;
+			z-index: @settings-layer + 9;
+			width: 100%;
+			margin: 10px 0 0 -10px;
+			padding: 0 10px 0 60px;
+			border-top: 1px solid @trans-grey-12;
+			border-bottom: 1px solid @trans-grey-12;
+			background-color: @solid-light-grey;
+
+			&.closed {
+				border-top: 0;
+				max-height: 0;
+				overflow-x: hidden;
+				overflow-y: hidden;
+				padding-top: 0;
+				.transition03();
+			}
+
+			&.open {
+				max-height: 400px;
+				overflow-x: hidden;
+				overflow-y: auto;
+				padding-top: 54px;
+				.transition03();
+			}
+		}
+	}
+
+	#menu {
+		display: block;
+		position: relative;
+		z-index: @settings-layer + 110;
+		width: 100%;
+		left: 0;
+		.transition03();
+
+		* {
+			box-sizing: border-box
+		}
+
+		.settingsMenu {
+			margin: 0;
+			padding: 0;
+
+			li {
+				margin: 24px 0 24px 14px;
+				padding: 0;
+				height: 24px;
+				.transition03();
+
+				a {
+					display: block;
+					color: black;
+					font-size: 14px;
+					font-weight: 400;
+					height: 24px;
+					line-height: 24px;
+
+					&:hover {
+						color: @dark-teal;
+					}
+
+					i {
+						float: left;
+						font-size: 24px;
+						line-height: 24px;
+						margin: 0 31px 0 0;
+					}
+				}
+			}
+		}
+
+		&.closed {
+			margin-top: 75%;
+			.transition03();
+		}
+
+		&.open {
+			margin-top: 35%;
+			.transition03();
+
+			li {
+				height: 14px;
+				.transition03();
+			}
+		}
+
+		&.editBmClosed {
+			// .transition03();
+			
+			#editBookmarks {
+				left: 700px;
+				max-height: 0;
+				overflow-x: hidden;
+				overflow-y: hidden;
+			}
+		}
+
+		&.editBmOpen {
+			left: -350px;
+
+			#editBookmarks {
+				left: 326px;
+				padding: 0 0 0 40px;
+				max-height: 2000px;
+				overflow-x: hidden;
+				overflow-y: auto;
+
+				.container {
+					margin: 0 0 0 -26px;
+				}
 			}
 		}
 	}
 }
+#editBookmarks {
+	.transition03();
+	top: -100%;
+	margin: 0;
+	margin: 0 0 0 14px;
 
-aside.sideBar .editEntry input[type="text"] {
-	width: 418px;
+	.catList {
+		h4 {
+			font-weight: 400;
+			color: black;
+		}
+		// li {
+		// 	background-color: blue;
+		// 	position: relative;
+		// 	margin: 20px 0;
+		// }
+
+// 		li ul.editBookmarks {
+// 			font-weight: 400;
+// 			color: @trans-grey-56;
+
+// 			li {
+// 				width: 260px;
+// 			}
+
+// /* ------------- */
+			
+// 			.btn {
+// 				cursor: default;
+// 				font-family: @font-family;
+// 				font-size: 16px;
+// 				font-weight: 300;
+// 				font-style: normal;
+// 				text-decoration: none;
+// 				padding: 2px 10px 2px 30px;
+// 				margin: 0;
+// 				display: block;
+// 				line-height: 30px;
+// 				border-top: 1px solid #2f2f2f;
+// 				border-bottom: 1px solid #1b1b1b;
+// 				background: none;
+				
+// 				&:hover {
+// 					background-color: #e5461e;
+// 					color: #fff;
+// 					border: none;
+// 					border-top: 1px solid rgba(255,255,255,.2);
+// 					border-bottom: 1px solid #1b1b1b;
+// 					box-shadow: 0 -2px 4px -2px #111, inset 0 -2px 0 rgba(0,0,0,.2);
+// 					text-shadow: 0 1px 1px #000;
+// 				}
+
+				
+// 			}
+// 			.btn {
+// 				.editBtn {
+// 					right: 60px;
+// 				}
+
+// 				&:hover {
+// 					.editBtn,
+// 					.delBtn {
+// 						color: #eee;
+
+// 						&:hover {
+// 							color: #000;
+// 						}
+// 					}
+// 				}
+// 			}
+
+// 			.editEntry input[type="text"] {
+// 				// width: 418px;
+// 			}
+// /* ----------------------------- */
+// 		}
+	}
 }
+
+.editBookmarksItem {
+	margin: 10px 0 0 -8px;
+
+	.editEntry,
+	.verifyDelete {
+		margin-left: -16px;
+		padding-left: 36px;
+		width: 350px;
+		border-top: 1px solid @trans-grey-12;
+		border-bottom: 1px solid @trans-grey-12;
+		background-color: @solid-light-grey;
+		color: black;
+		font-weight: 400;
+		font-size: 14px;
+	}
+
+	.verifyDelete {
+		padding-top: 20px;
+	}
+}
+.entry {
+	width: 300px;
+	.editBtn,
+	.delBtn {
+		color: white;
+		cursor: pointer;
+		position: relative;
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+		font-size: 24px;
+		line-height: 24px;
+		float: left;
+		&:hover {
+			color: @deep-orange;
+		}
+	}
+	.editBtn {
+		margin-left: 0px;
+
+		&:hover {
+			color: @dark-teal;
+		}
+	}
+	.entryName {
+		cursor: pointer;
+		position: relative;
+		left: 10px;
+		display: inline-block;
+		color: black;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 24px;
+ 	}
+
+ 	&:hover {
+ 		> a {
+ 			color: @trans-grey-56;
+ 		}
+ 	}
+}
+
 /* ---- */
 
+aside a,
+aside a:hover {
+	.transition02();
+}
+
+.container,
 input,
 input:hover,
 input:focus,
@@ -547,8 +942,6 @@ input:focus,
 .active,
 .column,
 .animateAll,
-aside a,
-aside a:hover,
 .overlay,
 .hideIt,
 .showIt,
