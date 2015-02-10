@@ -1,51 +1,6 @@
 /* settings.css */
 
-/* Bof: some global stuff */
-
-@settings-layer: 100010;
-
-#rssSettings,
-#backup,
-#appearance {
-	display: none;
-}
-
-.sidebarHeader {
-	display: block;
-	position: absolute;
-	top: 10px;
-	margin: 0;
-	padding: 0;
-	color: rgba(0,0,0,0.56);
-	line-height: 36px;
-
-	i {
-		color: @teal;
-		margin: 0 15px 0 0;
-		position: absolute;
-		top: 0;
-		font-size: 32px;
-	}
-	span .settingsHead,
-	a .settingsHead {
-		font-size: 22px;
-		font-weight: 400;
-		color: @trans-grey-56;
-		position: absolute;
-		top: -1px;
-		left: 52px;
-		margin: 0;
-		padding: 0;
-		white-space: nowrap;
-	}
-	a .settingsHead {
-		top: 6px;
-	}
-}
-aside {
-	font-family: @font-family;
-	font-size: 18px;
-}
+/* Bof: outside stuff */
 section.mainSection {
 	position: absolute;
 	display: inline-block;
@@ -53,20 +8,10 @@ section.mainSection {
 	height: 100%;
 	min-height: 100%;
 }
-/*
-aside a,
-aside a:hover,
-#dialogs a,
-#dialogs a:hover {
-	background: none;
-}
-*/
+
 .clear {
 	float: none;
 	clear: both;
-}
-.hidden {
-	display: none;
 }
 .hideIt {
 	left: -360px;
@@ -75,18 +20,15 @@ aside a:hover,
 .showIt {
 	left: 0;
 }
-.swipeLeft {
-	left: 0;
-}
-.swipeRight {
-	left: 350px;
-	box-shadow: 2px 0 20px #000;
-}
 .show {
-	display: block;
+	// display: block;
+	opacity: 1;
+	.transition03();
 }
 .hide {
-	display: none;
+	// display: none;
+	opacity: 0;
+	.transition03();
 }
 .overlay {
 	position: absolute;
@@ -96,200 +38,47 @@ aside a:hover,
 	min-height: 100%;
 	background-color: rgba(0,0,0,0.4);
 }
-/* ---- */
+/* ------------------ */
 
-/* Bof: Theme selector */
-/*
-select.selectTheme {
-	cursor: pointer;
-	width: 440px;
-	height: 40px;
-	border: none;
-	outline: none;
-	border-radius: 0;
-	box-shadow: inset 0 0 3px #999;
-	border: none;
-	outline: none;
-	font-size: 18px;
-	padding: 2px 10px;
-	margin: 0 10px 10px 10px;
+@settings-layer: 100010;
 
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-
-	text-indent: 0.01px;
-	text-overflow: '';
-
-	background: #ddd url('assets/img/select-arrow.png') no-repeat right 3px;
-	color: #333;
-}
-.container {
-	// padding: 20px 0 10px 0;
-	// margin: 0 0 40px 0;
-	// background-color: #242428;
-	// box-shadow: inset 0 -2px 0 #1a1a1a;
-	
-	// &:first-child {
-	// 	margin-top: 30px;
-	// }
-}
-.layout {
-	color: #fff;
-	padding: 5px 10px;
-	margin: 0 10px;
-	background-color: #2e2f33;
-	background-color: #29292e;
-	box-shadow: inset 0 1px #111, 0 1px #333;
-
-	h4 {
-		font-size: 18px;
-		margin: 0 0 10px 0;
-	}
-
-	input[type="radio"] {
-		display: none;
-	}
-	
-	label {
-		cursor: pointer;
-		display: inline-block;
-		width: 85px;
-		margin: 0 5% 0 0;
-		font-size: 18px;
-		font-weight: 300;
-		
-		&:last-child {
-			margin-right: 0;
-		}
-	}
-}
-.inactive {
-	color: #666;
-	cursor: pointer;
-	
-	&:hover {
-		color: #ddd;
-	}
-}
-
-.active {
-	color: #10b5d2;
-	cursor: default;
-	
-	&:hover {
-		text-shadow: 0 0 10px #10b5d2;
-	}
-}
-*/
-/* ---- */
-
-/* Bof: Add new bookmark */
-.closeSettings {
-	position: absolute;
-	top: 16px;
-	right: 4px;
-	display: block;
-	width: 30px;
-	height: 20px;
-	background-color: transparent;
-	color: #333;
-	border: none;
-	cursor: pointer;
-
-	i {
-		font-size: 24px;
-		color: rgba(0,0,0,0.56);
-	}
-
-	&:hover,
-	&:hover i {
-		color: #000;
-		border: none;
-	}
-}
-
-aside {
-	h3 {
-		color: #ccc;
-		text-shadow: inset 0 1px #000;
-		font-weight: 400;
-		margin: 0 10px 10px 10px;
-	}
-	
-	&.sideBar {
-		background: #FFFFFF;
-		position: absolute;
-		display: inline-block;
-		width: 330px;
-		height: 100%;
-		min-height: 100%;
-		padding: 0 10px;
-		overflow-x: hidden;
-		overflow-y: auto;
-		z-index: @settings-layer;
-		box-shadow: 0 0 4px rgba(0,0,0,0.12), 4px 0 4px rgba(0,0,0,0.24);
-
-		::-webkit-input-placeholder { color: #aaa; }
-		::-moz-placeholder { color: #aaa; } /* firefox 19+ */
-		:-ms-input-placeholder { color: #aaa; } /* ie */
-		input:-moz-placeholder { color: #aaa; }
-	}
-}
-/* ---- */
-
-/* Bof: RSS feed settings */
-/*
-#useReader {
+#rssSettings,
+#backup,
+#appearance {
 	display: none;
-
-	.inactive {
-		color: #ccc;
-		cursor: pointer;
-		&:hover {
-			color: #ddd;
-		}
-	}
-
-	.active {
-		color: #10b5d2;
-		cursor: default;
-	}
 }
-.rssSettings {
-	color: #fff;
-	padding: 5px 10px;
-	margin: 0 10px;
-	background-color: #2e2f33;
-	background-color: #29292e;
-	box-shadow: inset 0 1px #111, 0 1px #333;
 
-	h4 {
-		font-size: 18px;
-		margin: 0 0 10px 0;
-	}
-	
-	input[type="check"] {
-		display: none;
-	}
-	
-	label {
-		cursor: pointer;
-		display: inline-block;
-		margin: 0 5% 0 0;
-		font-size: 18px;
-		font-weight: 300;
-	}
-}
-*/
-/* ---- */
-
-/* Bof: Input field styling */
 .sideBar {
+	font-family: @font-family;
+	font-size: 18px;
+	background: white;
+	position: absolute;
+	display: inline-block;
+	width: 330px;
+	height: 100%;
+	min-height: 100%;
+	padding: 0 10px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: @settings-layer;
+	box-shadow: 0 0 4px rgba(0,0,0,0.12), 4px 0 4px rgba(0,0,0,0.24);
+
+	h3,
+	.thirdHeadline {
+		color: @solid-mid-grey;
+		font-weight: 400;
+	}
+
+	::-webkit-input-placeholder { color: #aaa; }
+	::-moz-placeholder { color: #aaa; }
+	:-ms-input-placeholder { color: #aaa; }
+	input:-moz-placeholder { color: #aaa; }
+
 	input[type="text"] {
 		width: 260px;
 		height: 48px;
 		line-height: 48px;
+		color: @solid-mid-grey;
 		border: none;
 		outline: none;
 		background-color: transparent;
@@ -305,299 +94,62 @@ aside {
 
 		&:focus {
 			border-bottom: 2px solid @teal;
+			color: @almost-black;
 		}
 	}
-}
-/* ---- */
-
-/* Bof: Button styling */
-/*
-input {
-	&.btnBlue {
-		background-color: #10b5d2;
-	}
-	
-	&.btnRed {
-		background-color: #e5461e;
-	}
-	
-	&.btnGreen {
-		background-color: #a0c61b;
-	}
-	
-	&.btnBlue,
-	&.btnRed,
-	&.btnGreen {
-		cursor: pointer;
+	.btnSave,
+	.btnDelete {
+		height: 36px;
+		line-height: 38px;
+		margin: 40px 10px;
+		padding: 0 22px;
 		border: none;
-		border-top: 1px solid rgba(255,255,255,.2);
-		box-shadow: none;
-		box-shadow: inset 0 -2px 0 rgba(0,0,0,.2);
-		padding: 2px 0;
-		margin: 10px;
+		border-radius: 3px;
+		font-family: @font-family;
 		font-size: 18px;
-		color: #333;
-		text-shadow: 0 1px 1px rgba(255,255,255,.2);
-		line-height: 36px;
-	}
-	&:hover.btnBlue {
-		background-color: #32d7f4;
-	}
-	&:hover.btnRed {
-		background-color: #f6572f;
-	}
-	&:hover.btnGreen {
-		background-color: #c2e83d;
-	}
-	&:hover.btnBlue,
-	&:hover.btnRed,
-	&:hover.btnGreen {
-		color: #fff;
-		text-shadow: none;
-	}
-	&:focus.btnBlue,
-	&:focus.btnRed,
-	&:focus.btnGreen {
-		color: #000;
-		text-shadow: none;
-	}
-	&:disabled.btnBlue,
-	&:disabled.btnRed,
-	&:disabled.btnGreen {
-		background-color: #ccc;
-		color: #666;
-	}
-	&.btnFull {
-		width: 440px;
-	}
-	&.btnLeft,
-	&.btnRight {
-		width: 208px;
-	}
-}
-#exportBox,
-#importBox {
- .btnLeft,
- .btnLeft {
-		float: left;
-	}
+		font-weight: 300;
+		text-transform: uppercase;
+		color: white;
+		background-color: @dark-teal;
+		box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
 
-	.btnRight,
-	.btnRight {
-		float: right;
-	}
-}
-*/
-/* ---- */
-/*
-aside hr {
-	color: #2e2f33;
-	background-color: #2e2f33;
-	height: 1px;
-	border: none;
-	border-bottom: 1px solid #444;
-}
-*/
-/* Bof: Edit bookmarks */
-/*
-aside .catList {
-	margin: 0 0 10px 0;
-
-	li {
-		margin: 0 0 20px 0;
-
-		h4 {
-			display: block;
-			height: 30px;
-			margin: -20px 0 0 0;
-			padding: 5px 0 5px 15px;
-			background-color: #29292e;
-			line-height: 30px;
-			font-size: 20px;
-			font-style: italic;
-			text-transform: capitalize;
-			color: #e5461e;
+		&:hover {
+			background-color: darken(@dark-teal, 5%);
+			box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.24);
 		}
 	}
-}
-aside .editBookmarks {
-	margin: 0 0 23px 0;
-	padding: 0;
+	.btnDelete {
+		background-color: @deep-orange;
+		padding: 0 14px;
+		margin: 40px 5px 20px 5px;
 
-	&:last-child {
-		margin: 0 0 0 0;
-		padding: 0;
-	}
+		&:hover {
+			background-color: @dark-orange;
+		}
 
-	li {
-		list-style-type: none;
-		margin: 0 0 0 0;
-		padding: 0;
-	
-		&:last-child {
-			margin-bottom: 10px;
+		&.btnDeleteAll {
+			margin: 40px 5px 20px -21px;
 		}
 	}
-}
-*/
-/* ---- */
+	.btnCancel {
+		height: 36px;
+		line-height: 38px;
+		margin: 40px 10px;
+		padding: 0 22px;
+		border: none;
+		border-radius: 3px;
+		font-family: @font-family;
+		font-size: 18px;
+		font-weight: 400;
+		text-transform: uppercase;
+		color: @dark-teal;
+		background-color: transparent;
 
-/* Bof: Import / Export functionality */
-/*
-#importBox,
-#exportBox {
-	position: absolute;
-	top: 10%;
-	left: 600px;
-	z-index: 1110;
-	padding: 0;
-	box-shadow: 0 0 10px #000;
-	font-family: @font-family;
-}
-#confirmClearBox h3,
-#importBox h3,
-#exportBox h3 {
-	margin: 0 0 10px 0;
-	padding: 0;
-	color: #ccc;
-	text-shadow: inset 0 1px #000;
-	font-size: 28px;
-	font-weight: 400;
-}
-#importBox .container,
-#exportBox .container {
-	width: 582px;
-	padding: 20px 20px 20px 20px;
-	margin: 0;
-}
-#importBox .imexJson,
-#exportBox .imexJson {
-	width: 560px;
-	height: 300px;
-	margin: 0 auto;
-	border: none;
-	outline: none;
-	box-shadow: inset 0 0 3px #999;
-	background-color: #ddd;
-	border: 1px solid #4f565b;
-	font-size: 18px;
-	padding: 2px 10px;
-}
-a {
-	&.closeImEx {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-
-		&:hover.closeImEx {
-			color: #e5461e;
+		&:hover {
+			background-color: @trans-grey-12;
+			box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.12);
 		}
 	}
-}
-.copyStatusTrue {
-	position: relative;
-	height: 30px;
-	visibility: visible;
-	color: #fff;
-	margin-top: 35px;
-	font-weight: 300;
-}
-.copyStatusFalse {
-	position: relative;
-	height: 30px;
-	visibility: hidden;
-	margin-top: 35px;
-}
-.confirmClearAll {
-	width: 448px !important;
-	margin-bottom: 50px !important;
-}
-#confirmClearBox {
-	position: absolute;
-	top: 25%;
-	left: 600px;
-	z-index: 1110;
-	padding: 0;
-	box-shadow: 0 0 10px #000;
-	font-family: @font-family;
-
-	.container {
-		width: 462px;
-		padding: 20px 20px 20px 20px;
-		margin: 0;
-	}
-}
-.infoText {
-	font-size: 18px;
-	line-height: 28px;
-	color: #fff;
-	font-weight: 300;
-}
-*/
-/* ---- */
-
-.btnSave,
-.btnDelete {
-	height: 36px;
-	line-height: 38px;
-	margin: 40px 10px;
-	padding: 0 22px;
-	border: none;
-	border-radius: 3px;
-	font-family: @font-family;
-	font-size: 18px;
-	font-weight: 300;
-	text-transform: uppercase;
-	color: white;
-	background-color: @dark-teal;
-	box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
-
-	&:hover {
-		background-color: darken(@dark-teal, 5%);
-		box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.24);
-	}
-}
-.btnDelete {
-	background-color: @deep-orange;
-	padding: 0 14px;
-	margin: 40px 5px 20px 5px;
-
-	&:hover {
-		background-color: @dark-orange;
-	}
-
-	&.btnDeleteAll {
-		margin: 40px 5px 20px -21px;
-	}
-}
-.btnCancel {
-	height: 36px;
-	line-height: 38px;
-	margin: 40px 10px;
-	padding: 0 22px;
-	border: none;
-	border-radius: 3px;
-	font-family: @font-family;
-	font-size: 18px;
-	font-weight: 400;
-	text-transform: uppercase;
-	color: @dark-teal;
-	background-color: transparent;
-
-	&:hover {
-		background-color: @trans-grey-12;
-		box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.12);
-	}
-}
-
-#editBookmarks {
-	.transition03();
-	position: absolute;
-	left: 350px;
-}
-.sideBar {
-	overflow: hidden;
-	width: 350px;
 	#addBookmark {
 		position: relative;
 		display: block;
@@ -616,7 +168,7 @@ a {
 			background-color: white;
 			border-radius: 50%;
 			box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
-			color: black;
+			color: @almost-black;
 
 			i {
 				display: block;
@@ -698,7 +250,6 @@ a {
 			}
 		}
 	}
-
 	#menu {
 		display: block;
 		position: relative;
@@ -723,7 +274,7 @@ a {
 
 				a {
 					display: block;
-					color: black;
+					color: @almost-black;
 					font-size: 14px;
 					font-weight: 400;
 					height: 24px;
@@ -759,7 +310,6 @@ a {
 		}
 
 		&.editBmClosed {
-			// .transition03();
 			
 			#editBookmarks {
 				left: 700px;
@@ -786,6 +336,90 @@ a {
 		}
 	}
 }
+
+.sidebarHeader {
+	display: block;
+	position: absolute;
+	z-index: @settings-layer + 1000;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 10px 0 0 10px;
+	color: rgba(0,0,0,0.56);
+	width: 340px;
+	height: 40px;
+	line-height: 40px;
+
+	i {
+		color: @teal;
+		margin: 3px 15px 0 0;
+		position: relative;
+		display: inline-block;
+		font-size: 32px;
+	}
+
+	span .settingsHead,
+	a .settingsHead {
+		font-size: 22px;
+		font-weight: 400;
+		color: @trans-grey-56;
+		position: absolute;
+		display: inline-block;
+		top: 10px;
+		margin: 0;
+		padding: 0;
+		white-space: nowrap;
+	}
+	a .settingsHead {
+		top: 19px;
+	}
+	a.show i {
+		font-size: 46px;
+		margin: 3px 1px 0 0;
+		top: -53px;
+		left: -8px;
+	}
+}
+
+.closeSettings {
+	position: absolute;
+	z-index: @settings-layer + 1010;
+	top: 16px;
+	right: 4px;
+	display: block;
+	width: 30px;
+	height: 20px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+
+	i {
+		font-size: 24px;
+		color: rgba(0,0,0,0.56);
+	}
+
+	&:hover,
+	&:hover i {
+		color: #000;
+		border: none;
+	}
+}
+
+// .sideBar.showIt .closeSettings {
+// 	position: fixed;
+// 	top: 16px;
+// 	left: 316px;
+// }
+// .sideBar.showIt .sidebarHeader {
+// 	position: fixed;
+// }
+
+#editBookmarks {
+	.transition03();
+	position: absolute;
+	left: 350px;
+}
+
 #editBookmarks {
 	.transition03();
 	top: -100%;
@@ -793,75 +427,10 @@ a {
 	margin: 0 0 0 14px;
 
 	.catList {
-		h4 {
+		.fourthHeadline {
 			font-weight: 400;
-			color: black;
+			color: @solid-mid-grey;
 		}
-		// li {
-		// 	background-color: blue;
-		// 	position: relative;
-		// 	margin: 20px 0;
-		// }
-
-// 		li ul.editBookmarks {
-// 			font-weight: 400;
-// 			color: @trans-grey-56;
-
-// 			li {
-// 				width: 260px;
-// 			}
-
-// /* ------------- */
-			
-// 			.btn {
-// 				cursor: default;
-// 				font-family: @font-family;
-// 				font-size: 16px;
-// 				font-weight: 300;
-// 				font-style: normal;
-// 				text-decoration: none;
-// 				padding: 2px 10px 2px 30px;
-// 				margin: 0;
-// 				display: block;
-// 				line-height: 30px;
-// 				border-top: 1px solid #2f2f2f;
-// 				border-bottom: 1px solid #1b1b1b;
-// 				background: none;
-				
-// 				&:hover {
-// 					background-color: #e5461e;
-// 					color: #fff;
-// 					border: none;
-// 					border-top: 1px solid rgba(255,255,255,.2);
-// 					border-bottom: 1px solid #1b1b1b;
-// 					box-shadow: 0 -2px 4px -2px #111, inset 0 -2px 0 rgba(0,0,0,.2);
-// 					text-shadow: 0 1px 1px #000;
-// 				}
-
-				
-// 			}
-// 			.btn {
-// 				.editBtn {
-// 					right: 60px;
-// 				}
-
-// 				&:hover {
-// 					.editBtn,
-// 					.delBtn {
-// 						color: #eee;
-
-// 						&:hover {
-// 							color: #000;
-// 						}
-// 					}
-// 				}
-// 			}
-
-// 			.editEntry input[type="text"] {
-// 				// width: 418px;
-// 			}
-// /* ----------------------------- */
-// 		}
 	}
 }
 
@@ -876,7 +445,7 @@ a {
 		border-top: 1px solid @trans-grey-12;
 		border-bottom: 1px solid @trans-grey-12;
 		background-color: @solid-light-grey;
-		color: black;
+		color: @almost-black;
 		font-weight: 400;
 		font-size: 14px;
 	}
@@ -914,7 +483,7 @@ a {
 		position: relative;
 		left: 10px;
 		display: inline-block;
-		color: black;
+		color: @almost-black;
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 24px;
@@ -940,7 +509,6 @@ input:hover,
 input:focus,
 .inactive,
 .active,
-.column,
 .animateAll,
 .overlay,
 .hideIt,
@@ -948,12 +516,6 @@ input:focus,
 .hideReader,
 .showReader,
 .readerClosed,
-.readerOpen,
-.swipeLeft,
-.swipeRight,
-.pushLeft,
-.pushRight {
-	-webkit-transition: all 0.3s ease-out;
-	-moz-transition: all 0.3s ease-out;
-	transition: all 0.3s ease-out;
+.readerOpen {
+	.transition03();
 }

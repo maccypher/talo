@@ -151,7 +151,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             input.btnBlue.btnRight.animateAll(type="submit" ng-click="openImport(); exportOpen = false" value="Restore Backup")
 
         div#appearance
-          h3.thirdHeadline.thirdHeadline Select Theme:
+          h3.thirdHeadline Select Theme:
           div.container
             select.selectTheme(
               ng-model="selectedTheme"
@@ -182,7 +182,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
           div.container
             ul.catList
               li(ng-repeat="cat in cats | orderBy: name")
-                h4 {{cat.name}}
+                h4.fourthHeadline {{cat.name}}
                 ul.editBookmarks
                   li.editBookmarksItem(ng-repeat="editItem in cat.items")
 
