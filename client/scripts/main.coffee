@@ -15,6 +15,23 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	$scope.exportOpen = false
 	$scope.importOpen = false
 	$scope.confirmClear = false
+	$scope.subMenu = 
+		bookmarks:
+			open: false
+			name: 'Edit Bookmarks'
+		backup: 
+			open: false
+			name: "Backup / Restore"
+		appearance: 
+			open: false
+			name: 'Appearance'
+		view: 
+			open: false
+			name: 'View'
+		rss: 
+			open: false
+			name: 'RSS Settings'
+
 	obj = 
 		id: ''
 		cat: ''
@@ -23,45 +40,40 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 # Bof: Show / Hide sidebar	
 	$scope.toggle = () ->
-		if not $scope.exportOpen and not $scope.importOpen and not $scope.confirmClear
-			$scope.isCollapsed = !$scope.isCollapsed
-			$rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
-			$scope.closeSubMenu()
+		# if not $scope.exportOpen and not $scope.importOpen and not $scope.confirmClear
+		$scope.isCollapsed = !$scope.isCollapsed
+		$rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
+		$scope.closeSubMenu()
 
 	$scope.sToggle = (event) ->
 		qInput = event.target.nextSibling
 		qInput.focus() if qInput?
 		$scope.searchActive = !$scope.searchActive
-		$rootScope.$broadcast 'mainCtrl.searchActive', $scope.searchActive
 
 	$scope.sClose = (event) ->
 		qInput = event.target.nextSibling
 		qInput.focus() if qInput?
 		$scope.searchActive = false
-		$rootScope.$broadcast 'mainCtrl.searchActive', $scope.searchActive
 
 	$scope.addBookmarkToggle = () ->
 		$scope.addBookmarkOpen = !$scope.addBookmarkOpen
-		$rootScope.$broadcast 'mainCtrl.addBookmarkOpen', $scope.addBookmarkOpen
 
-	$scope.editBmOpen = () ->
-		$scope.editBookmarkOpen = !$scope.editBookmarkOpen
-		$rootScope.$broadcast 'mainCtrl.editBmOpen', $scope.editBookmarkOpen
+	$scope.openSubMenu = (sub) ->
+		# close Add Bookmark form if open
+		$scope.addBookmarkOpen = false
 
-	$scope.openSubMenu = () ->
+		# tell everybody that a submenu is open
 		$scope.subOpened = true
-		$rootScope.$broadcast 'mainCtrl.subOpened', $scope.subOpened
-		$scope.addBookmarkOpen = false
-		$rootScope.$broadcast 'mainCtrl.addBookmarkOpen', $scope.addBookmarkOpen
 
-	$scope.closeSubMenu = () ->
+		# open the specific submenu
+		$scope.subMenu[sub].open = true
+		$scope.openSub = sub
+
+	$scope.closeSubMenu = (sub) ->
+		$scope.subMenu[sub].open = false
 		$scope.addBookmarkOpen = false
-		$rootScope.$broadcast 'mainCtrl.addBookmarkOpen', $scope.addBookmarkOpen
-		$scope.editBookmarkOpen = false
-		$rootScope.$broadcast 'mainCtrl.editBmOpen', $scope.editBookmarkOpen
 		$scope.subOpened = false
-		$rootScope.$broadcast 'mainCtrl.subOpened', $scope.subOpened
-
+		
 # THEMING
 # Bof: put theme names in an object
 	$scope.themes =
