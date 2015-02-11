@@ -12,6 +12,8 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	$scope.searchActive = false
 	$scope.addBookmarkOpen = false
 	$scope.editBookmarkOpen = false
+	$scope.editing = false
+	$scope.verify = false
 	$scope.exportOpen = false
 	$scope.importOpen = false
 	$scope.confirmClear = false
@@ -155,17 +157,17 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: delete entry
 	$scope.delItem = (item) ->
 		$store.remove item
-		$scope.editBookmarks()
+		# $scope.editBookmarks()
 		$scope.bookmarks()
 
 # Bof: save entry
 	$scope.saveItem = (item) ->
 		$store.set item.id, item
-		$scope.editBookmarks()
+		# $scope.editBookmarks()
 
 # Bof: cancel edit entry 
 	$scope.cancelEdit = (item) ->
-		$scope.editBookmarks()
+		# $scope.editBookmarks()
 
 # Bof: open export dialog
 	$scope.exportData = () ->

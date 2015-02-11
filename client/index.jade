@@ -106,8 +106,8 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
           input#newCat.animateAll(type="text" ng-model="newCat" placeholder="Category")
           input#newUrl.animateAll(type="text" ng-model="newUrl" placeholder="Url")
           input#newName.animateAll(type="text" ng-model="newName" placeholder="Name")
-          input.btnCancel.animateAll(type="reset" ng-click="addBookmarkToggle(); clearForm();" value="Cancel")
-          input.btnSave.animateAll(type="submit" ng-click="addNew()" value="Save")
+          input.btn.btnCancel.animateAll(type="reset" ng-click="addBookmarkToggle(); clearForm();" value="Cancel")
+          input.btn.btnSave.animateAll(type="submit" ng-click="addNew()" value="Save")
 
       div#menu(ng-class="{'open': addBookmarkOpen, 'closed': !addBookmarkOpen, 'subOpen': subOpened, 'subClosed': !subOpened}")
         ul.settingsMenu
@@ -141,16 +141,16 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
               ul.editBookmarks
                 li.editBookmarksItem(ng-repeat="editItem in cat.items")
 
-                  div.editEntry(ng-show="editing")
+                  div.editEntry(ng-class="{'open': editing, 'closed': !editing}")
                     input#modCat.animateAll(type="text" ng-model="editItem.cat")
                     input#modUrl.animateAll(type="text" ng-model="editItem.url")
                     input#modName.animateAll(type="text" ng-model="editItem.name")
-                    input.btnCancel.animateAll(type="submit" ng-click="cancelEdit(editItem.id); editing = false" value="Cancel")
-                    input.btnSave.animateAll(type="submit" ng-click="saveItem(editItem); editing = false" value="Save")
-                  div.verifyDelete(ng-show="verify")
-                    p Are you sure, you wanna delete <strong>"{{editItem.name}}"</strong>?
-                    input.btnCancel.animateAll(type="submit" ng-click="cancelEdit(editItem.id); verify = false" value="Cancel")
-                    input.btnDelete.animateAll(type="submit" ng-click="delItem(editItem.id); verify = false" value="Delete")
+                    input.btn.btnCancel.animateAll(type="submit" ng-click="editing = false" value="Cancel")
+                    input.btn.btnSave.animateAll(type="submit" ng-click="saveItem(editItem); editing = false" value="Save")
+                  div.verifyDelete(ng-class="{'open': verify, 'closed': !verify}")
+                    p Are you sure, you wanna delete <br /><strong>"{{editItem.name}}"</strong>?
+                    input.btn.btnCancel.animateAll(type="submit" ng-click="verify = false" value="Cancel")
+                    input.btn.btnDelete.animateAll(type="submit" ng-click="delItem(editItem.id); verify = false" value="Delete")
                   div.animateAll.entry(ng-hide="editing || verify")
                     a.delBtn(ng-click="verify = !verify")
                       i.mdfi_action_delete
@@ -158,41 +158,45 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
                       i.mdfi_editor_mode_edit
                     span.entryName {{editItem.name}}
         //- p.clear
-        input.btnDelete.btnDeleteAll.animateAll(type="submit" ng-click="confirmClearAll()" value="Delete All & Restore Defaults")
+        input.btn.btnDelete.btnDeleteAll.animateAll(type="submit" ng-click="confirmClearAll()" value="Delete All & Restore Defaults")
 
       div#backup(ng-class="{'open': subMenu['backup'].open, 'closed': !subMenu['backup'].open}")
-        h3.thirdHeadline Import / Export:
+        //- h3.thirdHeadline Import / Export:
         div.container
-          input.btnBlue.btnLeft.animateAll(type="submit" ng-click="exportData(); importOpen = false" value="Create Backup")
-          input.btnBlue.btnRight.animateAll(type="submit" ng-click="openImport(); exportOpen = false" value="Restore Backup")
+          a.animateAll(ng-click="exportData(); importOpen = false") Create Backup
 
-        div#exportBox(ng-show="exportOpen")
-          div.container
-            h3.thirdHeadline Export
-            p.infoText
-              | You can either copy the content from the textarea and save it in a text file manually or download the pre-defined file called "talo_backup.txt".
-            a.closeImEx(ng-click="closeExport()")
-              i.icon-close
-            textarea.imexJson(ng-bind="exportJson" ng-copy="copied=true" ng-init="copied=false" readonly)
-            span(ng-class="{'copyStatusTrue': copied, 'copyStatusFalse': !copied}")
-              | All copied to clipboard
-            p.clear
-              input.btnBlue.btnRight.animateAll(type="submit" ng-click="download()" value="Download File")
-            br.clear
+          div#exportBox(ng-class="{'openEx': exportOpen, 'closedEx': !exportOpen}")
+            div.container
+              h3.thirdHeadline Export
+              p.infoText
+                | You can either copy the content from the textarea and save it in a text file manually or download the pre-defined file called "talo_backup.txt".
+              a.closeImEx(ng-click="closeExport()")
+                i.mdfi_navigation_close
 
-        div#importBox(ng-show="importOpen")
-          div.container
-            h3.thirdHeadline Import
-            p.infoText
-              | To import your former created backup, please open the downloaded file with your favorite text-editor and copy the content from the file into the textarea.
-            
-            a.closeImEx(ng-click="closeImport()")
-              i.icon-close
-            form(name="doImport")
-              textarea.imexJson(ng-model="importJson" required)
+              textarea.imexJson(ng-bind="exportJson" ng-copy="copied=true" ng-init="copied=false" readonly)
+              br
+              span(ng-class="{'copyStatusTrue': copied, 'copyStatusFalse': !copied}")
+                | All copied to clipboard
               p.clear
-                input.btnRed.btnLeft.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreClean()" value="Restore Clean")
-                input.btnBlue.btnRight.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreAdd()" value="Add Data")
+                input.btn.btnSave.animateAll(type="submit" ng-click="download()" value="Download File")
+              br.clear
+          
+          a.animateAll(ng-click="openImport(); exportOpen = false") Restore Backup
+
+          div#importBox(ng-class="{'openIm': importOpen, 'closedIm': !importOpen}")
+            div.container
+              h3.thirdHeadline Import
+              p.infoText
+                | To import your former created backup, please open the downloaded file with your favorite text-editor and copy the content from the file into the textarea.
+              
+              a.closeImEx(ng-click="closeImport()")
+                i.mdfi_navigation_close
+
+              form(name="doImport")
+                textarea.imexJson(ng-model="importJson" required)
+                p.clear
+                  input.btn.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreClean()" value="Restore Clean")
+                  input.btn.btnSave.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreAdd()" value="Add Data")
 
 
       div#appearance(ng-class="{'open': subMenu['appearance'].open, 'closed': !subMenu['appearance'].open}")

@@ -1,4 +1,6 @@
 @teal: #80CBC4;
+@blue: #2196F3;
+@light-blue: #03A9F4;
 @dark-teal: #009688;
 @deep-orange: #FF5722;
 @dark-orange: #BF360C;
@@ -6,6 +8,7 @@
 @trans-grey-56: rgba(0,0,0,0.56);
 @trans-grey-26: rgba(0,0,0,0.26);
 @trans-grey-12: rgba(0,0,0,0.12);
+@trans-grey-06: rgba(0,0,0,0.06);
 @trans-white-56: rgba(255,255,255,0.56);
 @trans-white-26: rgba(255,255,255,0.26);
 @solid-light-grey: #eeeeee;
@@ -64,27 +67,27 @@ h1, h2, h3 {
 	padding: 0;
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
-  color: rgba(255,255,255,0.3);
+::-webkit-input-placeholder {
+  color: @trans-grey-26;
   font-family: @font-family;
-  font-weight: 100;
+  font-weight: 400;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color:  rgba(255,255,255,0.3);
+:-moz-placeholder {
+  color: @trans-grey-26;
   font-family: @font-family;
-  font-weight: 100;
+  font-weight: 400;
   opacity:  1;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color:  rgba(255,255,255,0.3);
+::-moz-placeholder {
+  color: @trans-grey-26;
   font-family: @font-family;
-  font-weight: 100;
+  font-weight: 400;
   opacity:  1;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-  color:  rgba(255,255,255,0.3);
+:-ms-input-placeholder {
+  color: @trans-grey-26;
   font-family: @font-family;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 input[type="submit"],
@@ -95,6 +98,7 @@ button {
 }
 
 a {
+	color: @trans-grey-56;
 	cursor: pointer;
 	text-decoration: none;
 

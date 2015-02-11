@@ -1,6 +1,9 @@
-/* settings.css */
+// settings.css 
 
-/* Bof: outside stuff */
+// Bof: outside stuff 
+
+@settings-layer: 100010;
+
 section.mainSection {
 	position: absolute;
 	display: inline-block;
@@ -13,38 +16,42 @@ section.mainSection {
 	float: none;
 	clear: both;
 }
+
 .hideIt,
 .hideIt .sidebarHeader,
 .hideIt .copyright {
 	left: -360px;
 	box-shadow: 0 !important;
 }
+
 .showIt,
 .showIt .sidebarHeader,
 .showIt .copyright {
 	left: 0;
 }
+
 .showRoot {
-	// left: 0;
 	top: 0;
 	.transition03();
 }
+
 .hideRoot {
-	// left: -360px;
 	top: -50px;
 	.transition03();
 }
+
 .showSub1 {
-	// left: 0;
 	top: 0;
 	.transition03();
 }
+
 .hideSub1 {
-	// left: 360px;
 	top: -50px;
 	opacity: 0;
 	.transition03();
 }
+
+// main content overlay
 .overlay {
 	position: fixed;
 	z-index: @settings-layer - 10;
@@ -53,10 +60,75 @@ section.mainSection {
 	min-height: 100%;
 	background-color: rgba(0,0,0,0.4);
 }
-/* ------------------ */
 
-@settings-layer: 100010;
+// button definitions
+.btn {
+	height: 36px;
+	line-height: 38px;
+	margin: 40px 10px;
+	padding: 0 22px;
+	border: none;
+	border-radius: 3px;
+	font-family: @font-family;
+	font-size: 18px;
+	font-weight: 300;
+	text-transform: uppercase;
+	color: white;
+	background-color: @light-blue;
+	box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
 
+	&:hover {
+		background-color: darken(@light-blue, 10%);
+		box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.24);
+	}
+}
+
+.btnSave {
+	background-color: @dark-teal;
+
+	&:hover {
+		background-color: darken(@dark-teal, 5%);
+	}
+}
+
+.btnDelete {
+	background-color: @deep-orange;
+	padding: 0 14px;
+	margin: 40px 5px 20px 5px;
+
+	&:hover {
+		background-color: @dark-orange;
+	}
+
+	&.btnDeleteAll {
+		margin: 40px 5px 20px -21px;
+	}
+}
+
+.btnCancel {
+	height: 36px;
+	line-height: 38px;
+	margin: 40px 10px;
+	padding: 0 22px;
+	border: none;
+	border-radius: 3px;
+	font-family: @font-family;
+	font-size: 18px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: @dark-teal;
+	background-color: transparent;
+	box-shadow: none;
+
+	&:hover {
+		background-color: @trans-grey-12;
+		box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.12);
+	}
+}
+
+// ------------------
+
+// aside sidebar layer
 .sideBar {
 	font-family: @font-family;
 	font-size: 18px;
@@ -72,6 +144,15 @@ section.mainSection {
 	z-index: @settings-layer;
 	box-shadow: 0 0 4px rgba(0,0,0,0.12), 4px 0 4px rgba(0,0,0,0.24);
 
+	a {
+		font-weight: 400;
+		color: @trans-grey-56;
+
+		&:hover {
+			color: @teal;
+		}
+	}
+
 	.sidebarHeader {
 		position: fixed;
 		z-index: @settings-layer + 1000;
@@ -82,7 +163,6 @@ section.mainSection {
 		width: 340px;
 		height: 40px;
 		line-height: 40px;
-
 		background-color: white;
 
 		i {
@@ -123,6 +203,7 @@ section.mainSection {
 				left: 52px;
 			}
 		}
+
 		.closeSettings {
 			position: absolute;
 			z-index: @settings-layer + 1010;
@@ -157,11 +238,6 @@ section.mainSection {
 		font-weight: 400;
 	}
 
-	::-webkit-input-placeholder { color: #aaa; }
-	::-moz-placeholder { color: #aaa; }
-	:-ms-input-placeholder { color: #aaa; }
-	input:-moz-placeholder { color: #aaa; }
-
 	input[type="text"] {
 		width: 260px;
 		height: 48px;
@@ -185,60 +261,9 @@ section.mainSection {
 			color: @almost-black;
 		}
 	}
-	.btnSave,
-	.btnDelete {
-		height: 36px;
-		line-height: 38px;
-		margin: 40px 10px;
-		padding: 0 22px;
-		border: none;
-		border-radius: 3px;
-		font-family: @font-family;
-		font-size: 18px;
-		font-weight: 300;
-		text-transform: uppercase;
-		color: white;
-		background-color: @dark-teal;
-		box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
-
-		&:hover {
-			background-color: darken(@dark-teal, 5%);
-			box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.24);
-		}
-	}
-	.btnDelete {
-		background-color: @deep-orange;
-		padding: 0 14px;
-		margin: 40px 5px 20px 5px;
-
-		&:hover {
-			background-color: @dark-orange;
-		}
-
-		&.btnDeleteAll {
-			margin: 40px 5px 20px -21px;
-		}
-	}
-	.btnCancel {
-		height: 36px;
-		line-height: 38px;
-		margin: 40px 10px;
-		padding: 0 22px;
-		border: none;
-		border-radius: 3px;
-		font-family: @font-family;
-		font-size: 18px;
-		font-weight: 400;
-		text-transform: uppercase;
-		color: @dark-teal;
-		background-color: transparent;
-
-		&:hover {
-			background-color: @trans-grey-12;
-			box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.12);
-		}
-	}
 }
+
+// adding a new bookmark
 #addBookmark {
 	position: relative;
 	display: block;
@@ -250,7 +275,7 @@ section.mainSection {
 		position: absolute;
 		z-index: @settings-layer + 10;
 		top: -28px;
-		left: 50%;
+		left: calc(~"50% - 6px");
 		display: block;
 		width: 56px;
 		height: 56px;
@@ -339,6 +364,8 @@ section.mainSection {
 		}
 	}
 }
+
+// main settings menu
 #menu {
 	display: block;
 	position: absolute;
@@ -357,7 +384,7 @@ section.mainSection {
 		padding: 0;
 
 		li {
-			margin: 24px 0 24px 14px;
+			margin: 24px 0 24px 0;
 			padding: 0;
 			height: 24px;
 			.transition03();
@@ -367,17 +394,20 @@ section.mainSection {
 				color: @almost-black;
 				font-size: 14px;
 				font-weight: 400;
-				height: 24px;
-				line-height: 24px;
+				height: 48px;
+				line-height: 48px;
+				margin: 0;
+				padding: 0 0 0 30px;
 
 				&:hover {
 					color: @dark-teal;
+					background-color: @trans-grey-06;
 				}
 
 				i {
 					float: left;
 					font-size: 24px;
-					line-height: 24px;
+					line-height: 48px;
 					margin: 0 31px 0 0;
 				}
 			}
@@ -385,16 +415,17 @@ section.mainSection {
 	}
 
 	&.closed {
-		margin-top: 75%;
+		margin-top: 65%;
 		.transition03();
 	}
 
 	&.open {
-		margin-top: 35%;
+		margin-top: 25%;
 		.transition03();
 
 		li {
-			height: 14px;
+			height: 24px;
+			line-height: 24px;
 			.transition03();
 		}
 	}
@@ -404,6 +435,7 @@ section.mainSection {
 	}
 }
 
+// overall submenu sections
 #editBookmarks.open,
 #backup.open,
 #appearance.open,
@@ -450,27 +482,48 @@ section.mainSection {
 }
 
 .editBookmarksItem {
-	margin: 10px 0 0 -8px;
+	margin: 0 0 0 -8px;
 
 	.editEntry,
 	.verifyDelete {
-		margin-left: -16px;
-		padding-left: 36px;
+		margin: 0 0 0 -26px;
 		width: 350px;
-		border-top: 1px solid @trans-grey-12;
-		border-bottom: 1px solid @trans-grey-12;
-		background-color: @solid-light-grey;
 		color: @almost-black;
 		font-weight: 400;
 		font-size: 14px;
-	}
 
-	.verifyDelete {
-		padding-top: 20px;
+		&.open {
+			padding: 20px 0 0 46px;
+			max-height: 500px;
+			overflow: auto;
+			border-top: 1px solid @trans-grey-12;
+			border-bottom: 1px solid @trans-grey-12;
+			background-color: @solid-light-grey;
+			.transition05();
+		}
+
+		&.closed {
+			padding: 0 0 0 46px;
+			max-height: 0;
+			overflow: hidden;
+			border-top: 1px solid white;
+			border-bottom: 1px solid white;
+			background-color: white;
+			.transition05();
+		}
+
+		p {
+			text-align: center;
+			margin-left: -110px;
+		}
 	}
 }
 .entry {
-	width: 300px;
+	position: relative;
+	width: 325px;
+	margin: -4px 0 0 -30px;
+	padding: 8px 0 8px 30px;
+
 	.editBtn,
 	.delBtn {
 		color: white;
@@ -482,10 +535,12 @@ section.mainSection {
 		font-size: 24px;
 		line-height: 24px;
 		float: left;
+
 		&:hover {
 			color: @deep-orange;
 		}
 	}
+
 	.editBtn {
 		margin-left: 0px;
 
@@ -493,8 +548,9 @@ section.mainSection {
 			color: @dark-teal;
 		}
 	}
+
 	.entryName {
-		cursor: pointer;
+		cursor: default;
 		position: relative;
 		left: 10px;
 		display: inline-block;
@@ -505,10 +561,85 @@ section.mainSection {
  	}
 
  	&:hover {
+ 		background-color: @trans-grey-06;
+
+ 		.entryName {
+	 		color: @dark-teal;
+ 		}
+
  		> a {
  			color: @trans-grey-56;
  		}
  	}
+}
+
+#backup {
+	width: 350px;
+	max-height: 2000px;
+
+	> .container {
+		padding-top: 150px;
+		max-height: 2000px;
+	}
+
+	#importBox,
+	#exportBox {
+		width: 304px;
+		margin: 20px 0 20px -26px;
+		max-height: 2000px;
+		position: relative;
+		z-index: @settings-layer + 1000;
+
+		overflow: auto;
+		border-top: 1px solid @trans-grey-12;
+		border-bottom: 1px solid @trans-grey-12;
+		background-color: @solid-light-grey;
+		.transition03();
+
+		&.openIm,
+		&.openEx {
+			max-height: 1000px;
+			overflow: auto;
+			padding: 20px 0 0 46px;
+			margin-top: -200px;
+		}
+
+		&.openIm {
+			margin-top: -265px;
+		}
+
+		&.closedIm,
+		&.closedEx {
+			max-height: 0;
+			overflow: hidden;
+			padding: 0 0 0 46px;
+			border-color: white;
+		}
+
+		.closeImEx {
+			display: block;
+			width: 30px;
+			height: 30px;
+			font-size: 24px;
+			position: absolute;
+			top: 20px;
+			right: 10px;
+
+			&:hover {
+				color: @almost-black;
+			}
+		}
+
+		textarea {
+			width: 90%;
+			height: 300px;
+		}
+
+		.btn {
+			margin: 10px 0;
+			width: 92%;
+		}
+	}
 }
 
 #copyright {
@@ -525,7 +656,8 @@ section.mainSection {
 
 	a {
 		font-size: 12px !important;
-		color: @solid-mid-grey;
+		// color: @solid-mid-grey;
+		color: @dark-teal;
 		
 		&:hover {
 			background: none;
