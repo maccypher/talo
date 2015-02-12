@@ -157,47 +157,46 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
                     a.editBtn(ng-click="editing = !editing")
                       i.mdfi_editor_mode_edit
                     span.entryName {{editItem.name}}
-        //- p.clear
+        
         input.btn.btnDelete.btnDeleteAll.animateAll(type="submit" ng-click="confirmClearAll()" value="Delete All & Restore Defaults")
 
       div#backup(ng-class="{'open': subMenu['backup'].open, 'closed': !subMenu['backup'].open}")
-        //- h3.thirdHeadline Import / Export:
-        div.container
-          a.animateAll(ng-click="exportData(); importOpen = false") Create Backup
-
-          div#exportBox(ng-class="{'openEx': exportOpen, 'closedEx': !exportOpen}")
-            div.container
-              h3.thirdHeadline Export
-              p.infoText
-                | You can either copy the content from the textarea and save it in a text file manually or download the pre-defined file called "talo_backup.txt".
-              a.closeImEx(ng-click="closeExport()")
-                i.mdfi_navigation_close
-
-              textarea.imexJson(ng-bind="exportJson" ng-copy="copied=true" ng-init="copied=false" readonly)
-              br
-              span(ng-class="{'copyStatusTrue': copied, 'copyStatusFalse': !copied}")
-                | All copied to clipboard
-              p.clear
-                input.btn.btnSave.animateAll(type="submit" ng-click="download()" value="Download File")
-              br.clear
+        div.subSubMenu
+          a.selectOption.animateAll(ng-click="openImport(); exportOpen = false")
+            i.mdfi_action_restore
+            | Restore Backup
           
-          a.animateAll(ng-click="openImport(); exportOpen = false") Restore Backup
+          a.selectOption.animateAll(ng-click="exportData(); importOpen = false") 
+            i.mdfi_action_backup
+            | Create Backup
 
-          div#importBox(ng-class="{'openIm': importOpen, 'closedIm': !importOpen}")
-            div.container
-              h3.thirdHeadline Import
-              p.infoText
-                | To import your former created backup, please open the downloaded file with your favorite text-editor and copy the content from the file into the textarea.
-              
-              a.closeImEx(ng-click="closeImport()")
-                i.mdfi_navigation_close
+        div#exportBox(ng-class="{'openEx': exportOpen, 'closedEx': !exportOpen}")
+          h4.fourthHeadline Backup - Data Export
+          div.container
+            p.infoText
+              | You can either copy the content from the textarea and save it in a text file manually or download the pre-defined file called "talo_backup.txt".
+            a.closeImEx(ng-click="closeExport()")
+              i.mdfi_navigation_close
 
-              form(name="doImport")
-                textarea.imexJson(ng-model="importJson" required)
-                p.clear
-                  input.btn.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreClean()" value="Restore Clean")
-                  input.btn.btnSave.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreAdd()" value="Add Data")
+            textarea.imexJson(ng-bind="exportJson" ng-copy="copied=true" ng-init="copied=false" readonly)
+            p.clear
+              input.btn.btnSave.animateAll(type="submit" ng-click="download()" value="Download File")
+            //- br.clear
+        
+        div#importBox(ng-class="{'openIm': importOpen, 'closedIm': !importOpen}")
+          h4.fourthHeadline Restore - Data Import
+          div.container
+            p.infoText
+              | To import your former created backup, please open the downloaded file with your favorite text-editor and copy the content from the file into the textarea.
+            
+            a.closeImEx(ng-click="closeImport()")
+              i.mdfi_navigation_close
 
+            form(name="doImport")
+              textarea.imexJson(ng-model="importJson" required placeholder="Paste data here ...")
+              p.clear
+                input.btn.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreClean()" value="Restore Clean")
+                input.btn.btnSave.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreAdd()" value="Add Data")
 
       div#appearance(ng-class="{'open': subMenu['appearance'].open, 'closed': !subMenu['appearance'].open}")
         h3.thirdHeadline Select Theme:

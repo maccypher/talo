@@ -240,24 +240,24 @@ section.mainSection {
 
 	input[type="text"] {
 		width: 260px;
-		height: 48px;
-		line-height: 48px;
+		height: 44px;
+		line-height: 44px;
 		color: @solid-mid-grey;
 		border: none;
 		outline: none;
 		background-color: transparent;
 		border: none;
-		border-bottom: 2px solid @trans-grey-12;
-		font-size: 18px;
+		border-bottom: 1px solid @trans-grey-12;
+		font-size: 16px;
 		padding: 0;
 		margin: 20px 10px 10px 0;
 
 		&:hover {
-			border-bottom: 2px solid @trans-grey-26;
+			border-bottom: 1px solid @trans-grey-26;
 		}
 
 		&:focus {
-			border-bottom: 2px solid @teal;
+			border-bottom: 1px solid @teal;
 			color: @almost-black;
 		}
 	}
@@ -545,7 +545,7 @@ section.mainSection {
 		margin-left: 0px;
 
 		&:hover {
-			color: @dark-teal;
+			color: @blue;
 		}
 	}
 
@@ -575,22 +575,50 @@ section.mainSection {
 
 #backup {
 	width: 350px;
-	max-height: 2000px;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: absolute;
+	display: block;
 
-	> .container {
-		padding-top: 150px;
-		max-height: 2000px;
+	&.open {
+		padding: 0 0 0 40px;
+	}
+
+	.subSubMenu {
+		margin-top: 50%;
+		.selectOption {
+			font-size: 14px;
+			position: relative;
+			display: block;
+			width: calc(~"100% - 26px");
+			height: 44px;
+			line-height: 44px;
+			left: -40px;
+			padding: 0 0 0 26px;
+			clear: both;
+			color: @almost-black;
+
+			i {
+				float: left;
+				font-size: 24px;
+				line-height: 45px;
+				margin: 0 20px 0 0;
+			}
+
+			&:hover {
+				color: @dark-teal;
+				background-color: @trans-grey-12;
+			}
+		}
 	}
 
 	#importBox,
 	#exportBox {
 		width: 304px;
-		margin: 20px 0 20px -26px;
-		max-height: 2000px;
-		position: relative;
-		z-index: @settings-layer + 1000;
-
-		overflow: auto;
+		position: absolute;
+		top: 50px;
+		left: 0;
 		border-top: 1px solid @trans-grey-12;
 		border-bottom: 1px solid @trans-grey-12;
 		background-color: @solid-light-grey;
@@ -598,14 +626,9 @@ section.mainSection {
 
 		&.openIm,
 		&.openEx {
-			max-height: 1000px;
+			max-height: 2000px;
 			overflow: auto;
 			padding: 20px 0 0 46px;
-			margin-top: -200px;
-		}
-
-		&.openIm {
-			margin-top: -265px;
 		}
 
 		&.closedIm,
@@ -613,7 +636,7 @@ section.mainSection {
 			max-height: 0;
 			overflow: hidden;
 			padding: 0 0 0 46px;
-			border-color: white;
+			border: none;
 		}
 
 		.closeImEx {
@@ -630,15 +653,61 @@ section.mainSection {
 			}
 		}
 
+		.fourthHeadline {
+			display: inline-block;
+			margin: 0 0 0 -13px;
+			font-weight: 100;
+			color: @solid-dark-grey;
+		}
+		.container {
+			font-size: 14px;
+		}
+
 		textarea {
-			width: 90%;
-			height: 300px;
+			resize: none;
+			width: 85%;
+			height: 22px;
+			line-height: 22px;
+			font-family: @font-family;
+
+			color: @solid-mid-grey;
+			border: none;
+			outline: none;
+			background-color: transparent;
+			border: none;
+			border-bottom: 1px solid @trans-grey-12;
+			font-size: 16px;
+			padding: 11px;
+			margin: 20px 10px 10px 0;
+			.transition02();
+
+			&:hover {
+				border-bottom: 1px solid @trans-grey-26;
+			}
+
+			&:focus {
+				height: 200px;
+				border-bottom: 1px solid @teal;
+				color: @almost-black;
+				background-color: white;
+			}
+
+			&.ng-dirty {
+				height: 220px;
+    	}
 		}
 
 		.btn {
 			margin: 10px 0;
 			width: 92%;
 		}
+	}
+
+	#importBox {
+		// margin: 0 0 -80px 0;
+	}
+	#exportBox {
+		// margin: 0 0 -60px 0;
 	}
 }
 

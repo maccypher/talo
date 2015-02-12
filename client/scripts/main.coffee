@@ -44,7 +44,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	$scope.toggle = () ->
 		# if not $scope.exportOpen and not $scope.importOpen and not $scope.confirmClear
 		$scope.isCollapsed = !$scope.isCollapsed
-		$rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
+		# $rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
 		$scope.closeSubMenu()
 
 	$scope.sToggle = (event) ->
@@ -75,6 +75,8 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		$scope.subMenu[sub].open = false
 		$scope.addBookmarkOpen = false
 		$scope.subOpened = false
+		$scope.closeImport()
+		$scope.closeExport()
 		
 # THEMING
 # Bof: put theme names in an object
@@ -89,7 +91,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.$watch 'selectedTheme', (newVal, oldVal) ->
 		$store.set 'selection', $scope.selectedTheme
-		$rootScope.$broadcast 'theme.update', newVal
+		# $rootScope.$broadcast 'theme.update', newVal
 
 # Bof: check / prepare column settings
 	$scope.$on 'column.update', (evt, val) ->
@@ -102,7 +104,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.$watch 'column', (newVal, oldVal) ->
 		$store.set 'columns', $scope.column
-		$rootScope.$broadcast 'column.update', newVal
+		# $rootScope.$broadcast 'column.update', newVal
 
 # Bof: update theme if new is selected
 	$scope.themeUpdate = () ->
@@ -173,13 +175,13 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	$scope.exportData = () ->
 		temp = JSON.stringify(localStorage)
 		$scope.exportOpen = true
-		$rootScope.$broadcast 'mainCtrl.exportOpen', $scope.exportOpen
+		# $rootScope.$broadcast 'mainCtrl.exportOpen', $scope.exportOpen
 		$scope.exportJson = temp
 
 # Bof: close the export dialog
 	$scope.closeExport = () ->
 		$scope.exportOpen = false
-		$rootScope.$broadcast 'mainCtrl.exportOpen', $scope.exportOpen
+		# $rootScope.$broadcast 'mainCtrl.exportOpen', $scope.exportOpen
 
 # Bof: download the exported txt file
 	$scope.download = () ->
@@ -204,12 +206,12 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: open import dialog
 	$scope.openImport = () ->
 		$scope.importOpen = true
-		$rootScope.$broadcast 'mainCtrl.importOpen', $scope.importOpen
+		# $rootScope.$broadcast 'mainCtrl.importOpen', $scope.importOpen
 
 # Bof: close the import dialog
 	$scope.closeImport = () ->
 		$scope.importOpen = false
-		$rootScope.$broadcast 'mainCtrl.importOpen', $scope.importOpen
+		# $rootScope.$broadcast 'mainCtrl.importOpen', $scope.importOpen
 
 # Bof: clean localstorage before adding new content
 	$scope.restoreClean = () ->
@@ -232,12 +234,12 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: confirmation dialog to reset all
 	$scope.confirmClearAll = () ->
 		$scope.confirmClear = true
-		$rootScope.$broadcast 'mainCtrl.confirmClear', $scope.confirmClear
+		# $rootScope.$broadcast 'mainCtrl.confirmClear', $scope.confirmClear
 
 # Bof: close confirmation dialog
 	$scope.closeConfirmClearAll = () ->
 		$scope.confirmClear = false
-		$rootScope.$broadcast 'mainCtrl.confirmClear', $scope.confirmClear
+		# $rootScope.$broadcast 'mainCtrl.confirmClear', $scope.confirmClear
 
 # Bof: DO the reset all
 	$scope.clearAll = () ->
@@ -269,11 +271,11 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	$scope.$watch 'useReader', (newVal, oldVal) ->
 		$store.set 'view', $scope.useReader
 		$scope.view = newVal
-		$rootScope.$broadcast 'view.update', newVal
+		# $rootScope.$broadcast 'view.update', newVal
 
 	$scope.getView = () ->
 		$scope.view = $store.get('view') or $scope.viewDefault
-		$rootScope.$broadcast 'view.update', $scope.view
+		# $rootScope.$broadcast 'view.update', $scope.view
 
 	$scope.getView()
 
@@ -283,7 +285,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.rssSettingsToggle = () ->
 		$scope.rssSettingsOpen = !$scope.rssSettingsOpen
-		$rootScope.$broadcast 'mainCtrl.rssSettingsOpen', $scope.rssSettingsOpen
+		# $rootScope.$broadcast 'mainCtrl.rssSettingsOpen', $scope.rssSettingsOpen
 		$scope.feedUrl = $store.get('feedUrl')
 
 	$scope.setFeedUrl = () ->
@@ -303,12 +305,12 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.fetchIndicator = () ->
 		$scope.refresh = true
-		$rootScope.$broadcast 'refresh.update', $scope.refresh
+		# $rootScope.$broadcast 'refresh.update', $scope.refresh
 		$timeout(stopFetchIndicator, 2500);
 
 	stopFetchIndicator = () ->
 		$scope.refresh = false
-		$rootScope.$broadcast 'refresh.update', $scope.refresh
+		# $rootScope.$broadcast 'refresh.update', $scope.refresh
 
 	$scope.fetchFeed = () ->
 		$scope.offline = true
