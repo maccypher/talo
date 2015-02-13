@@ -10,6 +10,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
     
     link(rel="stylesheet" type="text/css" href="main.css")
     link(rel="stylesheet" type="text/css" ng-href="assets/themes/{{cssTheme}}/style.css")
+    //- link(rel="stylesheet" type="text/css" ng-href="assets/themes/default/style.css")
 
     script(type="text/javascript" src="assets/scripts/angular.min.js")
     script(type="text/javascript" src="assets/scripts/localStorage.js")
@@ -88,8 +89,10 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
           i.mdfi_action_settings
           p Settings
 
-        a.settingsHead(ng-class="{'showSub1': subOpened, 'hideSub1': !subOpened}"
-          ng-click="closeSubMenu(openSub);")
+        a.settingsHead(
+          ng-class="{'showSub1': subOpened, 'hideSub1': !subOpened}"
+          ng-click="closeSubMenu(openSub);"
+        )
           i.mdfi_hardware_keyboard_arrow_left
           p {{subMenu[openSub].name}}
 
@@ -199,12 +202,54 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
                 input.btn.btnSave.animateAll(ng-disabled="doImport.$invalid" type="submit" ng-click="restoreAdd()" value="Add Data")
 
       div#appearance(ng-class="{'open': subMenu['appearance'].open, 'closed': !subMenu['appearance'].open}")
-        h3.thirdHeadline Select Theme:
+        h4.fourthHeadline Select Theme:
         div.container
-          select.selectTheme(
-            ng-model="selectedTheme"
-            ng-options="key as name for (key, name) in themes"
-          )
+          ul.selectTheme
+            li
+              input(id="default" type="radio" value="default" ng-model="selectedTheme")
+              label(for="default" ng-class="{'active': checkedTheme == 'default', 'inactive': checkedTheme !== 'default' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'default', 'inactive': checkedTheme !== 'default' }")
+                span Material - Blue Grey (Default)
+            li
+              input(id="m_bgorange" type="radio" value="m_bgorange" ng-model="selectedTheme")
+              label(for="m_bgorange" ng-class="{'active': checkedTheme == 'm_bgorange', 'inactive': checkedTheme !== 'm_bgorange' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_bgorange', 'inactive': checkedTheme !== 'm_bgorange' }")
+                span Material - Blue Grey / Orange
+            li
+              input(id="m_teal" type="radio" value="m_teal" ng-model="selectedTheme")
+              label(for="m_teal" ng-class="{'active': checkedTheme == 'm_teal', 'inactive': checkedTheme !== 'm_teal' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_teal', 'inactive': checkedTheme !== 'm_teal' }")
+                span Material - Teal
+            li
+              input(id="m_blue" type="radio" value="m_blue" ng-model="selectedTheme")
+              label(for="m_blue" ng-class="{'active': checkedTheme == 'm_blue', 'inactive': checkedTheme !== 'm_blue' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_blue', 'inactive': checkedTheme !== 'm_blue' }")
+                span Material - Blue
+            li
+              input(id="m_lblue" type="radio" value="m_lblue" ng-model="selectedTheme")
+              label(for="m_lblue" ng-class="{'active': checkedTheme == 'm_lblue', 'inactive': checkedTheme !== 'm_lblue' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_lblue', 'inactive': checkedTheme !== 'm_lblue' }")
+                span Material - Light Blue
+            li
+              input(id="m_green" type="radio" value="m_green" ng-model="selectedTheme")
+              label(for="m_green" ng-class="{'active': checkedTheme == 'm_green', 'inactive': checkedTheme !== 'm_green' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_green', 'inactive': checkedTheme !== 'm_green' }")
+                span Material - Green
+            li
+              input(id="m_grey" type="radio" value="m_grey" ng-model="selectedTheme")
+              label(for="m_grey" ng-class="{'active': checkedTheme == 'm_grey', 'inactive': checkedTheme !== 'm_grey' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_grey', 'inactive': checkedTheme !== 'm_grey' }")
+                span Material - Grey
+            li
+              input(id="m_gorange" type="radio" value="m_gorange" ng-model="selectedTheme")
+              label(for="m_gorange" ng-class="{'active': checkedTheme == 'm_gorange', 'inactive': checkedTheme !== 'm_gorange' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_gorange', 'inactive': checkedTheme !== 'm_gorange' }")
+                span Material - Grey / Orange
+            li
+              input(id="m_acyan" type="radio" value="m_acyan" ng-model="selectedTheme")
+              label(for="m_acyan" ng-class="{'active': checkedTheme == 'm_acyan', 'inactive': checkedTheme !== 'm_acyan' }")
+                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_acyan', 'inactive': checkedTheme !== 'm_acyan' }")
+                span Material - Amber / Cyan
 
       div#view(ng-class="{'open': subMenu['view'].open, 'closed': !subMenu['view'].open}")
         div.layout
@@ -213,22 +258,22 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             li
               input#oneColumn(type="radio" value="one" ng-model="column")
               label(for="oneColumn" ng-class="{'active': checkedColumn == 'one', 'inactive': checkedColumn !== 'one' }")
-                i(ng-class="{'mdfi_toggle_radio_button_on': checkedColumn == 'one', 'mdfi_toggle_radio_button_off': checkedColumn !== 'one' }")
+                i.mdfi_action_done(ng-class="{'active': checkedColumn == 'one', 'inactive': checkedColumn !== 'one' }")
                 span One Column
             li
               input#twoColumn(type="radio" value="two" ng-model="column")
               label(for="twoColumn" ng-class="{'active': checkedColumn == 'two', 'inactive': checkedColumn !== 'two' }")
-                i(ng-class="{'mdfi_toggle_radio_button_on': checkedColumn == 'two', 'mdfi_toggle_radio_button_off': checkedColumn !== 'two' }")
+                i.mdfi_action_done(ng-class="{'active': checkedColumn == 'two', 'inactive': checkedColumn !== 'two' }")
                 span Two Columns
             li
               input#threeColumn(type="radio" value="three" ng-model="column")
               label(for="threeColumn" ng-class="{'active': checkedColumn == 'three', 'inactive': checkedColumn !== 'three' }")
-                i(ng-class="{'mdfi_toggle_radio_button_on': checkedColumn == 'three', 'mdfi_toggle_radio_button_off': checkedColumn !== 'three' }")
+                i.mdfi_action_done(ng-class="{'active': checkedColumn == 'three', 'inactive': checkedColumn !== 'three' }")
                 span Three Columns
             li
               input#fourColumn(type="radio" value="four" ng-model="column")
               label(for="fourColumn" ng-class="{'active': checkedColumn == 'four', 'inactive': checkedColumn !== 'four' }")
-                i(ng-class="{'mdfi_toggle_radio_button_on': checkedColumn == 'four', 'mdfi_toggle_radio_button_off': checkedColumn !== 'four' }")
+                i.mdfi_action_done(ng-class="{'active': checkedColumn == 'four', 'inactive': checkedColumn !== 'four' }")
                 span Four Columns
 
       div#rssSettings(ng-class="{'open': subMenu['rss'].open, 'closed': !subMenu['rss'].open}")

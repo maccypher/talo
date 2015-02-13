@@ -42,11 +42,16 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 # Bof: Show / Hide sidebar	
 	$scope.toggle = () ->
-		# if not $scope.exportOpen and not $scope.importOpen and not $scope.confirmClear
 		$scope.isCollapsed = !$scope.isCollapsed
-		# $rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
-		$scope.closeSubMenu()
-		console.log "sidebar"
+		if $scope.subOpened is true
+			# $scope.closeSubMenu()
+			console.log "-"
+		if $scope.addBookmarkOpen is true
+			$scope.addBookmarkOpen = false
+		if $scope.importOpen is true
+			$scope.closeImport()
+		if $scope.exportOpen is true
+			$scope.closeExport();
 
 	$scope.sToggle = (event) ->
 		qInput = event.target.nextSibling
@@ -82,17 +87,30 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # THEMING
 # Bof: put theme names in an object
 	$scope.themes =
-		default: 'Default'
+		default: ''
+		m_bgorange: ''
+		m_teal: ''
+		m_blue:''
+		m_lblue:''
+		m_green:''
+		m_grey:''
+		m_gorange:''
+		m_acyan:''
+
+	$scope.selectedNewTheme = (nt) ->
+		$store.set 'selection', nt
 
 	$scope.selectedTheme = $store.get('selection') or $scope.themes.default
 	$scope.cssTheme = $scope.selectedTheme
 
 	$scope.$on 'theme.update', (evt, val) ->
+		$scope.selectedTheme = val
+		$scope.checkedTheme = val
 		$scope.cssTheme = val
 
 	$scope.$watch 'selectedTheme', (newVal, oldVal) ->
 		$store.set 'selection', $scope.selectedTheme
-		# $rootScope.$broadcast 'theme.update', newVal
+		$rootScope.$broadcast 'theme.update', newVal
 
 # Bof: check / prepare column settings
 	$scope.$on 'column.update', (evt, val) ->
@@ -160,29 +178,27 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: delete entry
 	$scope.delItem = (item) ->
 		$store.remove item
-		# $scope.editBookmarks()
+		$scope.editBookmarks()
 		$scope.bookmarks()
 
 # Bof: save entry
 	$scope.saveItem = (item) ->
 		$store.set item.id, item
-		# $scope.editBookmarks()
+		$scope.editBookmarks()
 
 # Bof: cancel edit entry 
 	$scope.cancelEdit = (item) ->
-		# $scope.editBookmarks()
+		$scope.editBookmarks()
 
 # Bof: open export dialog
 	$scope.exportData = () ->
 		temp = JSON.stringify(localStorage)
 		$scope.exportOpen = true
-		# $rootScope.$broadcast 'mainCtrl.exportOpen', $scope.exportOpen
 		$scope.exportJson = temp
 
 # Bof: close the export dialog
 	$scope.closeExport = () ->
 		$scope.exportOpen = false
-		# $rootScope.$broadcast 'mainCtrl.exportOpen', $scope.exportOpen
 
 # Bof: download the exported txt file
 	$scope.download = () ->
@@ -207,12 +223,10 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: open import dialog
 	$scope.openImport = () ->
 		$scope.importOpen = true
-		# $rootScope.$broadcast 'mainCtrl.importOpen', $scope.importOpen
 
 # Bof: close the import dialog
 	$scope.closeImport = () ->
 		$scope.importOpen = false
-		# $rootScope.$broadcast 'mainCtrl.importOpen', $scope.importOpen
 
 # Bof: clean localstorage before adding new content
 	$scope.restoreClean = () ->
@@ -235,12 +249,10 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: confirmation dialog to reset all
 	$scope.confirmClearAll = () ->
 		$scope.confirmClear = true
-		# $rootScope.$broadcast 'mainCtrl.confirmClear', $scope.confirmClear
 
 # Bof: close confirmation dialog
 	$scope.closeConfirmClearAll = () ->
 		$scope.confirmClear = false
-		# $rootScope.$broadcast 'mainCtrl.confirmClear', $scope.confirmClear
 
 # Bof: DO the reset all
 	$scope.clearAll = () ->
@@ -261,8 +273,8 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	window.SelectAll = (id) ->
 		document.getElementById(id).focus()
 		document.getElementById(id).select()
-	# Bof: Show / Hide Reader
 	
+	# Bof: Show / Hide Reader
 	$scope.$on 'view.update', (evt, val) ->
 		$scope.view = val
 
@@ -272,11 +284,9 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	$scope.$watch 'useReader', (newVal, oldVal) ->
 		$store.set 'view', $scope.useReader
 		$scope.view = newVal
-		# $rootScope.$broadcast 'view.update', newVal
 
 	$scope.getView = () ->
 		$scope.view = $store.get('view') or $scope.viewDefault
-		# $rootScope.$broadcast 'view.update', $scope.view
 
 	$scope.getView()
 
@@ -286,7 +296,6 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.rssSettingsToggle = () ->
 		$scope.rssSettingsOpen = !$scope.rssSettingsOpen
-		# $rootScope.$broadcast 'mainCtrl.rssSettingsOpen', $scope.rssSettingsOpen
 		$scope.feedUrl = $store.get('feedUrl')
 
 	$scope.setFeedUrl = () ->
@@ -306,12 +315,10 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.fetchIndicator = () ->
 		$scope.refresh = true
-		# $rootScope.$broadcast 'refresh.update', $scope.refresh
 		$timeout(stopFetchIndicator, 2500);
 
 	stopFetchIndicator = () ->
 		$scope.refresh = false
-		# $rootScope.$broadcast 'refresh.update', $scope.refresh
 
 	$scope.fetchFeed = () ->
 		$scope.offline = true
@@ -344,8 +351,3 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 			console.log 'Error: ', status
 
 	$scope.fetchFeed();
-
-
-
-
-

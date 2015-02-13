@@ -61,6 +61,13 @@ section.mainSection {
 	background-color: rgba(0,0,0,0.4);
 }
 
+.fourthHeadline {
+	display: inline-block;
+	margin: 0 0 0 -13px;
+	font-weight: 100;
+	color: @solid-dark-grey;
+}
+
 // button definitions
 .btn {
 	height: 36px;
@@ -472,11 +479,10 @@ section.mainSection {
 }
 
 #editBookmarks {
-
 	.catList {
 		.fourthHeadline {
-			font-weight: 400;
-			color: @solid-mid-grey;
+			margin-top: 10px;
+			margin-bottom: 10px;
 		}
 	}
 }
@@ -586,6 +592,7 @@ section.mainSection {
 
 	.subSubMenu {
 		margin-top: 75%;
+
 		.selectOption {
 			font-size: 14px;
 			position: relative;
@@ -594,7 +601,7 @@ section.mainSection {
 			height: 44px;
 			line-height: 44px;
 			left: -40px;
-			padding: 0 0 0 26px;
+			padding: 0 0 0 36px;
 			clear: both;
 			color: @almost-black;
 
@@ -602,7 +609,7 @@ section.mainSection {
 				float: left;
 				font-size: 24px;
 				line-height: 45px;
-				margin: 0 20px 0 0;
+				margin: 0 26px 0 0;
 			}
 
 			&:hover {
@@ -653,12 +660,6 @@ section.mainSection {
 			}
 		}
 
-		.fourthHeadline {
-			display: inline-block;
-			margin: 0 0 0 -13px;
-			font-weight: 100;
-			color: @solid-dark-grey;
-		}
 		.container {
 			font-size: 14px;
 		}
@@ -712,18 +713,16 @@ section.mainSection {
 }
 
 #view {
-	.fourthHeadline {
-		display: inline-block;
-		margin: 0 0 0 -13px;
-		font-weight: 100;
-		color: @solid-dark-grey;
-	}
-
 	.layout {
-		margin-top: 100%;
+		margin: 100% 0 0 0;
 
 		.columnList {
-			margin-top: 25%;
+			margin: 25% 0 0 -10px;
+
+			li {
+				margin: 5px;
+				padding-left: 7px;
+			}
 
 			input[type="radio"] {
 				display: none;
@@ -732,23 +731,24 @@ section.mainSection {
 			label {
 				cursor: pointer;
 				color: @almost-black;
-				display: inline-block;
+				display: block;
 				font-size: 14px;
-				line-height: 24px;
-				height: 24px;
+				font-weight: 400;
+				line-height: 44px;
+				height: 44px;
 
 				i, span {
 					.transition03;
 				}
 
 				i {
-					color: @trans-grey-26;
+					color: white;
 					float: left;
 					font-size: 24px;
-					margin-right: 10px;
+					margin-right: 30px;
 					width: 24px;
 					height: 24px;
-					line-height: 24px;
+					line-height: 44px;
 				}
 
 				&.active i,
@@ -759,6 +759,61 @@ section.mainSection {
 				&:hover i {
 					color: @almost-black;
 				}
+			}
+		}
+	}
+}
+
+#appearance {
+	.selectTheme {
+		width: 300px;
+		line-height: 44px;
+		margin: 20px 0;
+		padding: 0 10px;
+		border: none;
+		font-size: 14px;
+		outline: none;
+
+		li {
+			margin: 5px 0;
+			padding-left: 7px;
+		}
+
+		input[type="radio"] {
+			display: none;
+		}
+
+		label {
+			cursor: pointer;
+			color: @almost-black;
+			display: block;
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 44px;
+			height: 44px;
+			margin: 0;
+
+			i, span {
+				.transition03;
+			}
+
+			i {
+				color: white;
+				float: left;
+				font-size: 24px;
+				margin-right: 10px;
+				width: 24px;
+				height: 24px;
+				line-height: 44px;
+			}
+
+			&.active i,
+			&:hover.active i {
+				color: @dark-teal;
+			}
+
+			&:hover i {
+				color: @almost-black;
 			}
 		}
 	}
