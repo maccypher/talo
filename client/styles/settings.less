@@ -625,9 +625,10 @@ section.mainSection {
 
 		&.openIm,
 		&.openEx {
+			min-height: calc(~"100% - 140px");
 			max-height: 2000px;
 			overflow: auto;
-			padding: 20px 0 0 46px;
+			padding: 20px 0 20px 46px;
 		}
 
 		&.closedIm,
@@ -719,7 +720,7 @@ section.mainSection {
 	}
 
 	.layout {
-		margin-top: 75%;
+		margin-top: 100%;
 
 		.columnList {
 			margin-top: 25%;
@@ -729,6 +730,7 @@ section.mainSection {
 			}
 
 			label {
+				cursor: pointer;
 				color: @almost-black;
 				display: inline-block;
 				font-size: 14px;
