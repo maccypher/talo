@@ -554,7 +554,6 @@ section.mainSection {
 		position: relative;
 		left: 10px;
 		display: inline-block;
-		color: @almost-black;
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 24px;
@@ -586,7 +585,7 @@ section.mainSection {
 	}
 
 	.subSubMenu {
-		margin-top: 50%;
+		margin-top: 75%;
 		.selectOption {
 			font-size: 14px;
 			position: relative;
@@ -608,7 +607,7 @@ section.mainSection {
 
 			&:hover {
 				color: @dark-teal;
-				background-color: @trans-grey-12;
+				background-color: @trans-grey-06;
 			}
 		}
 	}
@@ -708,6 +707,58 @@ section.mainSection {
 	}
 	#exportBox {
 		// margin: 0 0 -60px 0;
+	}
+}
+
+#view {
+	.fourthHeadline {
+		display: inline-block;
+		margin: 0 0 0 -13px;
+		font-weight: 100;
+		color: @solid-dark-grey;
+	}
+
+	.layout {
+		margin-top: 75%;
+
+		.columnList {
+			margin-top: 25%;
+
+			input[type="radio"] {
+				display: none;
+			}
+
+			label {
+				color: @almost-black;
+				display: inline-block;
+				font-size: 14px;
+				line-height: 24px;
+				height: 24px;
+
+				i, span {
+					.transition03;
+				}
+
+				i {
+					color: @trans-grey-26;
+					float: left;
+					font-size: 24px;
+					margin-right: 10px;
+					width: 24px;
+					height: 24px;
+					line-height: 24px;
+				}
+
+				&.active i,
+				&:hover.active i {
+					color: @dark-teal;
+				}
+
+				&:hover i {
+					color: @almost-black;
+				}
+			}
+		}
 	}
 }
 

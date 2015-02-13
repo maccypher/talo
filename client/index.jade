@@ -205,28 +205,31 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             ng-model="selectedTheme"
             ng-options="key as name for (key, name) in themes"
           )
-          br
-          div.layout
-            h4 Columns to show 
-            input#oneColumn(type="radio" value="one" ng-model="column")
-            label(for="oneColumn" ng-class="{'active': ceckedColumn == 'one', 'inactive': ceckedColumn !== 'one' }")
-              i.icon-ok
-              | One
-            input#twoColumn(type="radio" value="two" ng-model="column")
-            label(for="twoColumn" ng-class="{'active': ceckedColumn == 'two', 'inactive': ceckedColumn !== 'two' }")
-              i.icon-ok
-              | Two
-            input#threeColumn(type="radio" value="three" ng-model="column")
-            label(for="threeColumn" ng-class="{'active': ceckedColumn == 'three', 'inactive': ceckedColumn !== 'three' }")
-              i.icon-ok
-              | Three
-            input#fourColumn(type="radio" value="four" ng-model="column")
-            label(for="fourColumn" ng-class="{'active': ceckedColumn == 'four', 'inactive': ceckedColumn !== 'four' }")
-              i.icon-ok
-              | Four
 
       div#view(ng-class="{'open': subMenu['view'].open, 'closed': !subMenu['view'].open}")
-        p VIEW
+        div.layout
+          h4.fourthHeadline Columns to show
+          ul.columnList
+            li
+              input#oneColumn(type="radio" value="one" ng-model="column")
+              label(for="oneColumn" ng-class="{'active': checkedColumn == 'one', 'inactive': checkedColumn !== 'one' }")
+                i(ng-class="{'mdfi_toggle_radio_button_on': checkedColumn == 'one', 'mdfi_toggle_radio_button_off': checkedColumn !== 'one' }")
+                span One Column
+            li
+              input#twoColumn(type="radio" value="two" ng-model="column")
+              label(for="twoColumn" ng-class="{'active': checkedColumn == 'two', 'inactive': checkedColumn !== 'two' }")
+                i(ng-class="{'mdfi_toggle_radio_button_on': checkedColumn == 'two', 'mdfi_toggle_radio_button_off': checkedColumn !== 'two' }")
+                span Two Columns
+            li
+              input#threeColumn(type="radio" value="three" ng-model="column")
+              label(for="threeColumn" ng-class="{'active': checkedColumn == 'three', 'inactive': checkedColumn !== 'three' }")
+                i(ng-class="{'mdfi_toggle_radio_button_on': checkedColumn == 'three', 'mdfi_toggle_radio_button_off': checkedColumn !== 'three' }")
+                span Three Columns
+            li
+              input#fourColumn(type="radio" value="four" ng-model="column")
+              label(for="fourColumn" ng-class="{'active': checkedColumn == 'four', 'inactive': checkedColumn !== 'four' }")
+                i(ng-class="{'mdfi_toggle_radio_button_on': checkedColumn == 'four', 'mdfi_toggle_radio_button_off': checkedColumn !== 'four' }")
+                span Four Columns
 
       div#rssSettings(ng-class="{'open': subMenu['rss'].open, 'closed': !subMenu['rss'].open}")
         h3.thirdHeadline RSS Reader:

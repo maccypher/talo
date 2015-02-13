@@ -46,6 +46,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		$scope.isCollapsed = !$scope.isCollapsed
 		# $rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
 		$scope.closeSubMenu()
+		console.log "sidebar"
 
 	$scope.sToggle = (event) ->
 		qInput = event.target.nextSibling
@@ -73,8 +74,8 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.closeSubMenu = (sub) ->
 		$scope.subMenu[sub].open = false
-		$scope.addBookmarkOpen = false
 		$scope.subOpened = false
+		$scope.addBookmarkOpen = false
 		$scope.closeImport()
 		$scope.closeExport()
 		
@@ -96,7 +97,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: check / prepare column settings
 	$scope.$on 'column.update', (evt, val) ->
 		$scope.column = val
-		$scope.ceckedColumn = val
+		$scope.checkedColumn = val
 
 	$scope.columnDefault = 'one'
 	$scope.selectedColumns = $store.get('columns') or $scope.columnDefault
@@ -104,7 +105,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.$watch 'column', (newVal, oldVal) ->
 		$store.set 'columns', $scope.column
-		# $rootScope.$broadcast 'column.update', newVal
+		$rootScope.$broadcast 'column.update', newVal
 
 # Bof: update theme if new is selected
 	$scope.themeUpdate = () ->
