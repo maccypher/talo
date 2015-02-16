@@ -19,14 +19,14 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
   body
     div#topbar
       div#settingsOpener
-        a.openSettings(ng-click="isCollapsed = !isCollapsed; sClose($event, this)" title="Feed URL Settings")
-          i.mdfi_navigation_menu
+        a.openSettings(ng-click="isCollapsed = !isCollapsed; sClose($event, this)" title="Open Settings")
+          i.icon-mdfi_menu
 
       div.headLine
         h1 Bookmarks
 
       div.filter
-        a.mdfi_action_search.toggleSearch(ng-click="sToggle($event, this)" ng-class="{'tActive': searchActive, 'tInactive': !searchActive}")
+        a.icon-mdfi_search.toggleSearch(ng-click="sToggle($event, this)" ng-class="{'tActive': searchActive, 'tInactive': !searchActive}")
         input.queryInput(
           type="search" 
           ng-model="query" 
@@ -35,73 +35,60 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
         )
         div#fakeInput(ng-class="{'fActive': searchActive, 'fInactive': !searchActive}")
 
+      div#rssOpener(ng-class="{'showRss': view == true, 'hideRss': view == false}")
+        a.openRss(ng-click="showRss = true" title="Open RSS Reader")
+          i.icon-mdfi_comment
+  
+      div.rssReader(ng-class="{'readerOpen': showRss, 'readerClosed': !showRss}")
+        div.feedHead
+          i.icon-mdfi_cast
+          h2.secondHeadline Feed Reader
+          a.closeRss(ng-click="showRss = false")
+            i.icon-mdfi_close
+
+        div.rssOffline
+          p You are probably offline
+            a.reloadTrigger(ng-class="{'run': refresh == true, 'stopped': refresh == false}" ng-click="fetchFeed(); fetchIndicator();")
+              | reload
+
+        //- Feed content starts here
+        div.feedList
+          div(ng-repeat="item in feedItems" ng-class="{'newItem': item.new, 'oldItem': !item.new}")
+            div.timeStamp 
+              span.feedDate {{item.dt | date: 'yyyy-MM-dd'}}
+              span.feedTime {{item.dt | date: '(HH:mm)'}}
+            a(href="{{item.u}}" target="_blank") {{item.d}}
+        //- Feed content ends here
+
     section.mainSection
       div(ng-class="{'overlay': isCollapsed}" ng-click="toggle()")
 
-      div#content(ng-class="{'rssOpen': view == true, 'rssClosed': view == false}")
+      div#content.rssClosed
         div.column(ng-repeat="cat in cats" class="{{column}}")
           h2.catName {{cat.name}}
           ul.bookmarks
             li(ng-repeat="item in cat.items | filter: query")
               a(href="{{item.url}}") {{item.name}}
 
-      div#readerPanel(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
-      div#innerReader(ng-class="{'readerOpen': view == true, 'readerClosed': view == false}")
-        div.info(ng-class="{'offline': offline}")
-          p You are probably offline
-          a#reloadTrigger(ng-class="{'run': refresh == true, 'stopped': refresh == false}" ng-click="fetchFeed(); fetchIndicator();")
-            i.icon-update
-
-        div#rssSettings(ng-class="{'showRssSettings': rssSettingsOpen, 'hideRssSettings': !rssSettingsOpen}")
-          div.headLineBlock
-            h1 Settings
-            a.closeRssSettings(ng-click="rssSettingsToggle()")
-              i.icon-close
-
-          div.infoText
-            p
-              strong ATTENTION:
-            | Make sure your feed URL calls a JSON based feed. Your feed URL should look like this:<br>"<i>http://feeds.domain.tld/json/feedname</i>"<br>Additionally you MUST put the URL in the "manifest.json" file in the "permissions" section as well.
-            
-          div.currentFeedUrl
-            | Current Feed URL:
-            textarea#currentURL(onClick="SelectAll('currentURL')" readonly) {{feedUrl}}
-
-          input#feedUrl.animateAll(type="text" ng-model="newFeedUrl" placeholder="New Feed URL")
-          input.btnBlue.animateAll(type="submit" ng-click="setFeedUrl()" value="Save Feed Url")
-
-        div.headLineBlock
-          h1 RSS Reader
-          a.rssSettingsTrigger(ng-click="rssSettingsToggle()")
-            i.icon-cog(title="Feed URL Settings")
-
-        //- Feed content starts here
-        div.feedList
-          ul
-            li(ng-repeat="item in feedItems" ng-class="{'newItem': item.new}")
-              a(href="{{item.u}}" target="_blank") {{item.d}}
-              div.timeStamp {{item.dt | date: 'yyyy-MM-dd (HH:mm)'}}
-        //- Feed content ends here
-
     aside.sideBar(ng-class="{'showIt': isCollapsed, 'hideIt': !isCollapsed, 'fixIt': !subOpened}")
       div.sidebarHeader
         span.settingsHead(ng-class="{'showRoot': !subOpened, 'hideRoot': subOpened}")
-          i.mdfi_action_settings
+          i.icon-mdfi_settings
           p Settings
 
         a.settingsHead(
           ng-class="{'showSub1': subOpened, 'hideSub1': !subOpened}"
           ng-click="closeSubMenu(openSub);"
         )
-          i.mdfi_hardware_keyboard_arrow_left
+          i.icon-mdfi_keyboard_arrow_left
           p {{subMenu[openSub].name}}
 
         a.closeSettings(ng-click="toggle()")
-          i.mdfi_navigation_close
+          i.icon-mdfi_close
 
       div#addBookmark(ng-class="{'showIt': !subOpened, 'hideIt': subOpened}")
         div.addButton(ng-click="addBookmarkToggle()" ng-class="{'open': addBookmarkOpen, 'closed': !addBookmarkOpen}")
-          i.mdfi_content_add
+          i.icon-mdfi_add
           div.tooltip Add Bookmark
 
         div.container(ng-class="{'open': addBookmarkOpen, 'closed': !addBookmarkOpen}")
@@ -116,23 +103,23 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
         ul.settingsMenu
           li
             a(ng-click="openSubMenu('bookmarks');")
-              i.mdfi_editor_mode_edit
+              i.icon-mdfi_mode_edit
               span Edit Bookmarks
           li
             a(ng-click="openSubMenu('backup');")
-              i.mdfi_action_settings_backup_restore
+              i.icon-mdfi_settings_backup_restore
               span Backup / Restore
           li
             a(ng-click=" openSubMenu('appearance');")
-              i.mdfi_image_style
+              i.icon-mdfi_style
               span Appearance
           li
             a(ng-click="openSubMenu('view');")
-              i.mdfi_action_view_column
+              i.icon-mdfi_view_column
               span View
           li
             a(ng-click="openSubMenu('rss');")
-              i.mdfi_hardware_cast
+              i.icon-mdfi_cast
               span RSS Reader
 
       div#editBookmarks(ng-class="{'open': subMenu['bookmarks'].open, 'closed': !subMenu['bookmarks'].open}")
@@ -156,9 +143,9 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
                     input.btn.btnDelete.animateAll(type="submit" ng-click="delItem(editItem.id); verify = false" value="Delete")
                   div.animateAll.entry(ng-hide="editing || verify")
                     a.delBtn(ng-click="verify = !verify")
-                      i.mdfi_action_delete
+                      i.icon-mdfi_delete
                     a.editBtn(ng-click="editing = !editing")
-                      i.mdfi_editor_mode_edit
+                      i.icon-mdfi_mode_edit
                     span.entryName {{editItem.name}}
         
         input.btn.btnDelete.btnDeleteAll.animateAll(type="submit" ng-click="confirmClearAll()" value="Delete All & Restore Defaults")
@@ -166,11 +153,11 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
       div#backup(ng-class="{'open': subMenu['backup'].open, 'closed': !subMenu['backup'].open}")
         div.subSubMenu
           a.selectOption.animateAll(ng-click="openImport(); exportOpen = false")
-            i.mdfi_action_restore
+            i.icon-mdfi_restore
             | Restore Backup
           
           a.selectOption.animateAll(ng-click="exportData(); importOpen = false") 
-            i.mdfi_action_backup
+            i.icon-mdfi_backup
             | Create Backup
 
         div#exportBox(ng-class="{'openEx': exportOpen, 'closedEx': !exportOpen}")
@@ -179,7 +166,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             p.infoText
               | You can either copy the content from the textarea and save it in a text file manually or download the pre-defined file called "talo_backup.txt".
             a.closeImEx(ng-click="closeExport()")
-              i.mdfi_navigation_close
+              i.icon-mdfi_close
 
             textarea.imexJson(ng-bind="exportJson" ng-copy="copied=true" ng-init="copied=false" readonly)
             p.clear
@@ -193,7 +180,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
               | To import your former created backup, please open the downloaded file with your favorite text-editor and copy the content from the file into the textarea.
             
             a.closeImEx(ng-click="closeImport()")
-              i.mdfi_navigation_close
+              i.icon-mdfi_close
 
             form(name="doImport")
               textarea.imexJson(ng-model="importJson" required placeholder="Paste data here ...")
@@ -208,47 +195,47 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             li
               input(id="default" type="radio" value="default" ng-model="selectedTheme")
               label(for="default" ng-class="{'active': checkedTheme == 'default', 'inactive': checkedTheme !== 'default' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'default', 'inactive': checkedTheme !== 'default' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'default', 'inactive': checkedTheme !== 'default' }")
                 span Material - Blue Grey (Default)
             li
               input(id="m_bgorange" type="radio" value="m_bgorange" ng-model="selectedTheme")
               label(for="m_bgorange" ng-class="{'active': checkedTheme == 'm_bgorange', 'inactive': checkedTheme !== 'm_bgorange' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_bgorange', 'inactive': checkedTheme !== 'm_bgorange' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'm_bgorange', 'inactive': checkedTheme !== 'm_bgorange' }")
                 span Material - Blue Grey / Orange
             li
               input(id="m_teal" type="radio" value="m_teal" ng-model="selectedTheme")
               label(for="m_teal" ng-class="{'active': checkedTheme == 'm_teal', 'inactive': checkedTheme !== 'm_teal' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_teal', 'inactive': checkedTheme !== 'm_teal' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'm_teal', 'inactive': checkedTheme !== 'm_teal' }")
                 span Material - Teal
             li
               input(id="m_blue" type="radio" value="m_blue" ng-model="selectedTheme")
               label(for="m_blue" ng-class="{'active': checkedTheme == 'm_blue', 'inactive': checkedTheme !== 'm_blue' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_blue', 'inactive': checkedTheme !== 'm_blue' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'm_blue', 'inactive': checkedTheme !== 'm_blue' }")
                 span Material - Blue
             li
               input(id="m_lblue" type="radio" value="m_lblue" ng-model="selectedTheme")
               label(for="m_lblue" ng-class="{'active': checkedTheme == 'm_lblue', 'inactive': checkedTheme !== 'm_lblue' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_lblue', 'inactive': checkedTheme !== 'm_lblue' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'm_lblue', 'inactive': checkedTheme !== 'm_lblue' }")
                 span Material - Light Blue
             li
               input(id="m_green" type="radio" value="m_green" ng-model="selectedTheme")
               label(for="m_green" ng-class="{'active': checkedTheme == 'm_green', 'inactive': checkedTheme !== 'm_green' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_green', 'inactive': checkedTheme !== 'm_green' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'm_green', 'inactive': checkedTheme !== 'm_green' }")
                 span Material - Green
             li
               input(id="m_grey" type="radio" value="m_grey" ng-model="selectedTheme")
               label(for="m_grey" ng-class="{'active': checkedTheme == 'm_grey', 'inactive': checkedTheme !== 'm_grey' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_grey', 'inactive': checkedTheme !== 'm_grey' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'm_grey', 'inactive': checkedTheme !== 'm_grey' }")
                 span Material - Grey
             li
               input(id="m_gorange" type="radio" value="m_gorange" ng-model="selectedTheme")
               label(for="m_gorange" ng-class="{'active': checkedTheme == 'm_gorange', 'inactive': checkedTheme !== 'm_gorange' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_gorange', 'inactive': checkedTheme !== 'm_gorange' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'm_gorange', 'inactive': checkedTheme !== 'm_gorange' }")
                 span Material - Grey / Orange
             li
               input(id="m_acyan" type="radio" value="m_acyan" ng-model="selectedTheme")
               label(for="m_acyan" ng-class="{'active': checkedTheme == 'm_acyan', 'inactive': checkedTheme !== 'm_acyan' }")
-                i.mdfi_action_done(ng-class="{'active': checkedTheme == 'm_acyan', 'inactive': checkedTheme !== 'm_acyan' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedTheme == 'm_acyan', 'inactive': checkedTheme !== 'm_acyan' }")
                 span Material - Amber / Cyan
 
       div#view(ng-class="{'open': subMenu['view'].open, 'closed': !subMenu['view'].open}")
@@ -258,46 +245,46 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
             li
               input#oneColumn(type="radio" value="one" ng-model="column")
               label(for="oneColumn" ng-class="{'active': checkedColumn == 'one', 'inactive': checkedColumn !== 'one' }")
-                i.mdfi_action_done(ng-class="{'active': checkedColumn == 'one', 'inactive': checkedColumn !== 'one' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedColumn == 'one', 'inactive': checkedColumn !== 'one' }")
                 span One Column
             li
               input#twoColumn(type="radio" value="two" ng-model="column")
               label(for="twoColumn" ng-class="{'active': checkedColumn == 'two', 'inactive': checkedColumn !== 'two' }")
-                i.mdfi_action_done(ng-class="{'active': checkedColumn == 'two', 'inactive': checkedColumn !== 'two' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedColumn == 'two', 'inactive': checkedColumn !== 'two' }")
                 span Two Columns
             li
               input#threeColumn(type="radio" value="three" ng-model="column")
               label(for="threeColumn" ng-class="{'active': checkedColumn == 'three', 'inactive': checkedColumn !== 'three' }")
-                i.mdfi_action_done(ng-class="{'active': checkedColumn == 'three', 'inactive': checkedColumn !== 'three' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedColumn == 'three', 'inactive': checkedColumn !== 'three' }")
                 span Three Columns
             li
               input#fourColumn(type="radio" value="four" ng-model="column")
               label(for="fourColumn" ng-class="{'active': checkedColumn == 'four', 'inactive': checkedColumn !== 'four' }")
-                i.mdfi_action_done(ng-class="{'active': checkedColumn == 'four', 'inactive': checkedColumn !== 'four' }")
+                i.icon-mdfi_done(ng-class="{'active': checkedColumn == 'four', 'inactive': checkedColumn !== 'four' }")
                 span Four Columns
 
       div#rssSettings(ng-class="{'open': subMenu['rss'].open, 'closed': !subMenu['rss'].open}")
-        h3.thirdHeadline RSS Reader:
+        h4.fourthHeadline RSS Reader:
         div.container
           div.rssSettings
             input#useReader(type="checkbox" value="true" ng-model="useReader")
             label(for="useReader" ng-class="{'active': useReader == true, 'inactive': useReader == false }")
-              i.icon-ok
-              | Use RSS Reader
+              i.icon-mdfi_done(ng-class="{'active': useReader == true, 'inactive': useReader == false }")
+              span Use RSS Reader
 
+            div.infoText
+              p
+                strong ATTENTION:
+              | Make sure your feed URL calls a JSON based feed. Your feed URL should look like this:<br>"<i>http://feeds.domain.tld/json/feedname</i>"<br>Additionally you MUST put the URL in the "manifest.json" file in the "permissions" section as well.
+              
+            div.currentFeedUrl
+              | Current Feed URL:
+              textarea.currentURL(onClick="SelectAll('currentURL')" readonly) {{feedUrl}}
+
+            input.feedUrl.animateAll(type="text" ng-model="newFeedUrl" placeholder="New Feed URL")
+            input.btn.btnSave.animateAll(type="submit" ng-click="setFeedUrl()" value="Save Feed Url")
 
       div#copyright(ng-class="{'rssOpen': view == true, 'rssClosed': view == false}")
         a(href="https://github.com/maccypher/talo")
           | <strong>TALO<sup>2</sup></strong> &copy; 2015 by MacCypher
           i.icon-github
-
-    section#dialogs
-      div#confirmClearBox(ng-show="confirmClear")
-        div.container
-          h3.thirdHeadline Confirm Delete and Restore
-          input.btnBlue.btnLeft.animateAll(type="submit" ng-click="cancelClear(); confirmClear = false" value="Cancel")
-          input.btnRed.btnRight.animateAll(type="submit" ng-click="clearAll(); confirmClear = false" value="Delete All")
-          br.clear
-
-      
-          br.clear

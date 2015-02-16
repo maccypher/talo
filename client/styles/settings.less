@@ -64,7 +64,7 @@ section.mainSection {
 .fourthHeadline {
 	display: inline-block;
 	margin: 0 0 0 -13px;
-	font-weight: 100;
+	font-weight: @font-light;
 	color: @solid-dark-grey;
 }
 
@@ -78,7 +78,7 @@ section.mainSection {
 	border-radius: 3px;
 	font-family: @font-family;
 	font-size: 18px;
-	font-weight: 300;
+	font-weight: @font-regular;
 	text-transform: uppercase;
 	color: white;
 	background-color: @light-blue;
@@ -121,7 +121,7 @@ section.mainSection {
 	border-radius: 3px;
 	font-family: @font-family;
 	font-size: 18px;
-	font-weight: 400;
+	font-weight: @font-regular;
 	text-transform: uppercase;
 	color: @dark-teal;
 	background-color: transparent;
@@ -152,7 +152,7 @@ section.mainSection {
 	box-shadow: 0 0 4px rgba(0,0,0,0.12), 4px 0 4px rgba(0,0,0,0.24);
 
 	a {
-		font-weight: 400;
+		font-weight: @font-regular;
 		color: @trans-grey-56;
 
 		&:hover {
@@ -187,7 +187,7 @@ section.mainSection {
 
 			p {
 				font-size: 22px;
-				font-weight: 400;
+				font-weight: @font-regular;
 				color: @trans-grey-56;
 				position: absolute;
 				display: inline-block;
@@ -222,17 +222,17 @@ section.mainSection {
 			background-color: transparent;
 			border: none;
 			cursor: pointer;
-			color: rgba(0,0,0,0.26);
+			color: @trans-grey-26;
 
 			i {
 				font-size: 24px;
-				color: rgba(0,0,0,0.56);
+				color: @trans-grey-56;
 				.transition03();
 			}
 
 			&:hover,
 			&:hover i {
-				color: #000;
+				color: @almost-black;
 				border: none;
 				.transition03();
 			}
@@ -242,7 +242,7 @@ section.mainSection {
 	h3,
 	.thirdHeadline {
 		color: @solid-mid-grey;
-		font-weight: 400;
+		font-weight: @font-regular;
 	}
 
 	input[type="text"] {
@@ -309,7 +309,7 @@ section.mainSection {
 			height: 22px;
 			line-height: 22px;
 			font-size: 10px;
-			font-weight: 400;
+			font-weight: @font-regular;
 			white-space: nowrap;
 			margin: 10px 0 0 -25%;
 			padding: 0 8px;
@@ -383,7 +383,7 @@ section.mainSection {
 	.transition03();
 
 	* {
-		box-sizing: border-box
+		box-sizing: border-box;
 	}
 
 	.settingsMenu {
@@ -400,7 +400,7 @@ section.mainSection {
 				display: block;
 				color: @almost-black;
 				font-size: 14px;
-				font-weight: 400;
+				font-weight: @font-regular;
 				height: 48px;
 				line-height: 48px;
 				margin: 0;
@@ -495,7 +495,7 @@ section.mainSection {
 		margin: 0 0 0 -26px;
 		width: 350px;
 		color: @almost-black;
-		font-weight: 400;
+		font-weight: @font-regular;
 		font-size: 14px;
 
 		&.open {
@@ -560,7 +560,7 @@ section.mainSection {
 		position: relative;
 		left: 10px;
 		display: inline-block;
-		font-weight: 400;
+		font-weight: @font-regular;
 		font-size: 14px;
 		line-height: 24px;
  	}
@@ -703,13 +703,6 @@ section.mainSection {
 			width: 92%;
 		}
 	}
-
-	#importBox {
-		// margin: 0 0 -80px 0;
-	}
-	#exportBox {
-		// margin: 0 0 -60px 0;
-	}
 }
 
 #view {
@@ -733,7 +726,7 @@ section.mainSection {
 				color: @almost-black;
 				display: block;
 				font-size: 14px;
-				font-weight: 400;
+				font-weight: @font-regular;
 				line-height: 44px;
 				height: 44px;
 
@@ -788,7 +781,7 @@ section.mainSection {
 			color: @almost-black;
 			display: block;
 			font-size: 14px;
-			font-weight: 400;
+			font-weight: @font-regular;
 			line-height: 44px;
 			height: 44px;
 			margin: 0;
@@ -816,6 +809,110 @@ section.mainSection {
 				color: @almost-black;
 			}
 		}
+	}
+}
+
+#rssSettings {
+	.container {
+		.rssSettings {
+			position: relative;
+			display: block;
+			margin: 40px 0 0 0;
+			font-size: 14px;
+
+			.btn {
+				position: relative;
+				top: -40px;
+				left: 120px;
+			}
+		}
+	}
+
+	input#useReader {
+		display: none;
+	}
+
+	label {
+		cursor: pointer;
+		color: @almost-black;
+		display: block;
+		font-size: 14px;
+		font-weight: @font-regular;
+		line-height: 44px;
+		height: 44px;
+		margin: 0;
+
+		i, span {
+			.transition03;
+		}
+
+		i {
+			color: @trans-grey-12;
+			float: left;
+			font-size: 24px;
+			margin-right: 10px;
+			width: 24px;
+			height: 24px;
+			line-height: 44px;
+		}
+
+		&.active i,
+		&:hover.active i {
+			color: @dark-teal;
+		}
+
+		&:hover i {
+			color: @almost-black;
+		}
+	}
+
+	.infoText {
+		margin: 40px 0;
+		font-weight: @font-regular;
+		line-height: 20px;
+	}
+
+	.currentFeedUrl {
+		display: block;
+		font-weight: @font-bold;
+		margin: 20px 0 15px 0;
+	}
+
+	.currentURL {
+		resize: none;
+		width: 278px;
+		height: 44px;
+		line-height: 44px;
+		font-family: @font-family;
+
+		color: @solid-mid-grey;
+		border: none;
+		outline: none;
+		background-color: transparent;
+		border: none;
+		border-bottom: 1px solid @trans-grey-12;
+		font-size: 16px;
+		padding: 0 11px;
+		margin: 20px 10px 10px 0;
+		.transition02();
+
+		&:hover {
+			border-bottom: 1px solid @trans-grey-26;
+		}
+
+		&:focus {
+			height: 72px;
+			line-height: 22px;
+			border-bottom: 1px solid @teal;
+			color: @almost-black;
+			background-color: white;
+		}
+
+		&.ng-dirty {
+  	}
+	}
+	.feedUrl {
+		width: 300px;
 	}
 }
 

@@ -16,6 +16,10 @@
 @solid-mid-grey: #848484;
 @almost-black: #212121;
 @font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-light: 100;
+@font-regular: 300;
+@font-bold: 400;
+@font-bolder: 700;
 
 .transition(@duration) {
 	-webkit-transition: all @duration ease-out;
@@ -63,7 +67,7 @@ body {
 	.transition03();
 }
 h1, h2, h3 {
-	font-weight: 300;
+	font-weight: @font-regular;
 	margin: 0;
 	padding: 0;
 }
@@ -71,24 +75,24 @@ h1, h2, h3 {
 ::-webkit-input-placeholder {
   color: @trans-grey-26;
   font-family: @font-family;
-  font-weight: 400;
+  font-weight: @font-bold;
 }
 :-moz-placeholder {
   color: @trans-grey-26;
   font-family: @font-family;
-  font-weight: 400;
+  font-weight: @font-bold;
   opacity:  1;
 }
 ::-moz-placeholder {
   color: @trans-grey-26;
   font-family: @font-family;
-  font-weight: 400;
+  font-weight: @font-bold;
   opacity:  1;
 }
 :-ms-input-placeholder {
   color: @trans-grey-26;
   font-family: @font-family;
-  font-weight: 400;
+  font-weight: @font-bold;
 }
 
 input[type="submit"],
@@ -123,6 +127,31 @@ a {
 	position: absolute;
 	z-index: 100020;
 	a.openSettings {
+		cursor: pointer;
+		margin: 0;
+		padding: 0;
+		display: block;
+		width: 24px;
+		height: 24px;
+		line-height: 48px;
+		border: none;
+		text-decoration: none;
+
+		&:hover {
+			background: none;
+			border: none;
+			text-decoration: none;
+		}
+	}
+}
+
+#rssOpener {
+	margin: 2px 0 0 0;
+	position: absolute;
+	right: 24px;
+	z-index: 100021;
+
+	a.openRss {
 		cursor: pointer;
 		margin: 0;
 		padding: 0;
@@ -189,14 +218,13 @@ ul {
 		background-color: transparent;
 		font-family: @font-family;
 		font-size: 18px;
-		font-weight: 100 !important;
+		font-weight: @font-light !important;
 		color: white;
 		padding: 2px 30px 0 0;
 		margin: 0;
 		-webkit-appearance: none;
 
-		-webkit-transition: all 0.3s ease-out;
-		transition: all 0.3s ease-out;
+		.transition03();
 		
 		&.sInactive {
 			width: 0;
@@ -219,8 +247,7 @@ ul {
 		margin: 0 6px;
 		border-bottom: 2px solid #80CBC4;
 
-		-webkit-transition: all 0.3s ease-out;
-		transition: all 0.3s ease-out;
+		.transition03();
 
 		&.fInactive {
 			width: 0;
@@ -241,16 +268,8 @@ ul {
 	float: none;
 	clear: both;
 	display: block;
-
-	&.rssClosed {
-		width: 90%;
-		margin: 9% auto 0 auto;
-	}
-
-	&.rssOpen {
-		width: 70%;
-		margin: 9% auto 0 2%;
-	}
+	width: 90%;
+	margin: 9% auto 0 auto;
 }
 
 .column {
@@ -294,14 +313,6 @@ ul {
 }
 
 // ---- Basic theme settings for all themes ---- //
-#topbar {
-	display: block;
-	position: fixed;
-	z-index: 99990;
-	width: 100%;
-	height: 48px;
-	box-shadow: 0 0 4px rgba(0,0,0,0.12), 0 4px 4px rgba(0,0,0,0.24);
-}
 .headLine {
 	display: block;
 	position: absolute;
@@ -312,12 +323,12 @@ ul {
 	padding: 0;
 
 	font-size: 20px;
-	font-weight: 100;
+	font-weight: @font-light;
 
 	h1 {
 		display: inline-block;
 		font-size: 20px;
-		font-weight: 100;
+		font-weight: @font-light;
 		height: 48px;
 		line-height: 48px;
 	}
@@ -328,6 +339,13 @@ ul {
 }
 
 #topbar {
+	display: block;
+	position: fixed;
+	z-index: 99990;
+	width: 100%;
+	height: 48px;
+	box-shadow: 0 0 4px rgba(0,0,0,0.12), 0 4px 4px rgba(0,0,0,0.24);
+
 	a {
 		font-size: 24px;
 		cursor: pointer;

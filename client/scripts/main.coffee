@@ -290,8 +290,6 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.getView()
 
-
-
 # Bof: Show / Hide RSS settings
 
 	$scope.rssSettingsToggle = () ->
@@ -322,13 +320,13 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.fetchFeed = () ->
 		$scope.offline = true
-		feedUrl = $store.get 'feedUrl'
-		return unless feedUrl?
+		$scope.feedUrl = $store.get 'feedUrl'
+		return unless $scope.feedUrl?
 		
 		# Use "jsonp" as long as you are on develop and you are running a local server
 		# Additonally you MUST specify a callback parameter at the end of the URL
-		request = $http.jsonp feedUrl
-
+		request = $http.jsonp $scope.feedUrl
+		
 		# Use "get" if you are on file base or you are running it as a Chrome Extension
 		# request = $http.get feedUrl
 
@@ -340,7 +338,11 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 			latestItem = new window.Date(data[0].dt).getTime()
 
 			if not latestStoredItem? or latestStoredItem < latestItem
-				$store.set 'latestFeed', latestItem
+				# $store.set 'latestFeed', latestItem
+
+				x = 0
+				showBellNew = false
+				showBellOld = false
 
 				for item in $scope.feedItems
 					tempTime = new window.Date(item.dt).getTime()
