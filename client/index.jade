@@ -17,58 +17,62 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
     script(type="text/javascript" src="app.js")
 
   body
-    div#topbar
-      div#settingsOpener
-        a.openSettings(ng-click="isCollapsed = !isCollapsed; sClose($event, this)" title="Open Settings")
-          i.icon-mdfi_menu
+    div#rssOpener(ng-class="{'showRss': view == true, 'hideRss': view == false}")
+      i.icon-mdfi_notifications.notifications(ng-show="rssNotify")
+      a.openRss(ng-click="showRss = true; sClose($event, this)" title="Open RSS Reader")
+        i.icon-mdfi_comment
 
-      div.headLine
-        h1 Bookmarks
+    div.rssReader(ng-class="{'readerOpen': showRss, 'readerClosed': !showRss}")
+      div.feedHead
+        i.icon-mdfi_cast
+        h2.secondHeadline Feed Reader
+        a.closeRss(ng-click="showRss = false")
+          i.icon-mdfi_close
 
-      div.filter
-        a.icon-mdfi_search.toggleSearch(ng-click="sToggle($event, this)" ng-class="{'tActive': searchActive, 'tInactive': !searchActive}")
-        input.queryInput(
-          type="search" 
-          ng-model="query" 
-          placeholder="Filter" 
-          ng-class="{'sActive': searchActive, 'sInactive': !searchActive}"
-        )
-        div#fakeInput(ng-class="{'fActive': searchActive, 'fInactive': !searchActive}")
+      div.rssOffline
+        p You are probably offline
+          a.reloadTrigger(ng-class="{'run': refresh == true, 'stopped': refresh == false}" ng-click="fetchFeed(); fetchIndicator();")
+            | reload
 
-      div#rssOpener(ng-class="{'showRss': view == true, 'hideRss': view == false}")
-        a.openRss(ng-click="showRss = true" title="Open RSS Reader")
-          i.icon-mdfi_comment
-  
-      div.rssReader(ng-class="{'readerOpen': showRss, 'readerClosed': !showRss}")
-        div.feedHead
-          i.icon-mdfi_cast
-          h2.secondHeadline Feed Reader
-          a.closeRss(ng-click="showRss = false")
-            i.icon-mdfi_close
+      //- Feed content starts here
+      div.feedList
+        div(ng-repeat="item in feedItems" ng-class="{'newItem': item.new, 'oldItem': !item.new}")
+          i(ng-class="{'icon-mdfi_notifications': item.firstNew, 'icon-mdfi_notifications_none': item.firstOld, 'hideIcon': !item.firstNew && !item.firstOld}")
+          div.timeStamp 
+            span.feedDate {{item.dt | date: 'yyyy-MM-dd'}}
+            span.feedTime {{item.dt | date: '(HH:mm)'}}
+          a(href="{{item.u}}" target="_blank") {{item.d}}
+      //- Feed content ends here
 
-        div.rssOffline
-          p You are probably offline
-            a.reloadTrigger(ng-class="{'run': refresh == true, 'stopped': refresh == false}" ng-click="fetchFeed(); fetchIndicator();")
-              | reload
+    div#wrapper(ng-class="{'blurred1': showRss || isCollapsed}")
+      div#topbar(ng-class="{'blurred1': showRss}")
+        div#settingsOpener
+          a.openSettings(ng-click="isCollapsed = !isCollapsed; sClose($event, this)" title="Open Settings")
+            i.icon-mdfi_menu
 
-        //- Feed content starts here
-        div.feedList
-          div(ng-repeat="item in feedItems" ng-class="{'newItem': item.new, 'oldItem': !item.new}")
-            div.timeStamp 
-              span.feedDate {{item.dt | date: 'yyyy-MM-dd'}}
-              span.feedTime {{item.dt | date: '(HH:mm)'}}
-            a(href="{{item.u}}" target="_blank") {{item.d}}
-        //- Feed content ends here
+        div.headLine
+          h1 Bookmarks
 
-    section.mainSection
-      div(ng-class="{'overlay': isCollapsed}" ng-click="toggle()")
+        div.filter
+          a.icon-mdfi_search.toggleSearch(ng-click="sToggle($event, this)" ng-class="{'tActive': searchActive, 'tInactive': !searchActive}")
+          input.queryInput(
+            type="search" 
+            ng-model="query" 
+            placeholder="Filter" 
+            ng-class="{'sActive': searchActive, 'sInactive': !searchActive}"
+          )
+          div#fakeInput(ng-class="{'fActive': searchActive, 'fInactive': !searchActive}")
 
-      div#content.rssClosed
-        div.column(ng-repeat="cat in cats" class="{{column}}")
-          h2.catName {{cat.name}}
-          ul.bookmarks
-            li(ng-repeat="item in cat.items | filter: query")
-              a(href="{{item.url}}") {{item.name}}
+      section.mainSection
+        div(ng-class="{'overlay': isCollapsed}" ng-click="toggle()")
+        div(ng-class="{'rssOverlay': showRss}" ng-click="rssToggle()")
+
+        div#content.rssClosed
+          div.column(ng-repeat="cat in cats" class="{{column}}")
+            h2.catName {{cat.name}}
+            ul.bookmarks
+              li(ng-repeat="item in cat.items | filter: query")
+                a(href="{{item.url}}") {{item.name}}
 
     aside.sideBar(ng-class="{'showIt': isCollapsed, 'hideIt': !isCollapsed, 'fixIt': !subOpened}")
       div.sidebarHeader

@@ -1,3 +1,4 @@
+@magenta: #ff0077;
 @teal: #80CBC4;
 @blue: #2196F3;
 @light-blue: #03A9F4;
@@ -47,6 +48,17 @@
 
 .transitionTooltip() {
 	.transitionDelayed(0.3s, 0.8s);
+}
+
+.blurred1 {
+	-webkit-filter: blur(1px);
+	filter: blur(1px);
+	.transition03;
+}
+.blurred3 {
+	-webkit-filter: blur(3px);
+	filter: blur(3px);
+	.transition03;
 }
 
 html,
@@ -110,6 +122,11 @@ a {
 	&:hover {
 		text-decoration: none;
 	}
+}
+#wrapper {
+	width: 100%;
+	height: 100%;
+	
 }
 .mainSection {
 	a {
@@ -341,7 +358,7 @@ ul {
 #topbar {
 	display: block;
 	position: fixed;
-	z-index: 99990;
+	z-index: 9000;
 	width: 100%;
 	height: 48px;
 	box-shadow: 0 0 4px rgba(0,0,0,0.12), 0 4px 4px rgba(0,0,0,0.24);

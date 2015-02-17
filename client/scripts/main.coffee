@@ -269,6 +269,9 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # ---- RSS Reader ---- #
 # -------------------- #
 
+	$scope.rssToggle = () ->
+		$scope.showRss = !$scope.showRss
+
 # Bof: Show / Hide RSS reader
 	window.SelectAll = (id) ->
 		document.getElementById(id).focus()
@@ -331,22 +334,29 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		# request = $http.get feedUrl
 
 		request.success (data, status) ->
+			$scope.rssNotify = false
 			$scope.offline = false
 			$scope.feedItems = data
 			$scope.feedStatus = status
 			latestStoredItem = $store.get 'latestFeed'
 			latestItem = new window.Date(data[0].dt).getTime()
+			firstNewEntry = true
+			firstOldEntry = true
 
 			if not latestStoredItem? or latestStoredItem < latestItem
 				# $store.set 'latestFeed', latestItem
 
-				x = 0
-				showBellNew = false
-				showBellOld = false
 
 				for item in $scope.feedItems
 					tempTime = new window.Date(item.dt).getTime()
 					item.new = true if tempTime > latestStoredItem
+					item.firstNew = true if firstNewEntry and item.new
+					firstNewEntry = false if item.firstNew
+					$scope.rssNotify = true if item.firstNew
+
+					item.old = true if tempTime < latestStoredItem
+					item.firstOld = true if firstOldEntry and item.old
+					firstOldEntry = false if item.firstOld
 
 		request.error (data, status) ->
 			$scope.feedStatus = status
