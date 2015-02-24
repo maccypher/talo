@@ -328,10 +328,10 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		
 		# Use "jsonp" as long as you are on develop and you are running a local server
 		# Additonally you MUST specify a callback parameter at the end of the URL
-		request = $http.jsonp $scope.feedUrl
+		# request = $http.jsonp $scope.feedUrl
 		
 		# Use "get" if you are on file base or you are running it as a Chrome Extension
-		# request = $http.get feedUrl
+		request = $http.get $scope.feedUrl
 
 		request.success (data, status) ->
 			$scope.rssNotify = false
@@ -344,7 +344,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 			firstOldEntry = true
 
 			if not latestStoredItem? or latestStoredItem < latestItem
-				# $store.set 'latestFeed', latestItem
+				$store.set 'latestFeed', latestItem
 
 
 				for item in $scope.feedItems
