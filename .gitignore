@@ -2,3 +2,4 @@ bower_components/
 dest/
 node_modules/
 npm-debug.log
+.DS_Store

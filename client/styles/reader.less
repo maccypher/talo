@@ -1,304 +1,283 @@
-/* reader.css */
+// reader.css
 
-/* Bof: some global stuff */
-/* Bof: reader panel definitions */
-	
-.readerClosed {
-	display: none;
+.rssOverlay {
+	position: fixed;
+	z-index: 9900;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	background-color: rgba(0,0,0,0.2);
 }
-.readerOpen {
+
+.rssReader {
+	background-color: white;
+	position: absolute;
 	display: block;
-}
-
-#readerPanel {
-	position: absolute;
-	z-index: 90;
-	top: 0;
-	right: 0;
-	width: 25%;
-	height: 100%;
-	margin: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	z-index: 9999;
+	top: 10px;
+	right: 7px;
 	padding: 0;
-	// background: #333 url('assets/themes/clouds/Clouds.jpg') no-repeat top right;
-	background: #333 url('assets/img/rss-bg.jpg') no-repeat center center;
-	background-size: 100% 100%;
-	overflow: hidden;
+	border-radius: 3px;
+	box-shadow: 0 0 4px rgba(0,0,0,0.12), 0 4px 4px rgba(0,0,0,0.24), 0 2px 24px rgba(0,0,0,0.87);
+	.transition02();
 
-	-webkit-filter: blur(5px);
-	-moz-filter: blur(5px);
-	filter: blur(5px);
-}
-#innerReader {
-	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	position: absolute;
-	z-index: 91;
-	top: 0;
-	right: 0;
-	width: 25%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	background-color: rgba(46,47,51,0.6);
-	overflow: hidden;
-	box-shadow: inset 2px 0 5px rgba(0,0,0,0.4);
-
-	.info {
-		display: none;
+	&.readerOpen {
+		opacity: 1;
+		width: 470px;
+		height: 680px;
 		position: absolute;
-		z-index: 92;
-		width: 100%;
-		text-align: center;
-		margin-top: 100%;
+		z-index: 210000 !important;
+		overflow-y: auto;
+	}
 
-		&.offline {
-			display: block;
-			color: #82e5f7;
+	&.readerClosed {
+		opacity: 0;
+		width: 469px;
+		height: 0;
+		
+		* {
+			opacity: 0 !important;
+			height: 0 !important;
+		}
+	}
+
+	i {
+		display: inline-block;
+		color: @almost-black;
+		font-size: 24px;
+	}
+
+	.closeRss {
+		position: absolute;
+		top: 25px;
+		right: 20px;
+		color: @trans-grey-26 !important;
+
+		i {
+			font-size: 24px;
+			color: @trans-grey-56;
+			.transition02();
 		}
 
-		#reloadTrigger {
-			margin: 40px auto;
-			font-size: 48px;
-			color: #bbb;
-			cursor: pointer;
-
-			&:hover {
-				color: #fff;
-				text-shadow: 0 0 5px #fff;
-			}
-
-			&.run {
-				color: #fff;
-				text-shadow: 0 0 10px #82e5f7;
-				-webkit-animation: spin 1s 2 linear;
-				-moz-animation: spin 1s 2 linear;
-				animation: spin 1s 2 linear;
-			}
-
-			&.stopped {
-				-webkit-animation: none;
-				-moz-animation: none;
-				animation: none;				
-			}
+		&:hover,
+		&:hover i {
+			color: @almost-black;
+			border: none;
+			.transition02();
 		}
+	}
 
-		@-webkit-keyframes spin {
-			0%  { -webkit-transform: rotate(0deg); }
-			100% { -webkit-transform: rotate(360deg); }	
-		}
-		@-moz-keyframes spin {
-			0%  { -moz-transform: rotate(0deg); }
-			100% { -moz-transform: rotate(360deg); }	
-		}
-		@keyframes spin {
-			0%  { transform: rotate(0deg); }
-			100% { transform: rotate(360deg); }	
-		}
+	.feedHead {
+		display: block;
+		position: fixed;
+		z-index: 200000;
+		top: 10px;
+		right: 7px;
+		width: 430px;
+		height: 30px;
+		margin: 0;
+		padding: 20px;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		border-bottom: 1px solid @trans-grey-12;
+		background-color: white;
 
+		.secondHeadline {
+			display: inline-block;
+			color: @almost-black;
+			font-weight: 300;
+			margin: 0 0 0 20px;
+		}
 	}
 
 	.feedList {
-		position: relative;
 		display: block;
-		width: 100%;
-		height: 100%;
-		padding-top: 20px;
-		padding-bottom: 20px;
-		color: #fff;
+		position: relative;
+		width: calc(~"100% - 80px");
+		height: 610px;
+		margin: 70px 0 0 10px;
+		padding-left: 50px;
 		overflow-y: auto;
-
-		a {
-			color: #bbb;
-			display: block;
-			font-weight: 700;
-			background: none !important;
-
-			&:hover {
-				background: none !important;
-				text-decoration: underline;
-				color: #82e5f7;
-			}
-		}
-
-		.timeStamp {
-			display: block;
-			text-align: right;
-			padding: 5px;
-			font-size: 12px;
-		}
-
-		ul {
-			margin: 40px 0 20px 0;
-
-			li {
-				position: relative;
-				margin: 0;
-				padding: 10px 10px;
-				font-size: 16px;
-				overflow: hidden;
-
-				&:nth-child(odd) {
-					background-color: rgba(255,255,255,0.1);
-				}
-
-				&:last-child {
-					border-bottom: 2px solid rgba(255,255,255,0.1);
-				}
-				
-				&.newItem {
-					a {
-						color: #eee;
-					}
-
-					&:after {
-						position: absolute;
-						top: -17px;
-						left: -17px;
-						font-family: "talo";
-						font-size: 32px;
-						content: '\e800';
-						color: #82e5f7;
-						text-shadow: 0 0 3px #000;
-						transform: rotate(45deg);
-					}
-				}
-			}
-		}
-	}
-
-	.rssSettingsTrigger {
-		cursor: pointer;
-		position: absolute;
-		z-index: 99;
-		top: 15px;
-		right: 15px;
-	}
-
-	#rssSettings {
-		position: absolute;
-		z-index: 100;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(46,47,51,1);
-		box-shadow: 0 3px 5px rgba(0,0,0,0.7);
-		color: #fff;
-
-		.header {
-			height: 60px;
-			background-color: rgba(46,47,51,1);
-		}
-
-		&.hideRssSettings {
-			right: -100%;
-			-webkit-transition: all 0.3s ease-out;
-			-moz-transition: all 0.3s ease-out;
-			transition: all 0.3s ease-out;
-		}
-
-		&.showRssSettings {
-			right: 0;
-			-webkit-transition: all 0.3s ease-out;
-			-moz-transition: all 0.3s ease-out;
-			transition: all 0.3s ease-out;
-		}
-
-		.currentFeedUrl {
-			display: block;
-			width: 84%;
-			margin: 30px auto 0 auto;
-			padding: 0;
-
-			textarea {
-				width: 100%;
-				height: 80px;
-				margin: 0 0 0 -5px;
-				padding: 5px;
-				border: none;
-				background-color: #242428;
-				color: #999;
-				font-size: 18px;
-				resize: none;
-			}
-		}
-
-		input[type="text"] {
-			position: relative;
-			display: block;
-			width: 80%;
-			height: 30px;
-			border: none;
-			outline: none;
-			box-shadow: inset 0 0 3px #999;
-			background-color: #ddd;
-			border: 1px solid #4f565b;
-			font-size: 18px;
-			padding: 2px 10px;
-			margin: 10px auto;
-
-			&:hover {
-				background-color: #fff;
-			}
-
-			&:focus {
-				background-color: #fff;
-				border: 1px solid #00dcff;
-				box-shadow: 0 0 10px #00dcff;
-			}
-		}
-
-		::-webkit-input-placeholder { color: #aaa; }
-		::-moz-placeholder { color: #aaa; } /* firefox 19+ */
-		:-ms-input-placeholder { color: #aaa; } /* ie */
-		:-moz-placeholder { color: #aaa; }
-
-		.btnBlue {
-			cursor: pointer;
-			position: relative;
-			display: block;
-			width: 86%;
-			margin: 0 auto;
-		}
-
-		.closeRssSettings{
-			cursor: pointer;
-			position: absolute;
-			top: 15px;
-			right: 15px;
-
-			&:hover,
-			&:hover i {
-				color: #df5e3c;
-				border: none;
-			}
-		}
-	}
-
-	.headLineBlock {
-		position: absolute;
-		z-index: 99;
-		top: 0;
-		right: 0;
-		width: 100%;
-		height: 60px;
-		margin: 0;
-		padding: 0;
-		background-color: rgba(0,0,0,0.8);
-
-		h1 {
-			font-size: 24px;
-			margin: 15px 20px;
-			padding: 0;
-		}
-	}
-
-	.infoText {
-		display: block;
-		position: relative;
-		margin: 70px 0 0 0;
-		padding: 0 30px;
+		overflow-x: hidden;
+		z-index: 100100;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		background-color: white;
+		font-weight: @font-regular;
 		font-size: 14px;
 
-		i {
-			color: #82e5f7;
+		div {
+			margin: 10px 20px;
+			height: 50px;
+
+			a {
+				width: 75%;
+				display: inline-block;
+				font-weight: @font-bolder !important;
+				font-size: 14px !important;
+				line-height: 18px;
+				color: @trans-grey-26 !important;
+
+				height: 40px;
+				max-height: 40px;
+				overflow: hidden;
+				margin: 0;
+
+				&:hover {
+					color: @almost-black !important;
+				}
+			}
+
+			.timeStamp {
+
+				width: 24%;
+				display: inline-block;
+				float: left;
+				text-align: left;
+				margin: 0 0 5px 0;
+				padding: 0;
+				font-size: 11px;
+				line-height: 18px;
+				font-weight: @font-bold;
+
+				.feedDate {
+					width: 100%;
+					display: block;
+					margin: 0;
+					color: @trans-grey-26 !important;
+				}
+
+				.feedTime {
+					width: 100%;
+					display: block;
+					margin: 0;
+					color: @trans-grey-26 !important;
+				}
+			}
+			
+			&.newItem {
+				a {
+					color: @trans-grey-56 !important;
+				}
+
+				.timeStamp {
+					.feedTime,
+					.feedDate {
+						color: @trans-grey-56 !important;
+					}
+				}
+			}
+
+			&.newItem,
+			&.oldItem {
+				i {
+					position: absolute;
+					left: 10px;
+					color: @magenta;
+					font-size: 24px;
+					line-height: 24px;
+					display: block;
+					width: 24px;
+					height: 24px;
+					&.hideIcon {
+						display: none;
+					}
+				}
+			}
+			&.oldItem {
+				i {
+					color: @trans-grey-26;
+				}
+			}
 		}
 	}
 }
+
+.feedList > .oldItem {
+	border-top: 1px solid @trans-grey-26;
+	margin-top: 30px !important;
+	padding-top: 30px;
+}
+.feedList > .oldItem ~ .oldItem {
+	border: none;
+	margin-top: 10px !important;
+	padding-top: 5px;
+}
+
+#rssOpener {
+	position: absolute;
+	z-index: 10100;
+	top: 15px;
+	right: 34px;
+	margin: 0;
+	padding: 0;
+	width: 24px;
+	height: 24px;
+
+	&.showRss {
+		display: block;
+	}
+
+	&.hideRss {
+		display: none;
+	}
+
+	.notifications {
+		position: absolute;
+		top: 4px;
+		left: -18px;
+		color: @magenta;
+		font-size: 12px;
+		display: inline-block;
+	}
+
+	.openRss {
+		cursor: pointer;
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+		width: 24px;
+		height: 24px;
+		font-size: 24px;
+		z-index: 100000;
+
+		i {
+			display: block;
+			width: 24px;
+			height: 24px;
+			line-height: 24px;
+
+			&:before {
+				margin-left: 0;
+			}
+		}
+	}
+}
+
+.rssReader * {
+	color: @trans-grey-56;
+}
+
+.rssOffline {
+	display: block;
+	position: absolute;
+	z-index: 100010;
+	top: 100px;
+	width: 100%;
+	height: 100px;
+	text-align: center;
+}
+
+
+.reloadTrigger {
+	font-weight: @font-bold;
+	color: @trans-grey-56 !important;
+
+	&:hover {
+		color: @teal !important;
+	}
+}
+
+

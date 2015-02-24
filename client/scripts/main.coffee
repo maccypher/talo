@@ -7,9 +7,33 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: define some vars
 	$scope.reload = false
 	$scope.isCollapsed = false
+	$scope.subOpened = false
+	$scope.closeSubMenu = false
+	$scope.searchActive = false
+	$scope.addBookmarkOpen = false
+	$scope.editBookmarkOpen = false
+	$scope.editing = false
+	$scope.verify = false
 	$scope.exportOpen = false
 	$scope.importOpen = false
 	$scope.confirmClear = false
+	$scope.subMenu = 
+		bookmarks:
+			open: false
+			name: 'Edit Bookmarks'
+		backup: 
+			open: false
+			name: "Backup / Restore"
+		appearance: 
+			open: false
+			name: 'Appearance'
+		view: 
+			open: false
+			name: 'View'
+		rss: 
+			open: false
+			name: 'RSS Settings'
+
 	obj = 
 		id: ''
 		cat: ''
@@ -18,28 +42,70 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 # Bof: Show / Hide sidebar	
 	$scope.toggle = () ->
-		if not $scope.exportOpen and not $scope.importOpen and not $scope.confirmClear
-			$scope.isCollapsed = !$scope.isCollapsed
-			$rootScope.$broadcast 'mainCtrl.isCollapsed', $scope.isCollapsed
+		$scope.isCollapsed = !$scope.isCollapsed
+		if $scope.subOpened is true
+			# $scope.closeSubMenu()
+			console.log "-"
+		if $scope.addBookmarkOpen is true
+			$scope.addBookmarkOpen = false
+		if $scope.importOpen is true
+			$scope.closeImport()
+		if $scope.exportOpen is true
+			$scope.closeExport();
 
+	$scope.sToggle = (event) ->
+		qInput = event.target.nextSibling
+		qInput.focus() if qInput?
+		$scope.searchActive = !$scope.searchActive
+
+	$scope.sClose = (event) ->
+		qInput = event.target.nextSibling
+		qInput.focus() if qInput?
+		$scope.searchActive = false
+
+	$scope.addBookmarkToggle = () ->
+		$scope.addBookmarkOpen = !$scope.addBookmarkOpen
+
+	$scope.openSubMenu = (sub) ->
+		# close Add Bookmark form if open
+		$scope.addBookmarkOpen = false
+
+		# tell everybody that a submenu is open
+		$scope.subOpened = true
+
+		# open the specific submenu
+		$scope.subMenu[sub].open = true
+		$scope.openSub = sub
+
+	$scope.closeSubMenu = (sub) ->
+		$scope.subMenu[sub].open = false
+		$scope.subOpened = false
+		$scope.addBookmarkOpen = false
+		$scope.closeImport()
+		$scope.closeExport()
+		
 # THEMING
 # Bof: put theme names in an object
 	$scope.themes =
-		default: 'Default'
-		fabric: 'Fabric'
-		taxi: 'Taxi'
-		tones: 'Tones'
-		pastel: 'Pastel Sky'
-		clouds: 'Clouds'
-		bb_corp_1: 'BB Corporate 1'
-		bb_corp_2: 'BB Corporate 2'
-		grass: 'Soccer Grass'
-		retro: 'Retro Feeling'
+		default: ''
+		m_bgorange: ''
+		m_teal: ''
+		m_blue:''
+		m_lblue:''
+		m_green:''
+		m_grey:''
+		m_gorange:''
+		m_acyan:''
+
+	$scope.selectedNewTheme = (nt) ->
+		$store.set 'selection', nt
 
 	$scope.selectedTheme = $store.get('selection') or $scope.themes.default
 	$scope.cssTheme = $scope.selectedTheme
 
 	$scope.$on 'theme.update', (evt, val) ->
+		$scope.selectedTheme = val
+		$scope.checkedTheme = val
 		$scope.cssTheme = val
 
 	$scope.$watch 'selectedTheme', (newVal, oldVal) ->
@@ -49,7 +115,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: check / prepare column settings
 	$scope.$on 'column.update', (evt, val) ->
 		$scope.column = val
-		$scope.ceckedColumn = val
+		$scope.checkedColumn = val
 
 	$scope.columnDefault = 'one'
 	$scope.selectedColumns = $store.get('columns') or $scope.columnDefault
@@ -66,6 +132,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 # EDIT MODE / SETTINGS SECTION STARTS HERE
 # Bof: read LocalStorage for sidebar (edit mode)
+	
 	$scope.editBookmarks = () ->
 		$scope.cats = []
 		cats = {}
@@ -98,6 +165,7 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 		$scope.clearForm()
 		$scope.editBookmarks()
+		$scope.addBookmarkToggle()
 
 # Bof: reset "add new" form
 	$scope.clearForm = () ->
@@ -126,13 +194,11 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	$scope.exportData = () ->
 		temp = JSON.stringify(localStorage)
 		$scope.exportOpen = true
-		$rootScope.$broadcast 'mainCtrl.exportOpen', $scope.exportOpen
 		$scope.exportJson = temp
 
 # Bof: close the export dialog
 	$scope.closeExport = () ->
 		$scope.exportOpen = false
-		$rootScope.$broadcast 'mainCtrl.exportOpen', $scope.exportOpen
 
 # Bof: download the exported txt file
 	$scope.download = () ->
@@ -157,12 +223,10 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: open import dialog
 	$scope.openImport = () ->
 		$scope.importOpen = true
-		$rootScope.$broadcast 'mainCtrl.importOpen', $scope.importOpen
 
 # Bof: close the import dialog
 	$scope.closeImport = () ->
 		$scope.importOpen = false
-		$rootScope.$broadcast 'mainCtrl.importOpen', $scope.importOpen
 
 # Bof: clean localstorage before adding new content
 	$scope.restoreClean = () ->
@@ -185,12 +249,10 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: confirmation dialog to reset all
 	$scope.confirmClearAll = () ->
 		$scope.confirmClear = true
-		$rootScope.$broadcast 'mainCtrl.confirmClear', $scope.confirmClear
 
 # Bof: close confirmation dialog
 	$scope.closeConfirmClearAll = () ->
 		$scope.confirmClear = false
-		$rootScope.$broadcast 'mainCtrl.confirmClear', $scope.confirmClear
 
 # Bof: DO the reset all
 	$scope.clearAll = () ->
@@ -207,12 +269,15 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # ---- RSS Reader ---- #
 # -------------------- #
 
+	$scope.rssToggle = () ->
+		$scope.showRss = !$scope.showRss
+
 # Bof: Show / Hide RSS reader
 	window.SelectAll = (id) ->
 		document.getElementById(id).focus()
 		document.getElementById(id).select()
-	# Bof: Show / Hide Reader
 	
+	# Bof: Show / Hide Reader
 	$scope.$on 'view.update', (evt, val) ->
 		$scope.view = val
 
@@ -222,21 +287,16 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 	$scope.$watch 'useReader', (newVal, oldVal) ->
 		$store.set 'view', $scope.useReader
 		$scope.view = newVal
-		$rootScope.$broadcast 'view.update', newVal
 
 	$scope.getView = () ->
 		$scope.view = $store.get('view') or $scope.viewDefault
-		$rootScope.$broadcast 'view.update', $scope.view
 
 	$scope.getView()
-
-
 
 # Bof: Show / Hide RSS settings
 
 	$scope.rssSettingsToggle = () ->
 		$scope.rssSettingsOpen = !$scope.rssSettingsOpen
-		$rootScope.$broadcast 'mainCtrl.rssSettingsOpen', $scope.rssSettingsOpen
 		$scope.feedUrl = $store.get('feedUrl')
 
 	$scope.setFeedUrl = () ->
@@ -256,45 +316,50 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 	$scope.fetchIndicator = () ->
 		$scope.refresh = true
-		$rootScope.$broadcast 'refresh.update', $scope.refresh
 		$timeout(stopFetchIndicator, 2500);
 
 	stopFetchIndicator = () ->
 		$scope.refresh = false
-		$rootScope.$broadcast 'refresh.update', $scope.refresh
 
 	$scope.fetchFeed = () ->
 		$scope.offline = true
-		feedUrl = $store.get 'feedUrl'
-		return unless feedUrl?
+		$scope.feedUrl = $store.get 'feedUrl'
+		return unless $scope.feedUrl?
 		
-		#  Use "jsonp" as long as you are on develop and you are running a local server
-		# request = $http.jsonp feedUrl
-
-		#  Use "get" if you are on file base or you are running it as a Chrome Extension
-		request = $http.get feedUrl
+		# Use "jsonp" as long as you are on develop and you are running a local server
+		# Additonally you MUST specify a callback parameter at the end of the URL
+		# request = $http.jsonp $scope.feedUrl
+		
+		# Use "get" if you are on file base or you are running it as a Chrome Extension
+		request = $http.get $scope.feedUrl
 
 		request.success (data, status) ->
+			$scope.rssNotify = false
 			$scope.offline = false
 			$scope.feedItems = data
 			$scope.feedStatus = status
 			latestStoredItem = $store.get 'latestFeed'
 			latestItem = new window.Date(data[0].dt).getTime()
+			firstNewEntry = true
+			firstOldEntry = true
 
 			if not latestStoredItem? or latestStoredItem < latestItem
 				$store.set 'latestFeed', latestItem
 
+
 				for item in $scope.feedItems
 					tempTime = new window.Date(item.dt).getTime()
 					item.new = true if tempTime > latestStoredItem
+					item.firstNew = true if firstNewEntry and item.new
+					firstNewEntry = false if item.firstNew
+					$scope.rssNotify = true if item.firstNew
+
+					item.old = true if tempTime < latestStoredItem
+					item.firstOld = true if firstOldEntry and item.old
+					firstOldEntry = false if item.firstOld
 
 		request.error (data, status) ->
 			$scope.feedStatus = status
 			console.log 'Error: ', status
 
 	$scope.fetchFeed();
-
-
-
-
-
