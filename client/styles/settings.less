@@ -1,6 +1,6 @@
-// settings.css 
+// settings.css
 
-// Bof: outside stuff 
+// Bof: outside stuff
 
 @settings-layer: 100010;
 
@@ -28,6 +28,7 @@ section.mainSection {
 .showIt .sidebarHeader,
 .showIt .copyright {
 	left: 0;
+	top: 0;
 }
 
 .showRoot {
@@ -300,6 +301,10 @@ section.mainSection {
 			font-size: 24px;
 			color: @trans-grey-56;
 			.transition01();
+			-webkit-transform-origin: 50% 50%;
+			transform-origin: 50% 50%;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
 		}
 
 		.tooltip {
@@ -326,7 +331,7 @@ section.mainSection {
 				opacity: 1;
 			}
 		}
-	
+
 		&.open {
 			i {
 				-webkit-transform: rotate(45deg);
@@ -438,7 +443,7 @@ section.mainSection {
 	}
 
 	&.subOpen {
-		left: -350px;	
+		left: -350px;
 	}
 }
 
@@ -932,7 +937,7 @@ section.mainSection {
 		font-size: 12px !important;
 		// color: @solid-mid-grey;
 		color: @dark-teal;
-		
+
 		&:hover {
 			background: none;
 			color: @deep-orange;

@@ -40,7 +40,7 @@ gulp.task 'build:scripts', [
 
 gulp.task 'build:scripts:app', ->
   gTasks.browserify.build src.scripts.main, dest.base
-  # gTasks.misc.copy src.vendors, dest.assets
+  gTasks.misc.copy src.vendors, dest.assets
 
 gulp.task 'build:templates', ->
   gTasks.jade.build src.templates.index, dest.base, lPort
