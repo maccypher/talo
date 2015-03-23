@@ -1,0 +1,42 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,400,700);
+
+@import url(basic.less);
+@import url(icons.less);
+@import url(settings.less);
+
+html, body, #addBookmark {
+  height: auto;
+}
+
+#addBookmark {
+  top: 0;
+  width: 260px;
+  padding-top: 20px;
+  padding-bottom: 0;
+}
+
+.notification {
+  color: white;
+  line-height: 30px;
+  .transition03();
+  margin: 0;
+  padding: 5px 10px;
+  text-align: center;
+  max-height: 100px;
+  overflow: hidden;
+  font-weight: 300;
+
+  &.success {
+    background-color: @dark-teal;
+  }
+
+  &.error {
+    background-color: @dark-orange;
+  }
+
+  &.hidden{
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
