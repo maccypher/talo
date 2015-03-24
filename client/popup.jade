@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    
+    title
+      | Add Bookmark - talo
+    
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    
+    link(rel="stylesheet" type="text/css" href="popup.css")
+
+  body
+    p#success.notification.success.hidden Successfully saved the bookmark
+    p#error.notification.error.hidden Couldn't save the bookmark, check your input
+    form#addBookmark.sideBar
+      h3.thirdHeadline Add Bookmark
+      input#url.animateAll(type="text" placeholder="Url" disabled)
+      input#categorie.animateAll(type="text" placeholder="Category")      
+      input#name.animateAll(type="text" placeholder="Name")
+      input#cancel.btn.btnCancel.animateAll(type="reset" value="Cancel")
+      input.btn.btnSave.animateAll(type="submit" value="Save")
+    
+    script(type="text/javascript" src="assets/scripts/popup.js")

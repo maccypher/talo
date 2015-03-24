@@ -18,9 +18,11 @@ src =
     watch: "#{__dirname}/client/scripts/**/*.coffee"
   templates:
     index: "#{__dirname}/client/index.jade"
+    popup: "#{__dirname}/client/popup.jade"
     files: "#{__dirname}/client/templates/**/*.jade"
   styles:
     index: "#{__dirname}/client/styles/main.less"
+    popup: "#{__dirname}/client/styles/popup.less"
     files: "#{__dirname}/client/styles/**/*.less"
     themes: "#{__dirname}/client/vendor/themes/**/*.less"
   vendors: [
@@ -44,10 +46,12 @@ gulp.task 'build:scripts:app', ->
 
 gulp.task 'build:templates', ->
   gTasks.jade.build src.templates.index, dest.base, lPort
+  gTasks.jade.build src.templates.popup, dest.base
   gTasks.jade.build src.templates.files, dest.templates
 
 gulp.task 'build:styles', ->
   gTasks.less.build src.styles.index, dest.base
+  gTasks.less.build src.styles.popup, dest.base
   gTasks.less.build src.styles.themes, dest.themes
 
 gulp.task 'build:local', ['build'], ->
