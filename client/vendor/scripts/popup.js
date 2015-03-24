@@ -1,7 +1,5 @@
 'use strict';
 
-console.log(localStorage);
-
 // get used elements
 var $error = document.getElementById('error');
 var $success = document.getElementById('success');

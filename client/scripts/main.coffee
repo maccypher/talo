@@ -43,9 +43,6 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # Bof: Show / Hide sidebar	
 	$scope.toggle = () ->
 		$scope.isCollapsed = !$scope.isCollapsed
-		if $scope.subOpened is true
-			# $scope.closeSubMenu()
-			console.log "-"
 		if $scope.addBookmarkOpen is true
 			$scope.addBookmarkOpen = false
 		if $scope.importOpen is true
@@ -309,11 +306,8 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 # URL has to be something like: 'http://feeds.delicious.com/v2/json/fdrei?callback=JSON_CALLBACK'
 
 	$scope.$on 'refresh.update', (evt, val) ->
-		console.log "evt: ", evt
-		console.log "val: ", val
 		$scope.refresh = val
-		console.log "$scope.refresh: ", $scope.refresh
-
+		
 	$scope.fetchIndicator = () ->
 		$scope.refresh = true
 		$timeout(stopFetchIndicator, 2500);
@@ -360,6 +354,5 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 
 		request.error (data, status) ->
 			$scope.feedStatus = status
-			console.log 'Error: ', status
 
 	$scope.fetchFeed();
