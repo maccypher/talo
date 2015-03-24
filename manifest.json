@@ -5,21 +5,21 @@
   },
   "name": "talo",
   "description": "An editable start- / homepage - bookmark collection manager",
-  "icons": { "128": "assets/img/icon.png" },
+  "icons": { "128": "assets/img/icon-128.png" },
   "permissions": [
     "management",
     "storage",
     "tabs",
     "http://feeds.delicious.com/v2/json/fdrei"
   ],
-  "version": "0.10",
+  "version": "2.10",
   "omnibox": { "keyword": "talo" },
   "background": {
     "scripts": ["assets/scripts/background.js"]
   },
   "browser_action": {
     "default_title": "Talo",
-    "default_icon": "assets/img/icon.png",
+    "default_icon": "assets/img/icon-128.png",
     "default_popup": "popup.html"
   },
   "commands": {

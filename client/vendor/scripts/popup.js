@@ -16,7 +16,7 @@ function exit() {
 }
 
 // set active tab url as the url to save
-chrome.tabs.query({active: true},function(tab) {
+chrome.tabs.query({active: true, currentWindow: true},function(tab) {
   $url.value = tab[0].url;
 });
 
