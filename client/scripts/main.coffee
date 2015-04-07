@@ -303,7 +303,6 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		$scope.fetchFeed();
 
 # Bof: fetching the feed Json
-# URL has to be something like: 'http://feeds.delicious.com/v2/json/fdrei?callback=JSON_CALLBACK'
 
 	$scope.$on 'refresh.update', (evt, val) ->
 		$scope.refresh = val
@@ -320,39 +319,33 @@ app.controller 'mainCtrl', ($scope, $rootScope, $store, $http, $timeout) ->
 		$scope.feedUrl = $store.get 'feedUrl'
 		return unless $scope.feedUrl?
 		
-		# Use "jsonp" as long as you are on develop and you are running a local server
-		# Additonally you MUST specify a callback parameter at the end of the URL
-		# request = $http.jsonp $scope.feedUrl
-		
-		# Use "get" if you are on file base or you are running it as a Chrome Extension
-		request = $http.get $scope.feedUrl
-
-		request.success (data, status) ->
+		render = (data) ->
 			$scope.rssNotify = false
 			$scope.offline = false
-			$scope.feedItems = data
-			$scope.feedStatus = status
+			$scope.feedItems = data.feed.entries
 			latestStoredItem = $store.get 'latestFeed'
-			latestItem = new window.Date(data[0].dt).getTime()
+			latestItem = new window.Date($scope.feedItems[0].publishedDate).getTime()
 			firstNewEntry = true
 			firstOldEntry = true
 
 			if not latestStoredItem? or latestStoredItem < latestItem
 				$store.set 'latestFeed', latestItem
 
+			for item in $scope.feedItems
+				tempTime = new window.Date(item.publishedDate).getTime()
+				item.formattedDate = tempTime
+				item.new = true if tempTime > latestStoredItem
+				item.firstNew = true if firstNewEntry and item.new
+				firstNewEntry = false if item.firstNew
+				$scope.rssNotify = true if item.firstNew
 
-				for item in $scope.feedItems
-					tempTime = new window.Date(item.dt).getTime()
-					item.new = true if tempTime > latestStoredItem
-					item.firstNew = true if firstNewEntry and item.new
-					firstNewEntry = false if item.firstNew
-					$scope.rssNotify = true if item.firstNew
+				item.old = true if tempTime <= latestStoredItem
+				item.firstOld = true if firstOldEntry and item.old
+				firstOldEntry = false if item.firstOld
 
-					item.old = true if tempTime < latestStoredItem
-					item.firstOld = true if firstOldEntry and item.old
-					firstOldEntry = false if item.firstOld
-
-		request.error (data, status) ->
-			$scope.feedStatus = status
+		window.Feed
+		  url: $scope.feedUrl
+		  number: 20
+		  callback: render
 
 	$scope.fetchFeed();

@@ -14,6 +14,7 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
 
     script(type="text/javascript" src="assets/scripts/angular.min.js")
     script(type="text/javascript" src="assets/scripts/localStorage.js")
+    script(type="text/javascript" src="assets/scripts/feed.min.js")
     script(type="text/javascript" src="app.js")
 
   body
@@ -38,10 +39,10 @@ html(lang="en" ng-app="homePage" ng-controller="mainCtrl")
       div.feedList
         div(ng-repeat="item in feedItems" ng-class="{'newItem': item.new, 'oldItem': !item.new}")
           i(ng-class="{'icon-mdfi_notifications': item.firstNew, 'icon-mdfi_notifications_none': item.firstOld, 'hideIcon': !item.firstNew && !item.firstOld}")
-          div.timeStamp 
-            span.feedDate {{item.dt | date: 'yyyy-MM-dd'}}
-            span.feedTime {{item.dt | date: '(HH:mm)'}}
-          a(href="{{item.u}}" target="_blank") {{item.d}}
+          div.timeStamp  
+            span.feedDate {{item.formattedDate | date: 'yyyy-MM-dd'}}
+            span.feedTime {{item.formattedDate | date: '(HH:mm)'}}
+          a(href="{{item.link}}" target="_blank") {{item.title}}
       //- Feed content ends here
 
     div#wrapper(ng-class="{'blurred1': showRss || isCollapsed}")
