@@ -9,9 +9,9 @@
   "permissions": [
     "management",
     "storage",
-    "tabs",
-    "http://feeds.delicious.com/v2/json/fdrei"
+    "tabs"
   ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com/; object-src 'self'",
   "version": "2.10",
   "omnibox": { "keyword": "talo" },
   "background": {
